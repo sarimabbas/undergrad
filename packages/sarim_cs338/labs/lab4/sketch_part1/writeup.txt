@@ -1,0 +1,12 @@
+It took a long time to get things working, because 
+* I realized that using Serial to debug within each process would mess things up
+* There are dependency issues with using Arduino functions in .c files
+* Conceptual problems about how all the functions worked together
+
+Eventually, I got things working. For my implementation:
+* I used a queue of ready processes
+* At the start, the first process is popped from the front of the queue and set as current
+* An updated process is put at the back of the queue 
+* A finished process is removed from the queue
+
+

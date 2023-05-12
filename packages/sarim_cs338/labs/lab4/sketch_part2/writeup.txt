@@ -1,0 +1,4 @@
+* For my implementation, I used a ticket lock system with yield()
+* My queue implementation was set up so that I did not need a separate waiting queue, 
+although that could be a future optimization to stop ball flickering on SPI display
+* This part was easier than part 1
