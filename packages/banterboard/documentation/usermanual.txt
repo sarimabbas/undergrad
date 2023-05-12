@@ -1,0 +1,112 @@
+YOUTUBE VIDEO
+- https://youtu.be/XMbYkMUzej4
+
+
+SUMMARY OF PROJECT
+
+BanterBoard can be described as a website that incorporates elements of Reddit, Yik Yak and Slack.
+Users can submit posts to boards, and other users can comment or vote those posts.
+
+Some additional interesting features:
+- Embeddable content via URL (currently limited to images and YouTube links. All other links are presented as is.)
+- Anonymous posts
+- Content expiration for unpopular posts (less than or equal to -5 votes)
+- Private boards for a set of usernames
+- Typeaheads for board and username search
+
+
+RUNNING THE PROJECT
+
+- Navigate to the project directory /finalproject
+- Run Flask as $ flask run
+- If on Cloud9, navigate to webserver URL
+- If deployed locally, navigate to http://0.0.0.0:8080/
+
+If you would like to use our implementation, navigate to http://banterboard.herokuapp.com
+
+
+THE HOMEPAGE
+
+- The homepage offers these features:
+    - Navigation bar
+    - Search bar for boards
+    - Call-to-action button for sign-up
+    
+
+SIGN UP
+
+- On the homepage, click either the "Sign up to start posting" button or "Register" navigation bar link.
+- You will be taken to the register page.
+- Create an account. You will be registered, logged in and brought to the home page.
+
+
+ACCESSING BOARDS
+
+- After login/registration, the hompage will now show the "Go to your boards" button. 
+- Feel free to click on it, but your list of boards will be empty.
+- Boards can be accessed through the search bar on the navigation bar. 
+- If boards are private, and you have not been added as a member, they will be inaccessible.
+- Boards live at /board/<boardname>
+- Try accessing /board/cs50fair
+
+
+POSTING
+
+- When you access a board you can add your own posts.
+- To do this, click the "Post Banter" button.
+- On this form, you can type in required text for "post content", insert an optional URL for "embed content", and choose anonymity.
+- Posts posted anonymously do not show your username.
+- Posts are sorted either by votes or recentness. To toggle between these states, use the toggle on the board page.
+
+
+COMMENTING
+
+- To comment, click the "Comments" button on each post. The button also has a counter that indicates the number of comments.
+- Use the form to add a required text comment.
+- Comments cannot be posted anonymously.
+
+
+VOTING
+
+- Voting on Banterboard can put posts above AND below 0.
+- Posts that are unpopular (with vote counts below -5) are deleted automatically.
+- To vote, click either the upvote or downvote buttons.
+- Clicking a button disables further upvoting/downvoting, but enables the other.
+- Refreshing the page and clicking a repeat vote button will also give an error.
+
+
+MY POSTS
+
+- Hover over the navigation bar's "My Account" dropdown to access your posts.
+- You can also manually access your posts at /posts
+- Here you can vote, comment and delete your posts.
+- Delete a post by clicking on the red trashcan button. You will be notified that your post has been deleted.
+
+
+MY BOARDS
+
+- Hover over the navigation bar's "My Account" dropdown to access your boards.
+- These are all the boards that you have created or been a member of.
+- You can create a new board by clicking the "Create a new board" button.
+- You can view statistics about your boards such as post counts and time of creation.
+- You can visit your boards.
+
+
+CREATE A NEW BOARD
+
+- Hover over the navigation bar's "My Account" dropdown to create a new board.
+- You can also manually access board creation at /newboard
+- Specify an arbitrary board title.
+- Specify a unique boardname.
+- Set the visibility of the board to public or private.
+- If the board is set to public, everyone will be able to access it.
+- If the board is set to private, you will be asked if you want to add any existing users on the website to it.
+- To do so, enter the names of users in the search field and select them. To remove a user, click the added name.
+- Upon board creation, you will be able to access your created board at /board/<boardname>
+
+
+LOGOUT/LOGIN
+
+- Hover over the navigation bar's "My Account" dropdown to logout.
+- Upon logout, you will be redirect to the homepage.
+- The navigation bar will have changed. Click login to log back in. Alternatively, click register to create a new account.

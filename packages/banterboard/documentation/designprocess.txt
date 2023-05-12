@@ -1,0 +1,131 @@
+YOUTUBE VIDEO
+- https://youtu.be/XMbYkMUzej4
+
+Our design choices are mostly made to the specific problems that we encountered
+as we added more and more features. The following is a list of the design specifics
+and why we choose them over alternative options:
+
+CHOICE OF LANGUAGES
+
+- We implemented our project with Python/Flask, Javascript, SQL (and HTML/CSS markup).
+- We strongly considered using React (with React Native for mobile) or Angular to create our project.
+- However, that would have involved using our time to pour over completely new documentation and design paradigms instead
+of writing working code quickly.
+- Bootstrap also has the benefit of making websites responsive for mobile, which alleviated our concerns that our project
+would not be mobile-friendly.
+
+
+CONTENT UPDATES
+
+- Social networks like Facebook and Twitter can automatically fetch new posts/content without user reload.
+- We tried to implement the same, and we had two options: jQuery AJAX or Websockets.
+- We were unable to get web socket modules for Flask working, amongst which we tried were Flask-Sockets, FlaskSocketsIO and tornado
+- Nearly all involved permissions errors and gevent related errors on Cloud9.
+- So we tried to go the AJAX route, thinking of running a while loop with AJAX requests to fetch content.
+- Unfortunately this (and neither would have web sockets) solved our problem of positioning the new content relative to
+existing content. This would have required highly complex jQuery selection that we could not implement.
+- We compromised by showing (appending) a user's newly created comments, votes and posts locally without reload.
+- But as a result, we are not truly 'real-time'.
+- Read flipswitch:
+
+
+FLIPSWITCH
+
+- In flipswitch.js, to sort the posts according to either their popularity or 
+recentness, we have to reload the same page with and additional '/popular' or 
+'/recent' url piece after the boardname so as to redirect to the proper webpage.
+At first we tried jquery load to load only the posts and leave the rest of the
+page intact. However, since jquery load breaks javascript as it loads dynamic
+html, the only viable option was to reload the entire page.
+
+- However, when we switch the toggle from recent to popular for instance, the loaded page
+should have the right state of the toggle. To ensure that we added a check variable in 
+application.py to display the toggle on when we render a popular template and off for 
+recent templates.But this caused some lagging in the toggle as we switch to popular, the newly
+loaded page's toggle with the 'popular' state overwrote the previous toggle. To prevent it in 
+toggleswitch.js we set 300 miliseconds timeout.
+
+
+DATA STORAGE
+
+- Data: users, posts, comments, votes, boards is all contained within separate tables.
+- The data is interlinked by user_id's, post_id's and board_id's.
+- Sometimes we were unable to write SQL queries that retrieved interconnected data at once.
+- So we fetched data in parts and ran operations on the backend to get it in the form we wanted.
+- Why was the specific form so important? Largely due to iteration via Jinja, which demands content be together.
+- One specific case was in application.py > boardRender, where we fetch comments and posts independently, but append the former 
+to the latter using looping code.
+
+
+VOTING
+
+- We looked into several jQuery plugins for voting functionality.
+- Eventually we implemented the feature from scratch, as we were unable to successfully work with other plugins.
+- Voting essentially comprises two parts: the front end javascript and the backend flask route that handles the votes.
+- The front end submits JSON AJAX requests for each downvote/upvote. The backend uses .get_json() to convert the submitted object
+to a Python object. From there, the backend uses a set of SQL queries to create votes in the SQL table 'votes'
+- The backend also increments vote count in the 'posts' table
+
+
+COMMENTING
+
+- Like voting, this feature was also implemented from scratch.
+- Intially we had considered using Disqus for voting functionality.
+- But that would have required users to set up an independent account on Disqus, which felt like poor user experience.
+
+
+FACTORING/DIVIDING OUR CODE
+
+- We tried to separate the code for our project into separate files, so that if one thing broke, it could be isolated to a single
+file. This was mostly the case with Javascript code
+- We could have imported the js files separately in layout.html (the base template), but we used the unconvential $.getScript
+to avoid excessive <head></head> clutter.
+- Other factoring took place with CSS and helper functions in helpers.py
+
+
+WHY BOARD.HTML HAS SO MANY CLASSES/IDS etc.
+
+- For most of our functionality, including voting, commenting and posting, most of the work was done on the front end
+through Javascript e.g. validation, auto comment appear, auto vote increment (all without reload)
+- This involved a lot of jQuery selection, for which we had to create selectable IDs and classes.
+- We scoured the jQuery documentation for solutions, but quite often we had to create new classes to get the job done.
+- In addition, much of the aesthetic design relies on Bootstrap classes, and our own custom CSS classes.
+
+
+EXTERNAL HELP
+
+- We have attributed human readable time functionality in helpers.py. It converts SQL timestamps to friendlier time.
+- Bootstrap
+- Bootstrap Tether for tool tips
+- Bootstrap Toggle for sorting posts
+- Scroll Reveal for smooth scrolling animation
+- Typeahead code from CS50 mashup
+- For the banterboard.me URL, we deployed to Heroku with a domain from Namecheap (education pricing)
+
+
+NAVIGATE THROUGH THE CODE
+
+- /static/js/: most frontend functionality here
+    - boards.js: scripts for the /newboard route. These scripts make the form, typeahead and username additions functional
+    - comments.js: scripts to post a new comment. Makes AJAX request to /newvote route backend
+    - flipswitch.js: helps sort posts by popularity/recentness with the URL converter on /board/<boardName>/<sort>/ backend
+    - notready.js: functions outside document.ready. Has scripts for typeahead.
+    - posts.js: scripts to post a new post. Makes AJAX request to /newpost route backend
+    - scroll.js: Scroll Reveal
+    - tether.min.js: tooltips for Bootstrap
+    - votes.js: scripts to vote. Makes AJAX requests to /newvote route backend
+    
+    
+- /helpers.py:
+    - page_error function: modeled after return apology from a pset
+    - embedContentHelper: creates embeddable HTML from a URL. First checks if URL exists (via response codes). Then parses the
+    URL (e.g. YouTube URL), and creates <img>, <iframe> etc. Can be extensible for other content types in the future.
+    
+    
+- /application.py: containes aforementioned routes as well as:
+    - routes for username, boardname typeahead search
+    - /sessionquery: needed for getting user data for creating comments without reload.
+    - /delete: for deleting posts on the /posts page on the website.
+    - /posts: for showing posts on the /posts page on the website.
+
+Most of these routes are used in conjunction with AJAX requests.

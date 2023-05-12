@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    BanterBoard 2
+{% endblock %}
+
+{% block main %}
+        <!-- content container -->
+        <div class="container-fluid">
+            
+            
+            <div class="jumbotron">
+                <h3 class="display-3">Welcome to BanterBoard</h3>
+                <hr class="my-2">
+                <h2>A simple place to share big ideas.</h2><br>
+                {% if session.user_id %}
+                <a class="btn btn-primary btn-lg" href="/board" role="button">Go to your boards&nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                {% else %}
+                <a class="btn btn-primary btn-lg" href="/register" role="button">Sign up to start posting&nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                {% endif %}
+            </div>
+          
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="card card-block">
+                  <h3 class="card-title text-center">Create posts</h3><br>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card card-block">
+                  <h3 class="card-title text-center">Comment</h3><br>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card card-block">
+                  <h3 class="card-title text-center">Make boards with friends</h3><br>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+        </div>    
+        <!-- end content container -->
+        
+{% endblock %}
