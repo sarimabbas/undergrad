@@ -1,0 +1,8 @@
+#define A a
+#define B b
+#define C c
+A B C
+"A B C"
+'A B C'
+ "A  B  C"
+ 'A  B  C'

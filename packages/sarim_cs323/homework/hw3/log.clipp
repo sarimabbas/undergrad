@@ -1,0 +1,55 @@
+ESTIMATE of time to complete assignment: 20 hours
+Date            Start Time          Time Spent          Work Completed
+----            ----------          ----------          --------------
+10/18           9:00 PM             2.0                 Been procrastinating on this a lot. Read the spec
+                                                        Worked on and off on this, created regex for single line comments
+                                                        I'll test it tomorrow
+10/19           2:00 PM             5.0                 Finished single line comments. Started multiline comments
+                                                        I am documenting each iteration of my regex for grading purposes
+                                                        I did single-line comments for nought, they're not being tested :(
+10/20           2:00 PM             5.0                 Worked on match quotes error detection but line splices are causing issues...
+                8:00 PM             4.0                 Did what I could on error detection, now I've created a regex to process directives
+                                                        Making some progress on ifdef parsing...
+10/21           2:00 PM             11.0                Super confused about how to do the recursion...like parsnip?
+                                                        Doing recursive descent, hope it's not the wrong path
+                                                        Made some headway, sketched out a structure and now I'm debugging it
+                                                        Making more headway, added token replacement
+                                                        Seems to be working but newlines are all out of whack
+                                                        Fixed newlines, passing 3/7
+                                                        4/7: complaint: the spec is vague about how failures should be processed and
+                                                        which errors to write to stderr. Do the no of errors matter?
+                                                        5/7: clawing my way through it
+                                                        Tried making fixes
+10/22           4:00 PM             7.0                 7/7. A lot of time was spent debugging. I ended up doing a lot of it like parsnip.
+                                                        Wrote up difficulties
+                                                        Cleanup of code
+                                                        Final debugging
+                                                        Found a particularly hairy bug regarding if-def nesting
+                                                        Fixed some more bugs, I think I am done with testing
+                                    ----------                        
+                                    34.0                TOTAL time spent
+I discussed strategies with: 
+Gabriel Saruhashi, Xiu Chen, Nadia Irwanto
+
+Discussion of difficulties:
+* Recursing through nested if-blocks: 
+This was perhaps the hardest part of the problem set. My immediate thought was
+to revisit parsnip, although looking in retrospect (and the fact that Prof.
+Eisenstat's solution is only 50 lines of Perl), I suspect that there are much
+simpler solutions. I ended up tokenizing/splitting my input via directives. I
+then created a recursive descent parser to move through arbitrarily nested
+blocks. Intermediate content between directives was processed by a separate
+function
+
+* Coming up with the correct regex:
+I suspect my solution could have benefited from more generous use of regex. I
+have a couple of expressions, but perhaps there are tricks, or expressions that
+could help more. A lot of it for me was playing around on Regex101 until I got
+desirable captures. If they weren't that great, I just processed them further
+the normal way (which probably increased lines of code).
+
+Eli's tutorial was great, otherwise I would've been completely lost. I do wish
+that Regex was discussed formally in class though. There are just so many
+aspects of it like greedy/lazy matching, lookaheads etc. that are difficult to
+understand
+

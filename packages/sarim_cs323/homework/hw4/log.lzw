@@ -1,0 +1,55 @@
+ESTIMATE of time to complete assignment: 50 hours
+Date            Start Time          Time Spent          Work Completed
+----            ----------          ----------          --------------
+10/28           8:30 PM             0.2                 Set up scaffolding and makefile with hard linking functionality
+                9:00 PM             3.0                 Working on hashtable
+                                    1.0                 Finished hashtable without resize 
+10/29           5:00 PM             3.0                 Wrote encode
+                                    1.0                 Wrote a stack
+                                    1.0                 I think I've cleared stage 1
+10/29           11:30 PM            1.0                 Wrote some tests and used code.h
+                                                        Debugging resize
+11/01           3:00 PM             7.0                 Still can't figure out resize :(
+                                                        Gonna try to send synchronizing codes 
+11/02           4:00 PM             7.0                 htFind and htAdd were really slow, figured out tthe probkem 
+                                    1.0                 I've gott tthe hang of resize, it's working now  
+11/03           12:00 AM            1.0   
+                                    4.0                 CPU timeout is pretty tricky. I stripped out quite a bit of redundancy
+                                                        which reduced my hashing ttimes on large files from approx 30 sec tto 10 sec
+                                                        but it's still not enough :( Sent messagee to newsgroup, hoping Prof. Eisennstat
+                                                        can help                  
+                12:00 PM            7.0                 Keeping a log is possibly the hardest part of the entire process because I make very little
+                                                        progress for the time I spend
+                                                        Currently, I'm adding the -r option
+                                                        Everything stopped working because I was trying to reserve a new code for Reset
+                                                        15/17. Resetting works!
+                                                        I also found a massive memory leak using Valgrind massif, and using bitfields, 
+                                    1.0                 I now pass the small memory tests!
+                                    3.0                 Binary files were the worst. I was infinitely recursing because EMPTY prefixed itself
+                                                        But done now thank God
+11/06           3:00 PM             0.1                 Adding protect signal so decode can recognize what was not created by encode
+11/08           3:40 PM             0.3                 More error checking                                                            
+
+                                    ----------                        
+                                    41.5                    TOTAL time spent
+
+I discussed strategies, never code, with: Xiu Chen, Katherine Sun, Andrea Oliveira, Gabriel Saruhashi
+
+Difficulties encountered:
+
+* Resizing the table
+- Updating the given pseudocode after resize: I really had to understand what the algorithm was doing
+- Entries would become out of data when inserting into the resized table
+
+* Binary files
+- EMPTY was prefixed by itself, causing infinite recursion
+- The fix was to give EMPTY a different prefix, and allow a separate entry for the null char
+
+* Small memory
+- Took a while to figure out what bit fields were, but implementing them was a relatively easy fix
+
+* Slow encode
+- Initially because of expensive integrity-checking functions - I figured out what they were using gprof
+- But that wasn't enough, encode was still pretty slow - so I emailed the newsgroup
+- Prof. Eisenstat intuited that I was still adding pairs after the final resize, and above my load average
+- He was correct! This bug took me an entirety of 5-6 hours to fix.

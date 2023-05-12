@@ -1,0 +1,24 @@
+BASIC:
+This is not a comment.
+"This is /* also not a comment */"
+// This is a CPP style comment
+/* This is a C-style comment. */
+/* This is another
+ * C-style comment.
+ */
+A non comment followed by // a comment this should be removed entirely
+This is still /* a comment */
+This is still /* a comment */ again
+
+
+STRING LITERALS:
+printf("I am a // problematic string ");
+printf("I am a regular string");
+printf("ewhf iwehr // // lets' go ooooooo"); // "ejfkhr" tthis is not good" 
+vervvev "string"
+"// a comment //// that could cause trouble"
+"string literal" // comment fails ""
+"string \" literal" // comment starts ""
+// comment "with a string inside" 
+printf("why isn't this causing // with a comment problems?")
+"a string \" which is problematic"

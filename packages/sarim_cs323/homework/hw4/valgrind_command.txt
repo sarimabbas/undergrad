@@ -1,0 +1,3 @@
+valgrind -v --tool=massif --log-file="valgrind.txt" --leak-check=full --track-origins=yes --show-leak-kinds=all ./encode < tests/resize/austin.txt > tests/resize/encode.out 2>tests/resize/encode_table.out
+
+valgrind -v --log-file="valgrind.txt" --leak-check=full --track-origins=yes --show-leak-kinds=all ./decode < tests/resize/encode.out > tests/resize/decode.out 2>tests/resize/decode_table.out

@@ -1,0 +1,28 @@
+6. The behavior of parsnip does not match bash in all particulars, including:
+
+   a. parsnip does not recognize line splices outside of HERE documents.
+
+   b. parsnip treats unterminated strings as syntactically invalid rather than
+      prompt for continuation lines.
+
+   b. Within a double-quoted string parsnip does not treat a \ that is followed
+      by a $, `, or ! as an escape character.
+
+   c. parsnip allows local variable definitions and input, output, or error
+      redirection to precede a subcommand.
+
+   d. parsnip treats commands like
+	> FILE
+      (missing command) and
+	command >file1 >>file2
+      (multiple input, output, or error redirection) as syntactically invalid.
+
+   e. parsnip does not issue a prompt for each line in a HERE document when run
+      interactively.
+
+   f. parsnip does not read or expand any HERE documents when a command is not
+      syntactically valid.
+
+   g. parsnip does not expand environment variables on the command line.
+
+   In such instances your code should reproduce the behavior of Hwk2/parsnip.

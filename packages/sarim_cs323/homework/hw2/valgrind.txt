@@ -1,0 +1,1049 @@
+==5252== Memcheck, a memory error detector
+==5252== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5252== Using Valgrind-3.14.0.GIT-26e21fe911-20180516 and LibVEX; rerun with -h for copyright info
+==5252== Command: ./test
+==5252== Parent PID: 1768
+==5252== 
+--5252-- 
+--5252-- Valgrind options:
+--5252--    -v
+--5252--    --log-file=valgrind.txt
+--5252--    --leak-check=full
+--5252--    --show-leak-kinds=all
+--5252-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--5252--   Darwin Kernel Version 18.0.0: Wed Aug 22 20:13:40 PDT 2018; root:xnu-4903.201.2~1/RELEASE_X86_64
+--5252-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--5252-- Page sizes: currently 4096, max supported 4096
+--5252-- Valgrind library directory: /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind
+--5252-- ./test (rx at 0x100000000, rw at 0x100003000)
+--5252--    reading syms   from primary file (39 160)
+--5252--    dSYM= ./test.dSYM/Contents/Resources/DWARF/test
+--5252--    reading dwarf3 from dsyms file
+--5252-- /usr/lib/dyld (rx at 0x100006000, rw at 0x100085000)
+--5252--    reading syms   from primary file (5 2307)
+--5252-- Scheduler: using generic scheduler lock implementation.
+--5252-- Reading suppressions file: /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/default.supp
+==5252== embedded gdbserver: reading from /var/folders/0q/zpb3rj917kg4ctfhf16s099h0000gn/T//vgdb-pipe-from-vgdb-to-5252-by-sarimabbas-on-???
+==5252== embedded gdbserver: writing to   /var/folders/0q/zpb3rj917kg4ctfhf16s099h0000gn/T//vgdb-pipe-to-vgdb-from-5252-by-sarimabbas-on-???
+==5252== embedded gdbserver: shared mem   /var/folders/0q/zpb3rj917kg4ctfhf16s099h0000gn/T//vgdb-pipe-shared-mem-vgdb-5252-by-sarimabbas-on-???
+==5252== 
+==5252== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==5252== don't want to do, unless you know exactly what you're doing,
+==5252== or are doing some strange experiment):
+==5252==   /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/../../bin/vgdb --pid=5252 ...command...
+==5252== 
+==5252== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==5252==   /path/to/gdb ./test
+==5252== and then give GDB the following command
+==5252==   target remote | /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/../../bin/vgdb --pid=5252
+==5252== --pid is optional if only one valgrind process is running
+==5252== 
+--5252-- REDIR: 0x100049000 (dyld:strcmp) redirected to 0x258056d81 (???)
+--5252-- REDIR: 0x100043460 (dyld:arc4random) redirected to 0x258056e1f (???)
+--5252-- REDIR: 0x1000483e0 (dyld:strlen) redirected to 0x258056d50 (???)
+--5252-- REDIR: 0x100049300 (dyld:strcpy) redirected to 0x258056d9d (???)
+--5252-- REDIR: 0x1000465e2 (dyld:strcat) redirected to 0x258056d61 (???)
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10000C3B0: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x100007035: _dyld_start (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10000E4E9: dyld::checkEnvironmentVariables(char const**) (in /usr/lib/dyld)
+==5252==    by 0x10000C3B9: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x100007035: _dyld_start (in /usr/lib/dyld)
+==5252== 
+--5252-- REDIR: 0x1000481d9 (dyld:strlcat) redirected to 0x258056dba (???)
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x100008BD2: dyld::processDyldEnvironmentVariable(char const*, char const*, char const*) (in /usr/lib/dyld)
+==5252==    by 0x10000E5F6: dyld::checkEnvironmentVariables(char const**) (in /usr/lib/dyld)
+==5252==    by 0x10000C3B9: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x100007035: _dyld_start (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10000C3C1: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x100007035: _dyld_start (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x100010585: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==5252==    by 0x10000FEF1: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==5252==    by 0x100009AEE: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==5252==    by 0x100009642: dyld::load(char const*, dyld::LoadContext const&, unsigned int&) (in /usr/lib/dyld)
+==5252==    by 0x10000D430: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x100007035: _dyld_start (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x100010585: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==5252==    by 0x10000FEF1: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==5252==    by 0x100009AEE: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==5252==    by 0x10000967D: dyld::load(char const*, dyld::LoadContext const&, unsigned int&) (in /usr/lib/dyld)
+==5252==    by 0x10000D430: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x100007035: _dyld_start (in /usr/lib/dyld)
+==5252== 
+--5252-- UNKNOWN fcntl 98!
+--5252-- /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x1000e7000, rw at 0x1000ed000)
+--5252--    reading syms   from primary file (3 91)
+--5252--    dSYM= /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--5252-- UNKNOWN fcntl 98! (repeated 2 times)
+--5252-- /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x1000f1000, rw at 0x1000fa000)
+--5252--    reading syms   from primary file (72 99)
+--5252--    dSYM= /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--5252-- /usr/lib/libSystem.B.dylib (rx at 0x100100000, rw at 0x100102000)
+--5252--    reading syms   from primary file (29 7)
+--5252-- UNKNOWN fcntl 98! (repeated 4 times)
+--5252-- /usr/lib/system/libcache.dylib (rx at 0x100107000, rw at 0x10010c000)
+--5252--    reading syms   from primary file (32 28)
+--5252-- /usr/lib/system/libcommonCrypto.dylib (rx at 0x100111000, rw at 0x10011c000)
+--5252--    reading syms   from primary file (222 166)
+--5252-- /usr/lib/system/libcompiler_rt.dylib (rx at 0x100129000, rw at 0x100131000)
+--5252--    reading syms   from primary file (510 8)
+--5252-- /usr/lib/system/libcopyfile.dylib (rx at 0x10013e000, rw at 0x100148000)
+--5252--    reading syms   from primary file (11 37)
+--5252-- UNKNOWN fcntl 98! (repeated 8 times)
+--5252-- /usr/lib/system/libcorecrypto.dylib (rx at 0x10014e000, rw at 0x1001d3000)
+--5252--    reading syms   from primary file (516 685)
+--5252-- /usr/lib/system/libdispatch.dylib (rx at 0x1001ef000, rw at 0x10022a000)
+--5252--    reading syms   from primary file (300 940)
+--5252-- /usr/lib/system/libdyld.dylib (rx at 0x10025a000, rw at 0x10028a000)
+--5252--    reading syms   from primary file (107 1394)
+--5252-- /usr/lib/system/libkeymgr.dylib (rx at 0x1002ac000, rw at 0x1002ad000)
+--5252--    reading syms   from primary file (11 2)
+--5252-- /usr/lib/system/libmacho.dylib (rx at 0x1002b8000, rw at 0x1002be000)
+--5252--    reading syms   from primary file (105 2)
+--5252-- /usr/lib/system/libquarantine.dylib (rx at 0x1002c4000, rw at 0x1002c7000)
+--5252--    reading syms   from primary file (71 38)
+--5252-- /usr/lib/system/libremovefile.dylib (rx at 0x1002cd000, rw at 0x1002cf000)
+--5252--    reading syms   from primary file (12 6)
+--5252-- UNKNOWN fcntl 98! (repeated 16 times)
+--5252-- /usr/lib/system/libsystem_asl.dylib (rx at 0x1002d4000, rw at 0x1002ec000)
+--5252--    reading syms   from primary file (220 229)
+--5252-- /usr/lib/system/libsystem_blocks.dylib (rx at 0x1002f9000, rw at 0x1002fa000)
+--5252--    reading syms   from primary file (21 7)
+--5252-- /usr/lib/system/libsystem_c.dylib (rx at 0x1002fe000, rw at 0x100387000)
+--5252--    reading syms   from primary file (1342 803)
+--5252-- /usr/lib/system/libsystem_configuration.dylib (rx at 0x1003af000, rw at 0x1003b3000)
+--5252--    reading syms   from primary file (38 66)
+--5252-- /usr/lib/system/libsystem_coreservices.dylib (rx at 0x1003b9000, rw at 0x1003bd000)
+--5252--    reading syms   from primary file (14 43)
+--5252-- /usr/lib/system/libsystem_darwin.dylib (rx at 0x1003c2000, rw at 0x1003c9000)
+--5252--    reading syms   from primary file (39 320)
+--5252-- /usr/lib/system/libsystem_dnssd.dylib (rx at 0x1003d3000, rw at 0x1003da000)
+--5252--    reading syms   from primary file (39 34)
+--5252-- /usr/lib/system/libsystem_info.dylib (rx at 0x1003df000, rw at 0x10042c000)
+--5252--    reading syms   from primary file (426 733)
+--5252-- /usr/lib/system/libsystem_m.dylib (rx at 0x100442000, rw at 0x10048e000)
+--5252--    reading syms   from primary file (811 1)
+--5252-- /usr/lib/system/libsystem_malloc.dylib (rx at 0x10049c000, rw at 0x1004c1000)
+--5252--    reading syms   from primary file (156 383)
+--5252-- /usr/lib/system/libsystem_networkextension.dylib (rx at 0x1004cf000, rw at 0x1004db000)
+--5252--    reading syms   from primary file (99 244)
+--5252-- /usr/lib/system/libsystem_notify.dylib (rx at 0x1004e7000, rw at 0x1004ef000)
+--5252--    reading syms   from primary file (23 1)
+--5252-- /usr/lib/system/libsystem_sandbox.dylib (rx at 0x1004f5000, rw at 0x1004f9000)
+--5252--    reading syms   from primary file (100 13)
+--5252-- /usr/lib/system/libsystem_secinit.dylib (rx at 0x1004ff000, rw at 0x100502000)
+--5252--    reading syms   from primary file (4 8)
+--5252-- /usr/lib/system/libsystem_kernel.dylib (rx at 0x100507000, rw at 0x10052f000)
+--5252--    reading syms   from primary file (1306 120)
+--5252-- /usr/lib/system/libsystem_platform.dylib (rx at 0x100549000, rw at 0x100553000)
+--5252--    reading syms   from primary file (166 105)
+--5252-- UNKNOWN fcntl 98! (repeated 32 times)
+--5252-- /usr/lib/system/libsystem_pthread.dylib (rx at 0x10055b000, rw at 0x100566000)
+--5252--    reading syms   from primary file (186 98)
+--5252-- /usr/lib/system/libsystem_symptoms.dylib (rx at 0x100570000, rw at 0x100578000)
+--5252--    reading syms   from primary file (10 93)
+--5252-- /usr/lib/system/libsystem_trace.dylib (rx at 0x10057e000, rw at 0x100594000)
+--5252--    reading syms   from primary file (126 250)
+--5252-- /usr/lib/system/libunwind.dylib (rx at 0x1005a3000, rw at 0x1005a9000)
+--5252--    reading syms   from primary file (102 52)
+--5252-- /usr/lib/system/libxpc.dylib (rx at 0x1005b0000, rw at 0x1005e1000)
+--5252--    reading syms   from primary file (589 1001)
+--5252-- /usr/lib/libobjc.A.dylib (rx at 0x100605000, rw at 0x100d8c000)
+--5252--    reading syms   from primary file (356 911)
+--5252-- /usr/lib/libc++abi.dylib (rx at 0x100f43000, rw at 0x100f59000)
+--5252--    reading syms   from primary file (369 604)
+--5252-- /usr/lib/libc++.1.dylib (rx at 0x100f6f000, rw at 0x100fc7000)
+--5252--    reading syms   from primary file (2023 1671)
+--5252-- REDIR: 0x10054a760 (libsystem_platform.dylib:_platform_memcmp) redirected to 0x1000f4872 (_platform_memcmp)
+--5252-- REDIR: 0x10054afe0 (libsystem_platform.dylib:_platform_strncmp) redirected to 0x1000f403c (_platform_strncmp)
+--5252-- REDIR: 0x10054b380 (libsystem_platform.dylib:_platform_strcmp) redirected to 0x1000f40bd (_platform_strcmp)
+--5252-- REDIR: 0x10049fc9c (libsystem_malloc.dylib:calloc) redirected to 0x1000f2b77 (calloc)
+--5252-- REDIR: 0x10049fe24 (libsystem_malloc.dylib:malloc_default_zone) redirected to 0x1000f38bd (malloc_default_zone)
+--5252-- REDIR: 0x10049d7a0 (libsystem_malloc.dylib:malloc_zone_malloc) redirected to 0x1000f27c3 (malloc_zone_malloc)
+--5252-- REDIR: 0x10049fcd7 (libsystem_malloc.dylib:malloc_zone_calloc) redirected to 0x1000f2d65 (malloc_zone_calloc)
+--5252-- REDIR: 0x10049d76b (libsystem_malloc.dylib:malloc) redirected to 0x1000f2550 (malloc)
+--5252-- REDIR: 0x10049fe2c (libsystem_malloc.dylib:malloc_zone_from_ptr) redirected to 0x1000f38fe (malloc_zone_from_ptr)
+--5252-- REDIR: 0x1004a012f (libsystem_malloc.dylib:free) redirected to 0x1000f2939 (free)
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10015020B: ccaes_vng_ctr_crypt (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10015012B: bcc_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151351: df_bcc_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151131: df (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014FA7F: nistctr_init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014F932: init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10032235A: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100322478: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10015020B: ccaes_vng_ctr_crypt (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10015012B: bcc_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x1001513E1: df_bcc_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151131: df (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014FA7F: nistctr_init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014F932: init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10032235A: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100322478: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10015020B: ccaes_vng_ctr_crypt (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10015012B: bcc_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151190: df (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014FA7F: nistctr_init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014F932: init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10032235A: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100322478: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10015020B: ccaes_vng_ctr_crypt (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10015123F: df (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014FA7F: nistctr_init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014F932: init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10032235A: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100322478: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252==    by 0x10025C646: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x100151523: drbg_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014FB3E: nistctr_init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10014F932: init (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10032235A: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100322478: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252==    by 0x10025C646: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==5252==    by 0x100606C33: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10015020B: ccaes_vng_ctr_crypt (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x10015174B: generate (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x1003224E3: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252==    by 0x10025C646: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==5252==    by 0x100606C33: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1001F25C3: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==5252==    by 0x1001FE3A6: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10015020B: ccaes_vng_ctr_crypt (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x1001514A6: drbg_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151796: generate (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x1003224E3: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252==    by 0x10025C646: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==5252==    by 0x100606C33: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1001F25C3: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x1001514C3: drbg_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151796: generate (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x1003224E3: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252==    by 0x10025C646: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==5252==    by 0x100606C33: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1001F25C3: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==5252==    by 0x1001FE3A6: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x100151523: drbg_update (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x100151796: generate (in /usr/lib/system/libcorecrypto.dylib)
+==5252==    by 0x1003224E3: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10060844D: _read_images (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x100607472: appendHeader (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10061B278: _class_remap (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x10000B570: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==5252==    by 0x10000B699: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==5252==    by 0x10025C646: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==5252==    by 0x100606C33: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1001F25C3: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==5252==    by 0x1001FE3A6: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==5252== 
+--5252-- REDIR: 0x1004a3133 (libsystem_malloc.dylib:realloc) redirected to 0x1000f2ef9 (realloc)
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10061024C: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16AC: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10061024E: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16AC: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x100610260: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16AC: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10061027E: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16AC: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10061028C: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16AC: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10061024C: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16C5: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10061024E: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16C5: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x100610260: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16C5: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10061027E: objc_initializeClassPair_internal(objc_class*, char const*, objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==5252==    by 0x1005B16C5: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252==    by 0x1000074F5: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x1005B2641: xpc_uint64_create (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1005B25CF: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1005B1A25: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252==    by 0x10000872D: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==5252==    by 0x10000D78E: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x1005B233B: _xpc_dictionary_insert (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1005B2727: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x10000A8B8: dyld::registerLoadCallback(void (*)(mach_header const*, char const*, bool)) (in /usr/lib/dyld)
+==5252==    by 0x1005B25DF: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1005B1A25: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x1005B2404: _xpc_dictionary_insert (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1005B2727: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x10000A8B8: dyld::registerLoadCallback(void (*)(mach_header const*, char const*, bool)) (in /usr/lib/dyld)
+==5252==    by 0x1005B25DF: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1005B1A25: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==5252==    by 0x1001019C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==5252==    by 0x10001ECC7: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001EEC5: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==5252==    by 0x10001A0D9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x10001A06C: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x100019253: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==5252==    by 0x1000192E7: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==5252== 
+--5252-- REDIR: 0x10054b1c0 (libsystem_platform.dylib:_platform_strchr$VARIANT$Haswell) redirected to 0x1000f3b6e (_platform_strchr$VARIANT$Haswell)
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000618: main (test.c:35)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000618: main (test.c:35)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000618: main (test.c:35)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000618: main (test.c:35)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000618: main (test.c:35)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000618: main (test.c:35)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000063A: main (test.c:36)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000063A: main (test.c:36)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000063A: main (test.c:36)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000063A: main (test.c:36)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000063A: main (test.c:36)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000063A: main (test.c:36)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000067B: main (test.c:38)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000067B: main (test.c:38)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000067B: main (test.c:38)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000067B: main (test.c:38)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000067B: main (test.c:38)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000067B: main (test.c:38)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000069D: main (test.c:39)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000069D: main (test.c:39)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000069D: main (test.c:39)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000069D: main (test.c:39)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000069D: main (test.c:39)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000069D: main (test.c:39)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000006FD: main (test.c:42)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000006FD: main (test.c:42)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000006FD: main (test.c:42)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000006FD: main (test.c:42)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000006FD: main (test.c:42)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000006FD: main (test.c:42)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000724: main (test.c:43)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000724: main (test.c:43)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000724: main (test.c:43)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000724: main (test.c:43)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000724: main (test.c:43)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x100000724: main (test.c:43)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000076F: main (test.c:45)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000076F: main (test.c:45)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000076F: main (test.c:45)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000076F: main (test.c:45)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000076F: main (test.c:45)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000076F: main (test.c:45)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000007BA: main (test.c:47)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000007BA: main (test.c:47)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000007BA: main (test.c:47)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000007BA: main (test.c:47)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000007BA: main (test.c:47)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x1000007BA: main (test.c:47)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054A727: _platform_strlen (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EF93: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000084D: main (test.c:51)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037EFAA: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000084D: main (test.c:51)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10037ECA5: __chk_overlap (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x10037EFC8: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000084D: main (test.c:51)
+==5252== 
+==5252== Conditional jump or move depends on uninitialised value(s)
+==5252==    at 0x10054ACF0: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000084D: main (test.c:51)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADA6: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000084D: main (test.c:51)
+==5252== 
+==5252== Use of uninitialised value of size 8
+==5252==    at 0x10054ADB5: _platform_memmove$VARIANT$Haswell (in /usr/lib/system/libsystem_platform.dylib)
+==5252==    by 0x10037EFD9: __strcat_chk (in /usr/lib/system/libsystem_c.dylib)
+==5252==    by 0x100000914: setText (test.c:71)
+==5252==    by 0x10000084D: main (test.c:51)
+==5252== 
+--5252-- REDIR: 0x10054b6e0 (libsystem_platform.dylib:_platform_memchr$VARIANT$Haswell) redirected to 0x1000f4146 (_platform_memchr$VARIANT$Haswell)
+==5252== Invalid write of size 4
+==5252==    at 0x10000257A: copyToken (parse.c:749)
+==5252==    by 0x100001270: lPush (parse.c:630)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==  Address 0x101034800 is 0 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid write of size 8
+==5252==    at 0x1000025B6: copyToken (parse.c:760)
+==5252==    by 0x100001270: lPush (parse.c:630)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==  Address 0x101034808 is 8 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid read of size 8
+==5252==    at 0x1000025BE: copyToken (parse.c:761)
+==5252==    by 0x100001270: lPush (parse.c:630)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==  Address 0x101034808 is 8 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid read of size 8
+==5252==    at 0x1000025DA: copyToken (parse.c:762)
+==5252==    by 0x100001270: lPush (parse.c:630)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==  Address 0x101034808 is 8 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid write of size 4
+==5252==    at 0x100001176: synArgument (parse.c:75)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002379: synList (parse.c:514)
+==5252==  Address 0x101034800 is 0 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid write of size 4
+==5252==    at 0x10000257A: copyToken (parse.c:749)
+==5252==    by 0x100001270: lPush (parse.c:630)
+==5252==    by 0x100001F2F: synSubCmd (parse.c:386)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002379: synList (parse.c:514)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100000E22: parse (parse.c:34)
+==5252==    by 0x10000088B: main (test.c:56)
+==5252==  Address 0x101034810 is 16 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid write of size 4
+==5252==    at 0x100001F46: synSubCmd (parse.c:388)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002379: synList (parse.c:514)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100000E22: parse (parse.c:34)
+==5252==    by 0x10000088B: main (test.c:56)
+==5252==  Address 0x101034810 is 16 bytes after a block of size 160 alloc'd
+==5252==    at 0x1000F2F7C: realloc (in /usr/local/Cellar/valgrind/HEAD-26e21fe/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==5252==    by 0x100002530: lExpand (parse.c:659)
+==5252==    by 0x10000123B: lPush (parse.c:626)
+==5252==    by 0x10000115F: synArgument (parse.c:73)
+==5252==    by 0x100001C89: synSimple (parse.c:323)
+==5252==    by 0x100002009: synStage (parse.c:412)
+==5252==    by 0x1000020B9: synPipeline (parse.c:430)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002443: synList (parse.c:538)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100001E98: synSubCmd (parse.c:374)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252== 
+==5252== Invalid write of size 4
+==5252==    at 0x10000257A: copyToken (parse.c:749)
+==5252==    by 0x100001270: lPush (parse.c:630)
+==5252==    by 0x10000174B: synRedSym (parse.c:206)
+==5252==    by 0x100001919: synRedirect (parse.c:251)
+==5252==    by 0x100001BC9: synRedList (parse.c:306)
+==5252==    by 0x100001F78: synSubCmd (parse.c:396)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002379: synList (parse.c:514)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100000E22: parse (parse.c:34)
+==5252==  Address 0x101034820 is 32 bytes before a block of size 16 in arena "client"
+==5252== 
+
+valgrind: m_mallocfree.c:307 (SizeT get_bszB_as_is(Block *)): Assertion 'bszB_lo == bszB_hi' failed.
+valgrind: Heap block lo/hi size mismatch: lo = 5, hi = 21474836480.
+This is probably caused by your program erroneously writing past the
+end of a heap block and corrupting heap metadata.  If you fix any
+invalid writes reported by Memcheck, this assertion failure will
+probably go away.  Please try that before reporting this as a bug.
+
+
+host stacktrace:
+==5252==    at 0x258040FEC: ???
+==5252==    by 0x258041357: ???
+==5252==    by 0x25804133A: ???
+==5252==    by 0x25804865E: ???
+==5252==    by 0x258035A3F: ???
+==5252==    by 0x2580349F3: ???
+==5252==    by 0x25803AFDA: ???
+==5252==    by 0x258033DD4: ???
+==5252==    by 0x25800BE36: ???
+==5252==    by 0x700000D71EFF: ???
+==5252==    by 0x700000AADF1F: ???
+==5252==    by 0x700000AADF3B: ???
+==5252==    by 0x700000009D4F: ???
+==5252==    by 0x700000009D5F: ???
+==5252==    by 0x700000AADF1F: ???
+==5252==    by 0xAAC3: ???
+==5252==    by 0x34DE: ???
+==5252==    by 0xAAC3: ???
+
+sched status:
+  running_tid=1
+
+Thread 1: status = VgTs_Runnable (lwpid 771)
+==5252==    at 0x10000177D: synRedSym (parse.c:208)
+==5252==    by 0x100001919: synRedirect (parse.c:251)
+==5252==    by 0x100001BC9: synRedList (parse.c:306)
+==5252==    by 0x100001F78: synSubCmd (parse.c:396)
+==5252==    by 0x100002022: synStage (parse.c:413)
+==5252==    by 0x100002184: synPipeline (parse.c:454)
+==5252==    by 0x100002219: synAndOr (parse.c:472)
+==5252==    by 0x100002379: synList (parse.c:514)
+==5252==    by 0x100000F19: synCommand (parse.c:556)
+==5252==    by 0x100000E22: parse (parse.c:34)
+==5252==    by 0x10000088B: main (test.c:56)
+
+
+Note: see also the FAQ in the source distribution.
+It contains workarounds to several common problems.
+In particular, if Valgrind aborted or crashed after
+identifying problems in your program, there's a good chance
+that fixing those problems will prevent Valgrind aborting or
+crashing, especially if it happened in m_mallocfree.c.
+
+If that doesn't help, please report this bug to: www.valgrind.org
+
+In the bug report, send all the above text, the valgrind
+version, and what OS and version you are using.  Thanks.
+

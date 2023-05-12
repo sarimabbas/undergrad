@@ -1,0 +1,56 @@
+ESTIMATE of time to complete assignment: 50 hours
+Date            Start Time          Time Spent          Work Completed
+----            ----------          ----------          --------------
+11/09           8:30 PM             1.0                 Set up project folder, created makefile and this log file
+11/21           12:00 PM            3.0                 Some code for basic commands. Setting of environment vars
+                                                        Can't figure out why my output "collides" with the next prompt
+11/24           12:00 PM            6.0                 Made some progress on stages and pipelines, working well. need to debug pipes tho
+11/27           7:00 PM             1.0                 Spent time organizing and cleaning my code. Now going to start testing
+                                    1.0                 tested RED_IN using gdb, starting RED_OUT after using mkdir and dirname   
+                                    1.0                 tested RED_OUT and RED_OUT_APP (needed to do some hackery with mkdir) 
+                                    2.0                 tested RED_IN_HERE after many tears (needed to lseek() after write to file descriptor)
+                                    1.0                 laying down structure for built in commands
+                                    1.0                 finished writing cd command, will debug tomorrow
+11/28           10:00 PM            1.5                 tested cd commands
+11/29           10:00 PM            1.0                 tested pipes    
+11/30           6:00 PM             4.0                 for about 4 hours ive been trying to figure out why t05 doesn't work
+                                                        the problem is with the second part of t05: cat file.txt | wc -l
+                                                        For small size of file.txt, it works, but hangs forever on larger files
+                                                        It might be my pipe logic, or it might be that im not waiting correctly 
+12/01           2:00 PM             1.0                 Was able to solve the above issue thanks to Prof Eisenstat's reponse: the FIFO is finite
+                                                        and any process writing to it will hang indefinitely unless it is started to be emptied out the read end   
+                                    2.0                 Wrote some and_or code, but i need to propagate the status up to the parent, so i'll do that
+                                    1.0                 tested and_or
+                                    3.0                 14/16, have to figure out a background command bug
+                                    3.0                 verge of tears. 15/16. can't figure out background commands. never sure when to exit and when to return : (
+                                    1.0                 Implemented wait command    
+12/06           2:00 PM             6.0                 Bug fixing                   
+                                    4.0                 Fixed more bugs related to multiple subcommands   
+                                    1.0                 Added signal handling to kill children  
+                                    0.5                 Hotfix for built-in commands ignore in pipeline             
+                                    ----------                        
+                                    46.0                 TOTAL time spent
+
+
+I discussed strategies, never code, with: 
+Andrea Oliveira, Gabriel Saruhashi, Nadia Irwanto, Katherine Sun
+
+A brief discussion of difficulties encountered:
+
+* Backgrounded commands: This one was the most difficult for me to understand. I
+couldn't get t08 working because "Completed" would never show up. Turns out it
+was because the waitpid(-1) calls was reaping zombies without my knowing. So I
+changed the Professor's code to wait specifcally for the processes in the table.
+I'm not sure if this is the right approach, because it might cause large delays
+at the pipeline level. However, alternatives like a global process table were to
+cumbersome to implement.
+
+* Parsing and lookaheads: Subcommands in particular have tricky tokens that
+throw off my parsing. So I had to check for these special cases and adjust the
+"drop-off" index for my parser appropriately.
+
+* Understanding pipes: At one point a child was writing to a pipe and appeared
+to hang forever. It only happened for large writes, and not smaller ones. But
+the Professor cleared it up pretty well: FIFOs are finite, and unless the next
+process in the pipeline is able to read it, the first process will stall since
+the pipe will be full. This definitely took me many hours to debug.

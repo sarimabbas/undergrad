@@ -1,0 +1,26 @@
+#!/bin/bash
+# cd directoryName / cd
+# REQUIRES: BUILT-IN (cd)
+
+FILES=
+PROGS="echo pwd"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+HOME=/c/cs323 timeout -k 1 2 ./bashful <<\END
+  # cd directoryName
+  cd /c/cs323/Doc
+  pwd
+   
+  # cd
+  cd
+  pwd
+  echo End of test
+END
+
+echo

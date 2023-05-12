@@ -1,0 +1,52 @@
+ESTIMATE of time to complete assignment: 30 hours
+
+Date        Start Time      Time Spent      Work Completed
+----        ----------      ----------      --------------
+09/18       9:00 PM         1.0             Set up my environment, looked through the files and spec
+                                            Experimenting with the token list and iterating through it
+09/20       1:00 PM         3.0             Spent some time writing functions. I am using recursive descent parsing
+                                            Debugging is very difficult locally because tokenize.o has been compiled for
+                                            Linux and I have a Mac, so I cannot link with compiler
+                                            Using GdbGui instead on the Zoo via FastX
+                                            I've managed to implement until <simple> but I have no idea how to attempt subcmd
+09/20       6:00 PM         4.0             Spent time at OH. Clarified top down vs bottom up. Modifying functions to build up an array
+                                            of parsed tokens as I go along
+09/29       2:00 PM         6.0             Started working on this pset again after many days. Passing my specialized list down to the child
+                                            functions that modify it. Written all the commands. Now have to start 1) testing 2) validating 3) reordering
+09/30       6:30 PM         3.0             Finished doing preliminary testing 
+09/03       11:00 PM        3.0             Spent some time trying to fix errors. Implemented reordering. Worrried I'm not going to finish in time.
+09/04       1:00 PM         2.0             Went to Stan to figure out my malloc errors. He helped fixed them. The problem was I was prematurely
+                                            freeing the token structs. Currently passing 7 cases. Need to implement here docs.
+09/04       3:00 PM         5.0             Tried to find time whenever I could today, in office hours and outside of class to work on this. At 
+                                            11/15. Got my multiple input/output checking working
+                                            Detected multiple (sub)commands
+09/04       10:00 PM        6.0             12/15. Some of the examples in the spec weren't working. If an and-or isn't parsed, you have to trust
+                                            that any detected SEP_END or SEP_BG would be used to parse a list. So this is the second instance
+                                            where you need backtrack (the first was parsing a <prefix> for simple but finding you needed it for <subcmd>)
+                                            A valgrind error keeps me from the final test case point
+                                            Turns out my custom readline() function was giving me trouble. Now I'm passing all the test cases
+                                            Adding checks for line splices and other here doc requirements
+                                            Fixed here doc related memory leak
+                                            hotfix to allow '/' and '=' to be in SIMPLE tokens
+                                            Used METACHARS and VARCHARS to correctly parse NAMES in NAME=VALUE and SIMPLEs
+                                            Now greedy parsing works correctly
+                                            Final fix to VARCHR check
+                            ----------                    
+                            34.0             TOTAL time spent
+
+People I've talked to regarding the pset (strategy, clarifying questions etc but never any code):
+TAs, Katherine Sun, Reese Wynn, Kevin Truong, Gabriel Saruhashi, 
+Isabella Teng, Xiu Chen, Nishita Burman
+
+A brief discussion of major difficulties encountered:
+
+* Backtracking: As noted, there were two instances I needed backtracking: the first was parsing a <simple>'s <prefix>,
+which may turn out to be a <subcmd>'s <prefix>, so I had to "restore" the state of my token array before proceding
+to parse a <subcmd>. Same was the case with <and_or> and those SEP_END and SEP_BG's, which may instead belong to a list
+
+* Freeing: I copied the freeList() function to free individual tokens, but realized I was not freeing the structs
+themselves, which led to memory leaks. I solved this problem by asking Prof. Eistenstat for help
+
+* Validation: the whole multiple redirects business (as well as all the other stuff outside the scope of the grammar) was
+tricky to implement. I needed to keep state of any errors seen. So I used global variables. The tricky part was to reset 
+the global variables appropriately for each new stage I parsed. 

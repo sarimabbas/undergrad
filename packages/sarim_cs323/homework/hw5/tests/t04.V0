@@ -1,0 +1,27 @@
+#!/bin/bash
+# Redirect stdout to nonexistent/writable file
+# REQUIRES: REDIR (>)
+
+FILES="+bashful.tmp"
+PROGS="cat echo"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+timeout -k 1 2 ./bashful <<\END
+  # Nonexistent file
+  cat /c/cs323/Hwk5/Tests/star.wars > +bashful.tmp
+  cat +bashful.tmp
+   
+  # Writable file
+  cat /c/cs323/Hwk5/Tests/stk.txt   > +bashful.tmp
+  cat +bashful.tmp
+   
+  echo End of test
+END
+
+echo

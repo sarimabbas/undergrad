@@ -1,0 +1,115 @@
+==3926== Memcheck, a memory error detector
+==3926== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3926== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==3926== Command: ./farthing x testExtractArkiv
+==3926== Parent PID: 9690
+==3926== 
+--3926-- 
+--3926-- Valgrind options:
+--3926--    -v
+--3926--    --log-file=valgrind.txt
+--3926--    --leak-check=full
+--3926--    --show-leak-kinds=all
+--3926-- Contents of /proc/version:
+--3926--   Linux version 4.17.19-200.fc28.x86_64 (mockbuild@bkernel03.phx2.fedoraproject.org) (gcc version 8.1.1 20180712 (Red Hat 8.1.1-5) (GCC)) #1 SMP Fri Aug 24 15:47:41 UTC 2018
+--3926-- 
+--3926-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--3926-- Page sizes: currently 4096, max supported 4096
+--3926-- Valgrind library directory: /usr/lib64/valgrind
+--3926-- Reading syms from /home/classes/cs323/class/abbas.sarim.sa857/homework/hw1/farthing
+--3926-- Reading syms from /usr/lib64/ld-2.27.so
+--3926--   Considering /usr/lib/debug/.build-id/74/dc0cadfe7c59447f67e0a4d6a22dc09145bc71.debug ..
+--3926--   .. build-id is valid
+--3926-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--3926--    object doesn't have a symbol table
+--3926--    object doesn't have a dynamic symbol table
+--3926-- Scheduler: using generic scheduler lock implementation.
+--3926-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==3926== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-3926-by-sa857-on-chameleon.zoo.cs.yale.edu
+==3926== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-3926-by-sa857-on-chameleon.zoo.cs.yale.edu
+==3926== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-3926-by-sa857-on-chameleon.zoo.cs.yale.edu
+==3926== 
+==3926== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==3926== don't want to do, unless you know exactly what you're doing,
+==3926== or are doing some strange experiment):
+==3926==   /usr/lib64/valgrind/../../bin/vgdb --pid=3926 ...command...
+==3926== 
+==3926== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==3926==   /path/to/gdb ./farthing
+==3926== and then give GDB the following command
+==3926==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=3926
+==3926== --pid is optional if only one valgrind process is running
+==3926== 
+--3926-- REDIR: 0x401e830 (ld-linux-x86-64.so.2:strlen) redirected to 0x58055e65 (???)
+--3926-- REDIR: 0x401e610 (ld-linux-x86-64.so.2:index) redirected to 0x58055e7f (???)
+--3926-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--3926-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+==3926== WARNING: new redirection conflicts with existing -- ignoring it
+--3926--     old: 0x0401e830 (strlen              ) R-> (0000.0) 0x58055e65 ???
+--3926--     new: 0x0401e830 (strlen              ) R-> (2007.0) 0x04c31d20 strlen
+--3926-- REDIR: 0x401b050 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c32e00 (strcmp)
+--3926-- REDIR: 0x401ed70 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c362d0 (mempcpy)
+--3926-- Reading syms from /usr/lib64/libc-2.27.so
+--3926--   Considering /usr/lib/debug/.build-id/46/77f12c31fa6c18c9925096f32e71afd4c71327.debug ..
+--3926--   .. build-id is valid
+--3926-- REDIR: 0x4ec3e10 (libc.so.6:memmove) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3010 (libc.so.6:strncpy) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec40f0 (libc.so.6:strcasecmp) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2a60 (libc.so.6:strcat) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3040 (libc.so.6:rindex) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec56d0 (libc.so.6:rawmemchr) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3f80 (libc.so.6:mempcpy) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3db0 (libc.so.6:bcmp) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2fd0 (libc.so.6:strncmp) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2ad0 (libc.so.6:strcmp) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3ee0 (libc.so.6:memset) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4eddb20 (libc.so.6:wcschr) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2f70 (libc.so.6:strnlen) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2b40 (libc.so.6:strcspn) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec4140 (libc.so.6:strncasecmp) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2b10 (libc.so.6:strcpy) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec4280 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3070 (libc.so.6:strpbrk) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2a90 (libc.so.6:index) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec2f40 (libc.so.6:strlen) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4eca130 (libc.so.6:memrchr) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec4190 (libc.so.6:strcasecmp_l) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3d80 (libc.so.6:memchr) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ede8d0 (libc.so.6:wcslen) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec3310 (libc.so.6:strspn) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec40c0 (libc.so.6:stpncpy) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec4090 (libc.so.6:stpcpy) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec5700 (libc.so.6:strchrnul) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4ec41e0 (libc.so.6:strncasecmp_l) redirected to 0x4a29731 (_vgnU_ifunc_wrapper)
+--3926-- REDIR: 0x4f975e0 (libc.so.6:__strrchr_avx2) redirected to 0x4c316b0 (rindex)
+--3926-- REDIR: 0x4f72f40 (libc.so.6:__strcmp_ssse3) redirected to 0x4c32cc0 (strcmp)
+--3926-- REDIR: 0x4ebf360 (libc.so.6:malloc) redirected to 0x4c2eb39 (malloc)
+--3926-- REDIR: 0x4ec3820 (libc.so.6:__GI_strstr) redirected to 0x4c36530 (__strstr_sse2)
+--3926-- REDIR: 0x4f93640 (libc.so.6:__memchr_avx2) redirected to 0x4c32ea0 (memchr)
+--3926-- REDIR: 0x4f97cf0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c35460 (memmove)
+--3926-- REDIR: 0x4f977b0 (libc.so.6:__strlen_avx2) redirected to 0x4c31c00 (strlen)
+--3926-- REDIR: 0x4ed3440 (libc.so.6:__strcat_ssse3) redirected to 0x4c318c0 (strcat)
+--3926-- REDIR: 0x4ebf9a0 (libc.so.6:free) redirected to 0x4c2fd3a (free)
+==3926== 
+==3926== HEAP SUMMARY:
+==3926==     in use at exit: 41,080 bytes in 1 blocks
+==3926==   total heap usage: 5 allocs, 4 frees, 58,568 bytes allocated
+==3926== 
+==3926== Searching for pointers to 1 not-freed blocks
+==3926== Checked 73,056 bytes
+==3926== 
+==3926== 41,080 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==3926==    at 0x4C2EBAB: malloc (vg_replace_malloc.c:299)
+==3926==    by 0x402675: lSetup (list.c:10)
+==3926==    by 0x401443: xKey (farthing.c:156)
+==3926==    by 0x400EB5: main (farthing.c:40)
+==3926== 
+==3926== LEAK SUMMARY:
+==3926==    definitely lost: 41,080 bytes in 1 blocks
+==3926==    indirectly lost: 0 bytes in 0 blocks
+==3926==      possibly lost: 0 bytes in 0 blocks
+==3926==    still reachable: 0 bytes in 0 blocks
+==3926==         suppressed: 0 bytes in 0 blocks
+==3926== 
+==3926== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==3926== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

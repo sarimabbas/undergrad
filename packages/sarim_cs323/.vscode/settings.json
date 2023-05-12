@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "string": "c",
+        "parsnip.h": "c",
+        "iterator": "cpp",
+        "lzw.h": "c",
+        "hashtable.h": "c",
+        "process-stub.h": "c"
+    },
+    "python.pythonPath": "/Users/sarimabbas/.virtualenvs/cs323/bin/python"
+}

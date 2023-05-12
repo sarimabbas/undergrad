@@ -1,0 +1,15 @@
+a
+#ifdef A
+b
+#else
+c
+#endif
+d
+#define A a
+A
+#ifdef A
+b
+#else
+c
+#endif
+d

@@ -1,0 +1,25 @@
+CC     = gcc
+CFLAGS = -g3 -std=c99 -pedantic -Wall
+
+all: test parsnip
+
+#test: test.o tokenize.o parse.o
+#	$(CC) -o test test.o tokenize.o parse.o
+
+test: test.o parse.o
+	$(CC) -o test test.o parse.o
+parsnip: mainParsnip.o tokenize.o parse.o
+	$(CC) -o parsnip mainParsnip.o tokenize.o parse.o
+test.o: test.c parsnip.h parse.h
+	$(CC) $(CFLAGS) -c test.c
+mainParsnip.o: mainParsnip.c parsnip.h
+	$(CC) $(CFLAGS) -c mainParsnip.c
+parse.o: parse.c parse.h parsnip.h 
+	$(CC) $(CFLAGS) -c parse.c
+
+# list.o: list.c list.h parsnip.h
+# 	$(CC) $(CFLAGS) -c list.c
+
+clean:
+	-rm parsnip test mainParsnip.o parse.o test.o 
+

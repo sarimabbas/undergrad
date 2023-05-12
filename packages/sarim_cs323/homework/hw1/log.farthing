@@ -1,0 +1,59 @@
+ESTIMATE of time to complete assignment: 30 hours
+Date                Start Time              Time Spent              Work Completed
+----                ----------              ----------              --------------
+08/29               7:00 pm                 0.8                     Spent a little too much time setting up my coding environment and created snippets to help
+                                                                    me maintain log files like these
+08/29               8:30 pm                 1.5                     Did some of the reading for 08/29. Read makefiles closely. Lost energy by the time I got to 
+                                                                    carry look ahead adders, which is probably the meatiest part.
+09/02               9:00 pm                 2.0                     Did the readings for Linux file system and started sketching out strategies for how to
+                                                                    implement the t key.
+09/03               12:00 am                3.5                     Started working on t key implementation. Using a finite state machine (equivalent to regex)
+                                                                    to parse Arkiv files created by staff implementation. My reasoning is that it will be easier to
+                                                                    test if I implement on staff-created Arkiv files. I'm not super confident with line-by-line reading
+                                                                    or tokenization, so a FSM seems easier to implement. 
+09/03               12:00 pm                3.0                     Very close to finishing tKey. FSM was promising. Close to staff solution. 
+09/03               3:00  pm                1.0                     Ugh! Sometimes it works perfectly. But as soon as I open an Arkiv with an editor, then the program
+                                                                    no longer works on it. Maybe my text editor is changing it
+09/03               4:00  pm                1.0                     The main reason I went down this path was because the spec says we cant use fseek to skip ahead in the file
+                                                                    But if I could, it could make things simpler! I've sent a message to clarify
+09/03               7:00  pm                1.0                     Went to office hours to check if fseek as I am using it is allowed.
+09/03               8:30  pm                1.5                     Took the ULA's advice and will change fseek to an fgets, and throw away the buffer. Done with t function!
+                                                                    Started work on r key. The reading is coming in handy; i know how to use mkstemp and lstat etc                     
+09/05               8:40  pm                1.5                     I think I can simplify my code if I use a flexible array/queue to hold all my file metadata
+09/05               10:30 pm                3.0                     The new data structure looks good so far. I'm so close!! The single pass requirement is making it difficult.
+                                                                    But I think it's going to work!
+09/07               8:00  pm                2.0                     OK, this has occupied me for two hours. rKey was working on mac but not on the zoo. That's because mkstemp()
+                                                                    does not work with read only strings on systems with older compilers. A fabulous waste of time.
+09/07               10:00 pm                2.0                     Got rKey and tKey working. Now adding recursion to rKey             
+09/08               3:00  pm                3.0                     I've made some mpodifications. tKey now works with specified names (almost). I've got rKey working seemingly perfectly
+                                                                    as well  
+09/09               12:00 pm                2.0                     Improved my rKey and removed bugs      
+09/09               2:00  pm                5.0                     Got dKey() working  
+                                                                    Got xKey working   
+09/10               2:00  pm                0.1                     I wasn't getting test case 6 working (the one which tries to extract to a write protected file). While Stan was talking,
+                                                                    I realized part of the spec said we should throw an error if we are unable to extract for some reason. So I made
+                                                                    that change as soon as I got out of class. Now I am 15/15. Next I will test my own cases. Woohoo.
+09/12               11:00 pm                2.0                     Edge casing rKey and xKey. rKey needs to be free of valgrind errors if archive is corrupt. xKey needs to 
+                                                                    address the case where zoo is a directory and file thingy
+                                                                    Fixed (to the best of my ability) both. Cleaned up documentation.                                                                                       
+                                            ----------                            
+                                            34.9                    TOTAL time spent: 34.9
+
+I discussed my solution with: 
+* TAs at office hours: Addie, Eli 
+
+A brief discussion of major difficulties encountered:
+* The log generally is descriptive, but:
+* The earliest major difficulty was how to parse the archive file. I was scared of using the fprintf/fread
+  style functions so I used a finite state machine, which was a massive waste of time. When I read the textbook 
+  chapter, I realized it could be done in a simpler way
+* The next difficulty was whether or not to use a specialized data structure like a resizeable list to store 
+  file meta data and carry out preliminary operations. This was made complicated by the fact that the archive could
+  only be parsed in one run and that we weren't allowed to store file contents in memory. So my use of the data structure 
+  was kind of wacky, with many specialized helper functions built into it, which prevents it being used generally in other programs
+* The trailing slashes requirement for directories made everything a little harder. I realized that having a trailing slash is
+  important when reading the archive to tell which file is a directory or not. However, having to strip the slashes from names 
+  everytime i wanted to make comparisons for insertion, extraction or deletion was paramount, otherwise the correct files would not 
+  have the operation performed on them
+* Having to continually submit the log file is a little tiring - when I am busy debugging for many hours, I did not want to keep updating my slow progress
+

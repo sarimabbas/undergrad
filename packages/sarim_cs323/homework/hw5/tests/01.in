@@ -1,0 +1,23 @@
+// test stdin redirect
+cat < sample.txt
+
+// test stdout redirect
+echo yum > sample.txt // overwrite
+echo yum > new.txt // new file
+
+// test stdin and stdout
+cat < sample.txt > sample_copy.txt
+
+// test here doc
+cat << here
+hello
+here
+
+// test here doc and stdout
+// look for: cleanup of temp files
+cat > sample_copy.txt << here
+hello
+here
+
+// test pipes
+cat mainBashful.c | grep "token" | wc -l

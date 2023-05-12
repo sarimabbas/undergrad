@@ -1,0 +1,23 @@
+#!/bin/bash
+# Simple && and ||
+# REQUIRES: AND/OR
+
+FILES=
+PROGS="echo false ls true"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+timeout -k 1 2 ./bashful <<\END
+  true  && ls -1 /c/cs323/Style
+  false && ls -1 /c/cs323/Style
+  true  || ls -1 /c/cs323/Style
+  false || ls -1 /c/cs323/Style
+  echo End of test
+END
+
+echo

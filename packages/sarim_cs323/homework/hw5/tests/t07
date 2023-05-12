@@ -1,0 +1,20 @@
+#!/bin/bash
+# Multiple commands separated by ;
+# REQUIRES: SEP (;)
+
+FILES=
+PROGS="echo"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+timeout -k 1 2 ./bashful <<\END
+  echo Garbage In, ; echo Garbage Out!
+  echo End of test
+END
+
+echo

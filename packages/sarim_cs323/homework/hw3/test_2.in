@@ -1,0 +1,37 @@
+printf("I am a regular string");
+printf("ewhf iwehr /* ekwjhfj */"); /* "ejfkhr" */
+/* comment "with a string inside" */
+/****** This is a C-style comment. */
+This is not a comment
+/* This is another
+ouiui iu iuh******** 
+ *     /
+
+
+
+jkbkjb
+
+/**wqdefew few
+
+split over several       */
+
+"/* \" a comment */"
+
+// some other comment 
+'/'
+
+/****
+ * Common multi-line comment style.
+ ****/
+
+/*
+ * Another common multi-line comment style.
+ */
+
+
+"This is /* also not a comment */"
+This is still /* a comment */
+This is still /* a comment */ again
+"string literal" /* comment starts */ ""
+"string \" literal" /** comment starts */ ""
+"this is an unbalanced quote

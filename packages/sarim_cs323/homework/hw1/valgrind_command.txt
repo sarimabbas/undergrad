@@ -1,0 +1,1 @@
+valgrind -v --log-file="valgrind.txt" --leak-check=full --show-leak-kinds=all ./farthing t imgArchive

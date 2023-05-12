@@ -1,0 +1,3348 @@
+.\"
+.\" Version of Indian Hill Style Manual (U of T amended)
+.\" revision $Revision: 6.1 $
+.\"
+.\" make with  ``... | tbl | {{di,}t,n}roff -ms ..''
+.\" See the `.ds C C\"' macro, to set the C source code font.
+.\"
+.\" This document was really written with `troff' in mind.  You will
+.\" need to do significant hacking to get nice output with `nroff'.
+.\"
+.\" You may have comments, suggestions, bug fixes, etc.  Send them to
+.\" me and I will try to incorporate them (one way or another) in to
+.\" a future version.   If you change this document, please add a note
+.\" that it has been modified and change the minor version number
+.\" (e.g., version 5.0 becomes 5.1 or 5.0.zork, or whatever) and the
+.\" last date of modification (printed in the footer of each page).
+.\"
+.\" pardo@cs.washington.edu or
+.\" {rutgers,cornell,ucsd,ubc-cs,tektronix}!uw-beaver!june!pardo
+.\"
+.\"
+.\"--------------------
+.\" Footnote numbering
+.ds f \\u\s-2\\n+f\\s+2\d
+.nr f 0 1
+.ds F \\n+F.
+.nr F 0 1
+.\"--------------------
+.\" Select a font and a format for blocks of code.
+.\" If your system has fixed-width fonts, then that's
+.\" probably what you want to use.  If your system doesn't
+.\" support fixed-width fonts, then use the default.
+.\" Really aggressive hackers will want to use vgrind (grind).
+.\"
+.ds C C\"		\" Fixed-width font.  (`.ds C CW' if no C?)
+.\" `Ex': start example.
+.de Ex
+.DS \\$1
+.ft \*C
+.\" .DS \\$1		\" Use w/ any fixed-width font!
+.\" .ft \*C		\" Use fixed-width font.
+.\" .ft R		\" Default font if you don't have fixed-width.
+.\" .vS			\" Use vgrind.  (BROKE?)
+..
+.\"
+.\" `Ee': end example.
+.de Ee
+.DE
+.\" .vE			\" End vgrind block.
+.\" .DE			\" One of the fonts.
+..
+.\" Same idea, select a font for program text appearing `inline' in
+.\" the text.  use the same selection choices as for code blocks.
+.\" Prepend `\&' in case the trailing arg starts w/ a period.
+.\"
+.\" Usage:
+.\"	.Ec foo         (`foo' in code font)
+.\"	.Ec foo mp      (`foomp', `foo' in code font, `mp' not)
+.\"	.Ec foo mp ka   (`kafoomp', `foo' in code font, rest not)
+.\"
+.de Ep
+.nh
+\&\\$3\c
+.ft \*C
+\\$1\fP\\$2\"			fixed-width font (not broke...)
+.hy
+.\"\&\\$3\f\*C\\$1\fP\\$2\"	fixed-width font (BUG: BROKE!)
+.\"\&\\$3\fC\\$1\fP\\$2\"	fixed-width font
+.\" \&\\$3\fB\\$1\fP\\$2\"	default (general) font
+..
+.\"	Same idea, select a font for `ideas' (concepts) that appear
+.\"	in the text.
+.de Ec
+\&\\$3\fI\\$1\fP\\$2
+..
+.\"--------------------
+.\"
+.nr x \w'    '\" find width of 4 spaces.
+.ta \nxu +\nxu +\nxu +\nxu +\nxu +\nxu +\nxu +\nxu +\nxu  \" set tabs using that
+.\"
+.\"--------------------
+.\" Long digressionary comment:  There's lots of embedded junk that
+.\" acts as ``rationale'' for rules or explains something or is of
+.\" some interest, but of limited relevance.  Those embedded comments
+.\" might well be interesting to somebody, thus they should PERHAPS
+.\" optionally be
+.\"
+.\" (a) ignored (yes!)
+.\" (b) printed as endnotes
+.\" (c) printed as footnotes
+.\" (d) printed as inline text
+.\"
+.\" That is,
+.\"
+.\" 	mumble, foo, bar, zork.
+.\" 	.BS
+.\" 	The zoop machine bit-aligns the user
+.\" 	The foop machine byte-aligns the user.
+.\" 	The boop machine floats the user right out the door.
+.\" 	.ES
+.\" 	Other sterling words of wisdom.
+.\"
+.\" So suppose that register `r' and macro/string `ZZ' are unused,
+.\" then reasonable macros include:
+.\"
+.\" 	.de BS
+.\" 	.if \\nr==0 .de ZZ ES
+.\" 	.if \\nr==1 .BE
+.\" 	.if \\nr==2 .FS
+.\" 	..
+.\" 	.de ES
+.\" 	.if \\nr==1 .EE
+.\" 	.if \\nr==2 .FE
+.\" 	..
+.\"
+.\" Then, if register r is 0, everything from the .BS to the .ES will
+.\" become the definition of a macro ZZ, which are never read back;
+.\" thus it is effectively (and fairly efficiently) thrown away.
+.\"
+.\" If register r is 1, .BS invokes .BE, and .ES invokes .EE --
+.\" supposing .BE and .EE are names for macros for end-notes, though
+.\" such thing might not exist in the -ms macros.  IMHO, the various
+.\" comments shouldn't be end-nodes.  End-notes are for things like
+.\" "op. cit. pp. 6-42", never for actual commentary on the text; it's
+.\" just too much effort to read them.
+.\"
+.\" If register r is 2, .BS invokes .FS, and .ES invokes .FE; and
+.\" if register r has any other value, .BE and .ES do nothing at all,
+.\" so the material comes out inline.  (The text should probably be
+.\" blocked out with a `.QP' and a `\fBRemark:\fP or some such; see
+.\" Knuth's "dangerous bend" paragraphs in The TeXBook.)
+.\"
+.\" Using a register with a 1-character name because it works nicely
+.\" with troff's -r option.  With the above macros, doing nothing
+.\" makes the optional comments to disappear, -rr1 makes them in to
+.\" end-notes, -rr2 for footnotes, and -rr3 for inline text.
+.\"
+.\" It probably isn't a good idea to do all that, though.  People will
+.\" just get confused about versions.  Better to just include or
+.\" exclude the notes.
+.\"
+.\"----------------
+.RP
+.TL
+Recommended C Style and Coding Standards
+.AU
+L.W. Cannon
+R.A. Elliott
+L.W. Kirchhoff
+J.H. Miller
+J.M. Milner
+R.W. Mitze
+E.P. Schan
+N.O. Whittington
+.AI
+Bell Labs
+.AU
+Henry Spencer
+.AI
+Zoology Computer Systems
+University of Toronto
+.AU
+David Keppel
+.AI
+EECS, UC Berkeley
+CS&E, University of Washington
+.AU
+Mark Brader
+.AI
+SoftQuad Incorporated
+Toronto
+.AB
+This document is an updated version of the
+\fIIndian Hill C Style and Coding Standards\fP
+paper,
+with modifications by the last three authors.
+It describes a recommended coding standard for
+C
+programs.
+The scope is coding style, not functional organization.
+.AE
+.\"--------------------
+.\" Headers/footers must be in double quotes because most versions
+.\" of .OF, .OH, ... are BROKE.  (They work until you get 10 arguments
+.\" and then silently truncate...
+.\" revision $Revision: 6.1 $
+.\"
+.OF "'Recommended C Coding Standards'Revision: 6.0'25 June 1990'"
+.EF "'Recommended C Coding Standards'Revision: 6.0'25 June 1990'"
+.nr PO 1.25i
+.ta 0.5i 1.0i 1.5i 2.0i 2.5i 3.0i
+.\"--------------------
+.NH
+Introduction
+.PP
+This document
+is a modified version of a document from
+a committee formed at AT&T's Indian Hill labs to establish
+a common set of coding standards and recommendations for the
+Indian Hill community.
+.\"
+.\" old:
+.\"
+.\" The scope of this work is C coding style,
+.\" rather than the functional organization of programs
+.\" or general issues such as the use of \fIgoto\fPs.
+.\"
+The scope of this work is C coding style.
+Good style should encourage consistent layout, improve
+portability, and reduce errors.
+.\"
+.\" "It's simply a matter of style, and while there
+.\" are many wrong styles, there really isn't any
+.\" one right style."      -- Ray Butterworth
+.\"
+This work does not cover functional organization, or general
+issues such as the use of
+.Ec goto s.
+We\*f
+.FS
+.IP \*F
+The opinions in this document
+do not reflect the opinions of all authors.
+This is still an evolving document.
+Please send comments and suggestions to
+pardo@cs.washington.edu or
+{rutgers,cornell,ucsd,ubc-cs,tektronix}!uw-beaver!june!pardo
+.FE
+have tried to combine previous work [1,6,8] on C style into a uniform
+set of standards that should be appropriate for any project using C,
+although parts are biased towards particular systems.
+Of necessity, these standards cannot cover all situations.
+Experience and informed judgement count for much.
+Programmers who encounter unusual situations should
+consult either
+experienced C programmers or code written by experienced C
+programmers (preferably following these rules).
+.PP
+The standards in this document are not of themselves required, but
+individual institutions or groups may adopt part or all of them
+as a part of program acceptance.
+It is therefore likely that others at your institution will code in
+a similar style.
+Ultimately, the goal of these standards is to
+increase portability, reduce maintenance, and above all
+improve clarity.
+.PP
+Many of the style choices here are somewhat arbitrary.
+Mixed coding style is harder to maintain than bad coding style.
+When changing existing code it is better to conform to the
+style (indentation, spacing, commenting, naming conventions)
+of the existing code than it is to blindly follow this document.
+.QP
+``\fITo be clear is professional; not to be clear
+is unprofessional.\fP'' \(em Sir Ernest Gowers.
+.NH
+File Organization
+.PP
+A file consists of various sections that should be separated by
+several blank lines.
+Although there is no maximum length limit for source files,
+files with more than about 1000 lines are cumbersome to deal with.
+The editor may not have enough temp space to edit the file,
+compilations will go more slowly,
+etc.
+Many rows of asterisks, for example,
+present little information compared to the time it takes to scroll past,
+and are discouraged.
+Lines longer than 79 columns are not handled well by all terminals
+and should be avoided if possible.
+Excessively long lines which result from deep indenting are often
+a symptom of poorly-organized code.
+.NH 2
+File Naming Conventions
+.PP
+File names are made up of a base name,
+and an optional period and suffix.
+The first character of the name should be a letter
+and all characters (except the period)
+should be lower-case letters and numbers.
+The base name should be eight or fewer characters and the
+suffix should be three or fewer characters
+(four, if you include the period).
+These rules apply to both program files and
+default files used and produced by the program
+(e.g., ``rogue.sav'').
+.\"
+.\" 8 + 1 + 3 + ",v" fits RCS into Version 7 filesystems.
+.\" MS-DOS does 8 + "." + 3.
+.\"
+.PP
+Some compilers and tools require certain suffix conventions for names
+of files [5].
+The following suffixes are required:
+.IP \0\0\(bu
+C source file names must end in \fI.c\fP
+.IP \0\0\(bu
+Assembler source file names must end in \fI.s\fP
+.LP
+The following conventions are universally followed:
+.IP \0\0\(bu
+Relocatable object file names end in \fI.o\fP
+.IP \0\0\(bu
+Include header file names end in \fI.h\fP.
+.\"
+.\" \*f.
+.\" .FS
+.\" .IP \*F
+.\"
+An alternate convention that may
+be preferable in multi-language environments
+is to suffix both the language type and \fI.h\fP
+(e.g. ``foo.c.h'' or ``foo.ch'').
+.FE
+.IP \0\0\(bu
+Yacc source file names end in \fI.y\fP
+.IP \0\0\(bu
+Lex source file names end in \fI.l\fP
+.PP
+C++ has compiler-dependent suffix conventions,
+including \fI.c\fP, \fI..c\fP, \fI.cc\fP, \fI.c.c\fP, and \fI.C\fP.
+Since much C code is also C++ code, there is no clear solution here.
+.PP
+In addition,
+it is conventional to use ``Makefile'' (not ``makefile'') for the
+control file for \fImake\fP (for systems that support it)
+and ``README'' for a summary of the contents
+of the directory or directory tree.
+.\"
+.\" Having ``README'' in caps breaks the "monocase" rule, but is
+.\" convention.  Same for ``Makefile''.
+.\"
+.NH 2
+Program Files
+.PP
+The suggested order of sections for a program file is as follows:
+.IP 1.
+First in the file is a prologue that tells what is in that file.
+A description of the purpose of the objects in the files (whether
+they be functions, external data declarations or definitions, or
+something else) is more useful than a list of the object names.
+The prologue may optionally contain author(s),
+revision control information, references, etc.
+.IP 2.
+Any header file includes should be next.
+If the include is for a non-obvious reason,
+the reason should be commented.
+In most cases, system include files like \fIstdio.h\fP should be
+included before user include files.
+.IP 3.
+Any defines and typedefs that apply to the file as a whole are next.
+One normal order is to have
+``constant'' macros first,
+then ``function'' macros, then typedefs and enums.
+.IP 4.
+Next come the global (external) data declarations,
+usually in the order: externs, non-static globals, static globals.
+If a set of defines applies to a particular piece of global data
+(such as a flags word), the defines should be immediately after
+the data declaration or embedded in structure declarations,
+indented to put the defines one level
+deeper than the first keyword of the declaration to which they apply.
+.IP 5.
+The functions come last,
+and should be in some sort of meaningful order.
+Like functions should appear together.
+A ``breadth-first''
+approach (functions on a similar level of abstraction together) is
+preferred over depth-first (functions defined as soon as possible
+before or after their calls).
+Considerable judgement is called for here.
+If defining large numbers of essentially-independent utility
+functions, consider alphabetical order.
+.NH 2
+Header Files
+.PP
+Header files are files that are included in other files prior to
+compilation by the C preprocessor.
+Some, such as \fIstdio.h\fP, are defined at the system level
+and must included by any program using the standard I/O library.
+Header files are also used to contain data declarations and defines
+that are needed by more than one program.
+Header files should be functionally organized,
+i.e., declarations for separate subsystems
+should be in separate header files.
+Also, if a set of declarations is likely to change when code is
+ported from one machine to another, those declarations should be
+in a separate header file.
+.PP
+Avoid private header filenames that are the same
+as library header filenames.
+The statement
+.Ep #include
+.Ep """math.h"""
+.\"
+.\" Or try .Ep math.h """" """"
+.\"
+will include the standard library math header file
+if the intended one is not
+found in the current directory.
+If this is what you \fIwant\fP to happen,
+comment this fact.
+Don't use absolute pathnames for header files.
+Use the
+.Ec <name>
+construction for getting them from a standard
+place, or define them relative to the current directory.
+The ``include-path'' option of the C compiler
+(\-I on many systems)
+is the best way to handle
+extensive private libraries of header files;  it permits reorganizing
+the directory structure without having to alter source files.
+.PP
+Header files that declare functions or external variables should be
+included in the file that defines the function or variable.
+That way, the compiler can do type checking and the external
+declaration will always agree with the definition.
+.PP
+Defining variables in a header file is often a poor idea.
+Frequently it is a symptom of poor partitioning of code between files.
+Also, some objects like typedefs and initialized data definitions
+cannot be seen twice by the compiler in one compilation.
+On some systems, repeating uninitialized declarations
+without the \fIextern\fP keyword also causes problems.
+Repeated declarations can happen if include files are nested
+and will cause the compilation to fail.
+.PP
+Header files should not be nested.
+.\"
+.\" Many people disagree strongly with this.
+.\" However, if you are to use \fIone\fP style, then this is best.
+.\" The #ifndef/#define/.../#endif approach (below) often causes
+.\" compilations to go much slower.
+.\" A #endinput directive would be nice.
+.\"
+The prologue for a header file should, therefore, describe what
+other headers need to be #included for the header to be functional.
+In extreme cases, where a large number of header files are to be
+included in several different source files,
+it is acceptable to put all common #includes in one include file.
+.PP
+It is common to put the following into each
+.Ec .h
+file
+to prevent accidental double-inclusion.
+.Ex
+#ifndef EXAMPLE_H
+#define EXAMPLE_H
+\&...	\fI/* body of example.h file */\fP
+#endif /* EXAMPLE_H */
+.Ee
+.LP
+This double-inclusion mechanism should not be relied upon,
+particularly to perform nested includes.
+.NH 2
+Other Files
+.PP
+It is conventional to have a file called ``README'' to document both
+``the bigger picture'' and issues for the program as a whole.
+For example, it is common to include a list of all conditional
+compilation flags and what they mean.
+It is also common to list files that are machine dependent, etc.
+.NH
+Comments
+.QP
+.ad r
+``\fIWhen the code and the comments disagree,
+both are probably wrong.\fP'' \(em Norm Schryer
+.\" \fIBumper-Sticker Computer Science\fP,
+.\" Jon Bently's \fIProgramming Pearls\fP column,
+.\" Communications of the ACM (CACM),
+.\" September 1985, Volume 28, Number 9.
+.\"
+.\" ``\fIMany's the time when I've thanked the Doug A. Gwyn of past
+.\" years for anticipating future maintenance questions and providing
+.\" helpful information in the original sources.\fP'' \(em Doug A.
+.\" Gwyn
+.\"
+.br
+.ad b
+.PP
+The comments should describe \fIwhat\fP is happening,
+\fIhow\fP it is being done,
+what parameters mean,
+.\"
+.\" BUG:
+.\" By X3.159-1989, ``formal parameters'' are called `parameters' and
+.\" ``actual parameters'' are called `arguments'.  A somewhat relaxed
+.\" form lets us call anything an argument, but only some formal
+.\" parameters are `parameters'.
+.\" The two usages are used inconsistantly in this document.
+.\"
+which globals are used and which are modified,
+and any restrictions or bugs.
+Avoid, however, comments that are clear from the code,
+as such information rapidly gets out of date.
+Comments that disagree with the code are of negative value.
+Short comments should be
+\fIwhat\fP comments, such as ``compute mean value'',
+rather than \fIhow\fP comments such as
+``sum of values divided by n''.
+C is not assembler;
+putting a comment at the top of a 3\-10 line section telling what it
+does overall is often more useful than a comment on each line
+describing micrologic.
+.PP
+Comments should justify offensive code.
+The justification should be that something bad will happen if
+unoffensive code is used.
+Just making code faster is not enough to rationalize a hack;
+the performance must be \fIshown\fP to be unacceptable
+without the hack.
+The comment should explain the unacceptable behavior and describe why
+the hack is a ``good'' fix.
+.PP
+Comments that describe data structures, algorithms, etc., should be
+in block comment form with the opening
+.Ep /*
+in columns 1-2, a
+.Ep *
+in column 2 before each line of comment text,
+and the closing
+.Ep */
+in columns 2-3.
+An alternative is to have
+.Ep **
+in columns 1-2, and put the closing
+.Ep */
+also in 1-2.
+.Ex L
+/*
+ *	Here is a block comment.
+ *	The comment text should be tabbed or spaced over uniformly.
+ *	The opening slash-star and closing star-slash are alone on a line.
+ */
+.Ee
+.Ex L
+/*
+** Alternate format for block comments
+*/
+.Ee
+.PP
+Note that \fIgrep '^.\e*'\fP will catch all block comments in the
+file\*f.
+.FS
+.IP \*F
+Some automated program-analysis
+packages use different characters before comment lines as
+a marker for lines with specific items of information.
+In particular, a line with a
+.Ep \- ' `
+in a comment preceding a function
+is sometimes assumed to be a one-line summary of the function's
+purpose.
+.FE
+Very long block comments such as drawn-out discussions and copyright
+notices often start with
+.Ep /*
+in columns 1-2, no leading
+.Ep *
+before lines of text, and the closing
+.Ep */
+in columns 1-2.
+Block comments inside a function are appropriate, and
+they should be tabbed over to the same tab setting as the code that
+they describe.
+One-line comments alone on a line should be indented to the tab
+setting of the code that follows.
+.Ex
+if (argc > 1) {
+	/* Get input file from command line. */
+	if (freopen(argv[1], "r", stdin) =\^= NULL) {
+		perror (argv[1]);
+	}
+}
+.Ee
+.PP
+Very short comments may appear on the same line as the code they
+describe,
+and should be tabbed over to separate them from the statements.
+If more than one short comment appears in a block of code
+they should all be tabbed to the same tab setting.
+.Ex
+if (a =\^= EXCEPTION) {
+	b = TRUE;				/* special case */
+} else {
+	b = isprime(a);			/* works only for odd a */
+}
+.Ee
+.NH
+Declarations
+.PP
+Global declarations should begin in column 1.
+All external data declaration should be preceded by the
+.Ec extern
+keyword.
+If an external variable is an array that is defined with an explicit
+size, then the array bounds must be repeated in the extern
+declaration unless the size is always encoded in the array
+(e.g., a read-only character array that is always null-terminated).
+Repeated size declarations are
+particularly beneficial to someone picking up code written by another.
+.\"
+.\" /* foo.h */
+.\" #define SIZE 1234
+.\" extern int zork[SIZE];	/* ... and not `extern int zork[];' */
+.\"
+.\" /* foo.c */
+.\" int zork[SIZE];
+.\"
+.PP
+The ``pointer'' qualifier,
+.Ep * ', `
+should be with the variable name rather
+than with the type.
+.Ex
+char		*s, *t, *u;
+.Ee
+instead of
+.Ex
+char*	s, t, u;
+.Ee
+which is wrong, since
+.Ep t ' `
+and
+.Ep u ' `
+do not get declared as pointers.
+.PP
+Unrelated declarations, even of the same type,
+should be on separate lines.
+A comment describing the role of the object being declared should be
+included, with the exception
+that a list of
+.Ec #define d
+constants do not need comments
+if the constant names are sufficient documentation.
+The names, values, and comments
+are usually
+.\" should be
+tabbed so that they line up underneath each other.
+Use the tab character rather than blanks (spaces).
+For structure and union template declarations,
+each element should be alone on a line
+with a comment describing it.
+The opening brace
+.Ep { \^\^) (\^
+should be on the same line as the structure
+tag, and the closing brace
+.Ep } \^) (\^\^
+should be in column 1.
+.Ex
+struct boat {
+	int		wllength;	/* water line length in meters */
+	int		type;		/* see below */
+	long		sailarea;	/* sail area in square mm */
+};
+
+/* defines for boat.type */
+#define	KETCH	(1)
+#define	YAWL		(2)
+#define	SLOOP	(3)
+#define	SQRIG	(4)
+#define	MOTOR	(5)
+.Ee
+.\"
+.\" If this formatting `loses', you can probably fix it, but you'll
+.\" have to be careful about tabs that appear later.
+.\"
+.\" .\" Set up a tab field, with the worst-case tabbing, more or less
+.\" .ta \w'MOTOR    'u
+.\" .\" #define KETCH<tab>1 (etc.)
+.\"
+.LP
+These defines are sometimes put right after the declaration of
+.Ep type ,
+within the
+.Ep struct
+declaration, with enough tabs after the
+.Ep # \^' `
+to indent
+.Ep define
+one level more than the structure member declarations.
+When the actual values are unimportant,
+the
+.Ec enum
+facility is better\*f.
+.FS
+.IP \*F
+.Ec enum s
+might be better anyway.
+.FE
+.Ex
+enum bt { KETCH=1, YAWL, SLOOP, SQRIG, MOTOR };
+struct boat {
+	int		wllength;	/* water line length in meters */
+	enum bt	type;		/* what kind of boat */
+	long		sailarea;	/* sail area in square mm */
+};
+.Ee
+.PP
+Any variable whose initial value is important should be
+\fIexplicitly\fP initialized, or at the very least should be commented
+to indicate that C's default initialization to zero
+is being relied upon.
+The empty initializer,
+.Ep {\^} '', ``
+should never be used.
+Structure
+initializations should be fully parenthesized with braces.
+.\"
+.\" Consider the following:
+.\"
+.\" struct foo {int i, j};
+.\" struct foo bar[] = {1, 2, 3, 4};
+.\" struct foo kung[] = {{1, 2}, {3, 4}};
+.\" struct foo oh[] = {};
+.\"
+.\" `bar' is accepted, but is visually ambiguous.
+.\" `oh' is also accepted.  Don't do it -- what does it mean?
+.\"
+.\" The following is NOT ambiguous and is good style.
+.\"
+.\" struct foo kung[] = {{1}, {3}};
+.\"
+Constants used to initialize longs should be explicitly long.
+Use capital letters; for example two long
+.Ep 2l '' ``
+looks a lot like
+.Ep 21 '', ``
+the number twenty-one.
+.Ex
+int		x = 1;
+char		*msg = "message";
+struct boat	winner[] = {
+	{ 40, YAWL, 6000000L },
+	{ 28, MOTOR, 0L },
+	{ 0 },
+};
+.Ee
+.PP
+In any file which is part of a larger whole rather than a self-contained
+program, maximum use should be made of the
+.Ec static
+keyword to make functions and variables local to single files.
+Variables in particular should be accessible from other files
+only when there is a clear
+need that cannot be filled in another way.
+Such usage should be commented to make it clear that another file's
+variables are being used; the comment should name the other file.
+If your debugger hides static objects you need to see during
+debugging,
+declare them as
+.Ep STATIC
+and #define
+.Ep STATIC
+as needed.
+.PP
+The most important types should be highlighted by typedeffing
+them, even if they are only integers,
+as the unique name makes the program easier to read (as long as there
+are only a \fIfew\fP things typedeffed to integers!).
+Structures may be typedeffed when they are declared.
+Give the struct and the typedef the same name.
+.Ex
+typedef struct splodge_t {
+	int	sp_count;
+	char	*sp_name, *sp_alias;
+} splodge_t;
+.Ee
+.PP
+The return type of functions should always be declared.
+If function prototypes are available, use them.
+One common mistake is to omit the
+declaration of external math functions that return
+.Ec double .
+The compiler then assumes that
+the return value is an integer and the bits are dutifully
+converted into a (meaningless) floating point value.
+.QP
+.ce
+``\fIC takes the point of view that the programmer is always right.\fP'' \(em Michael DeCorte
+.NH
+Function Declarations
+.PP
+Each function should be preceded by a block comment prologue
+that gives a short description of what the function does
+and (if not clear) how to use it.
+Discussion of non-trivial design decisions and
+side-effects is also appropriate.
+Avoid duplicating information clear from the code.
+.PP
+The function return type should be alone on a line,
+(optionally) indented one stop\*f.
+.FS
+.IP \*F
+``Tabstops'' can be blanks (spaces) inserted by your editor in clumps
+of 2, 4, or 8.
+Use actual tabs where possible.
+.FE
+Do not default to
+.Ec int ;
+if the function does not return a value then it should be given
+return type \fIvoid\fP\*f.
+.FS
+.IP \*F
+.Ep "#define"
+.Ep void
+or
+.Ep "#define"
+.Ep void
+.Ep int
+for compilers without the
+.Ec void
+keyword.
+.FE
+If the value returned requires a long explanation,
+it should be given in the prologue;
+otherwise it can be on the same line as the return type, tabbed over.
+The function name
+(and the formal parameter list)
+should be alone on a line, in column 1.
+Destination (return value) parameters
+should generally be first (on the left).
+All formal parameter declarations,
+local declarations and code within the function body
+should be tabbed over one stop.
+The opening brace of the function body should be alone on a line
+beginning in column 1.
+.PP
+Each parameter should be declared (do not default to
+.Ec int ).
+In general the role of each variable in the function should be described.
+This may either be done in the function comment or, if each declaration
+is on its own line, in a comment on that line.
+Loop counters called ``i'',  string pointers called ``s'',
+and integral types called ``c'' and used for characters
+are typically excluded.
+If a group of functions all have a like parameter or local variable,
+it helps to call the repeated variable by the same name in all
+functions.
+(Conversely, avoid using the same name for different purposes in
+related functions.)
+Like parameters should also appear in the same place in the various
+argument lists.
+.PP
+Comments for parameters and local variables should be
+tabbed so that they line up underneath each other.
+Local variable declarations should be separated
+from the function's statements by a blank line.
+.\"
+.\"	int zork;			/* Last known zork. */
+.\"	struct price_tag inventory[MAX_STORES][MAX_STOCK]
+.\"					/* Corporate structure. */
+.\"	some_really_long_type_name *tree;
+.\"					/* root of the parse tree */
+.\"	char *s;			/* variable name */
+.\"
+.\" If a variable has an extremely long definition, the comment
+.\" should come \fIafter\fP the declaration.  Multiline comments
+.\" for variables should be moved to the header and referenced
+.\" from the comment.
+.\"
+.\"	* Note 1: The variable `zork' has two lives.  It first ...
+.\"	*/
+.\"
+.\"		void *zork;		/* See header note #1. */
+.\"
+.PP
+Be careful when you use or declare functions
+that take a variable number of arguments (``varargs'').
+There is no truly portable way to do varargs in C.
+Better to design an interface that uses a fixed number of arguments.
+If you must have varargs,
+use the library macros for declaring functions with
+variant argument lists.
+.PP
+If the function uses any external variables (or functions)
+that are not declared globally in the file,
+these should have their
+own declarations in the function body using the
+.Ec extern
+keyword.
+.PP
+Avoid local declarations that override declarations at higher levels.
+In particular, local variables
+should not be redeclared in nested blocks.
+Although this is valid C, the potential confusion is
+enough that
+\fIlint\fP will complain about it when given the \-h option.
+.NH
+Whitespace
+.QP
+.ad r
+\fIint i;main(){for(;i["]<i;++i){--i;}"];read('-'-'-',i+++"hell\\
+.br
+o, world!\\n",'/'/'/'));}read(j,i,p){write(j/p+p,i---j,i/i);}\fP
+.br
+\(em Dishonorable mention, Obfuscated C Code Contest, 1984.
+.br
+Author requested anonymity.
+.br
+.ad b
+.PP
+.\"Use whitespace generously, both vertically and horizontally.
+Use vertical and horizontal whitespace generously.
+Indentation and spacing should reflect the block structure of the code;
+e.g.,
+there should be at least 2 blank lines between the end of one function
+and the comments for the next.
+.PP
+A long string of conditional operators should be split
+onto separate lines.
+.Ex
+if (foo->next=\^=NULL && totalcount<needed && needed<=MAX_ALLOT
+	&& server_active(current_input)) { ...
+.Ee
+Might be better as
+.Ex
+if (foo->next =\^= NULL
+	&& totalcount < needed && needed <= MAX_ALLOT
+	&& server_active(current_input))
+{
+	...
+.Ee
+Similarly, elaborate
+.Ec for
+loops should be split onto different lines.
+.Ex
+for (curr = *listp, trail = listp;
+	curr != NULL;
+	trail = &(curr->next), curr = curr->next )
+{
+\&	...
+.Ee
+Other complex expressions, particularly those using the ternary
+.Ec ?\^:
+operator,
+are best split on to several lines, too.
+.Ex
+c = (a == b)
+	? d + f(a)
+	: f(b) - d;
+.Ee
+.\" .PP
+.\" Finally, the closing brace of long functions and very long blocks
+.\" should include an ``end function'' or ``end block'' comment:
+.\" .DS
+.\" \&	}	/* end  for (each list element) */
+.\" \&	...
+.\" }	/* end function_name() */
+.Ee
+Keywords that are followed by expressions in parentheses
+should be separated from the left parenthesis by a blank.
+(The
+.Ec sizeof
+operator is an exception.)
+.\"
+.\" Because `sizeof' is an OPERATOR.
+.\"
+Blanks should also appear after commas in argument lists to help
+separate the arguments visually.
+On the other hand, macro definitions with arguments must
+not have a blank between the name and the left parenthesis,
+otherwise the C preprocessor will not recognize the argument list.
+.\"
+.\" The C preprocessor requires the left parenthesis,
+.\" to be immediately after the macro name or else the argument list
+.\" will not be recognized.
+.\"
+.NH
+Examples
+.\"
+.\" Perhaps this should be a complete file?
+.\"
+.PP
+.Ex
+/*
+ *	Determine if the sky is blue by checking that it isn't night.
+ *	CAVEAT: Only sometimes right.  May return TRUE when the answer
+ *	is FALSE.  Consider clouds, eclipses, short days.
+ *	NOTE: Uses `hour' from `hightime.c'.  Returns `int' for
+ *	compatibility with the old version.
+ */
+	int						/* true or false */
+skyblue()
+{
+	extern int	hour;		/* current hour of the day */
+
+	return (hour >= MORNING && hour <= EVENING);
+}
+.Ee
+.Ex
+/*
+ *	Find the last element in the linked list
+ *	pointed to by nodep and return a pointer to it.
+ *	Return NULL if there is no last element.
+ */
+	node_t *
+tail(nodep)
+	node_t	*nodep;			/* pointer to head of list */
+{
+	register node_t	*np;		/* advances to NULL */
+	register node_t	*lp;		/* follows one behind np */
+
+	if (nodep =\^= NULL)
+		return (NULL);
+	for (np = lp = nodep; np != NULL; lp = np, np = np->next)
+		;	/* VOID */
+	return (lp);
+}
+.Ee
+.NH
+Simple Statements
+.PP
+There should be only one statement per line unless the statements are
+very closely related.
+.Ex
+case FOO:	  oogle (zork);  boogle (zork);  break;
+case BAR:	  oogle (bork);  boogle (zork);  break;
+case BAZ:	  oogle (gork);  boogle (bork);  break;
+.Ee
+The null body of a
+.Ec for
+or
+.Ec while
+loop should be alone on a line and commented
+so that it is clear that the null body is intentional
+and not missing code.
+.Ex
+while (*dest++ = *src++)
+	;	/* VOID */
+.Ee
+.\"
+.\" An alternative convention is to use
+.\" .Ep continue
+.\" explicitly.
+.\" .Ex
+.\" while (*dest++ = *src++)
+.\"	continue;
+.\" .Ee
+.\"
+.PP
+Do not default the test for non-zero, i.e.
+.Ex
+if (f(\^) != FAIL)
+.Ee
+is better than
+.Ex
+if (f(\^))
+.Ee
+even though
+.Ep FAIL
+may have the value 0 which C considers to be false.
+An explicit test will help you out later when somebody decides that a
+failure return should be \-1 instead of 0.
+Explicit comparison should be used even if the comparison value will
+never change; e.g., 
+.Ep "if (!(bufsize % sizeof(int)))" '' ``
+should be written instead as
+.Ep "if ((bufsize % sizeof(int)) =\^= 0)" '' ``
+to reflect the \fInumeric\fP (not \fIboolean\fP) nature of the test.
+A frequent trouble spot is using
+.Ep strcmp
+to test for string equality, where the result should \fInever\fP
+\fIever\fP be defaulted.
+The preferred approach is to define a macro \fISTREQ\fP.
+.Ex
+#define STREQ(a, b) (strcmp((a), (b)) =\^= 0)
+.Ee
+.PP
+The non-zero test \fIis\fP often defaulted for predicates
+and other functions or expressions which meet the following
+restrictions:
+.IP \0\0\(bu
+Evaluates to 0 for false, nothing else.
+.IP \0\0\(bu
+Is named so that the meaning of (say) a `true' return
+is absolutely obvious.
+Call a predicate \fIisvalid\fP or \fIvalid\fP, not \fIcheckvalid\fP.
+.\"
+.\" The non-zero test is also defaulted for NULL pointer checks,
+.\" e.g.,
+.\" .Ep "p = malloc(n); if (!p) error()" ''. ``
+.\" It is defaulted because essentually you are saying ``allocate `p'.
+.\" If no `p', then error.''
+.\" (Thus, it is covered by the existing rules.)
+.\"
+.PP
+It is common practice to declare a boolean type
+.Ep bool '' ``
+in a global include file.
+.\"
+.\" Unfortunately, the ideal type to use may differ for scalar and
+.\" array variables.
+.\"
+The special names improve readability immensely.
+.Ex
+typedef int	bool;
+#define FALSE	0
+#define TRUE	1
+.Ee
+or
+.Ex
+typedef enum { NO=0, YES } bool;
+.Ee
+.LP
+Even with these declarations,
+do not check a boolean value for equality with 1 (TRUE, YES, etc.);
+instead test for inequality with 0 (FALSE, NO, etc.).
+Most functions are guaranteed to return 0 if false,
+but only non-zero if true.
+Thus,
+.Ex
+if (func() =\^= TRUE) { ...
+.Ee
+must be written
+.Ex
+if (func() != FALSE) { ...
+.Ee
+It is even better (where possible) to rename the function/variable or
+rewrite the expression so that the meaning is obvious without a
+comparison to true or false
+(e.g., rename to \fIisvalid()\fP).
+.PP
+There is a time and a place for embedded assignment statements.
+In some constructs there is no better way to accomplish the results
+without making the code bulkier and less readable.
+.Ex
+while ((c = getchar()) != EOF) {
+	process the character
+}
+.Ee
+The
+.Ep ++
+and
+.Ep \-\^\^\-
+operators count as assignment statements.
+So, for many purposes, do functions with side effects.
+Using embedded assignment statements to improve run-time performance
+is also possible.
+However, one should consider the tradeoff between increased speed and
+decreased maintainability that results when embedded assignments are
+used in artificial places.
+For example,
+.Ex
+a = b + c;
+d = a + r;
+.Ee
+should not be replaced by
+.Ex
+d = (a = b + c) + r;
+.Ee
+even though the latter may save one cycle.
+In the long run the time difference between the two will
+decrease as the optimizer gains maturity, while the difference in
+ease of maintenance will increase as the human memory of what's
+going on in the latter piece of code begins to fade.
+.PP
+Goto statements should be used sparingly, as in any well-structured
+code.
+The main place where they can be usefully employed is to break out
+of several levels of
+.Ec switch ,
+.Ec for ,
+and
+.Ec while
+nesting,
+although the need to do such a thing may indicate
+that the inner constructs should be broken out into
+a separate function, with a success/failure return code.
+.Ex
+	for (...) {
+		while (...) {
+			...
+			if (disaster)
+				goto error;
+	    
+		}
+	}
+	\&...
+error:
+	clean up the mess
+.Ee
+When a
+.Ec goto
+is necessary the accompanying label should be alone
+on a line and tabbed one stop to the left of the
+code that follows.
+The goto should be commented (possibly in the block header)
+as to its utility and purpose.
+.Ec Continue
+should be used sparingly and near the top of the loop.
+.Ec Break
+is less troublesome.
+.PP
+Parameters to non-prototyped functions sometimes need to be promoted
+explicitly.
+If, for example, a function expects a 32-bit
+.Ec long
+and gets handed a 16-bit
+.Ec int
+instead,
+the stack can get misaligned.
+Problems occur with pointer, integral, and floating-point values.
+.NH
+Compound Statements
+.PP
+A compound statement is a list of statements enclosed by braces.
+There are many common ways of formatting the braces.
+Be consistent with your local standard, if you have one,
+or pick one and use it consistently.
+When editing someone else's code, \fIalways\fP use the style
+used in that code.
+.Ex
+control {
+\ \ \ \ \ \ \ \ statement;
+\ \ \ \ \ \ \ \ statement;
+}
+.Ee
+.Ee
+.LP
+The style above is called ``K\^&\^R style'', and is
+preferred if you haven't already got a favorite.
+With K&R style, the
+.Ep else
+part of an
+\fIif-else\fP statement
+and the
+.Ep while
+part of a \fIdo-while\fP statement
+should appear on the same line as the close brace.
+With most other styles, the braces are always alone on a line.
+.PP
+When a block of code has several labels
+(unless there are a lot of them),
+the labels are placed on separate lines.
+The fall-through feature of the C \fIswitch\fP statement,
+(that is, when there is no
+.Ep break
+between a code segment and the next
+.Ep case
+statement)
+must be commented for future maintenance.
+A lint-style comment/directive is best.
+.Ex
+switch (expr) {
+case ABC:
+case DEF:
+	statement;
+	break;
+case UVW:
+	statement;
+	/*FALLTHROUGH*/
+case XYZ:
+	statement;
+	break;
+}
+.Ee
+.\"
+.\" You won't believe how long I struggled with the format of the
+.\" `switch' statement.  It took a lot of people beating on me to
+.\" convince me that it should look like the if...else arrangement
+.\" that I said is supposed to ``look like a generalized switch''.
+.\" Ok, so I'm a little slow some years...
+.\"
+.PP
+Here, the last
+.Ep break
+is unnecessary, but is required
+because it prevents a fall-through error if another
+.Ep case
+is added later after the last one.
+The
+.Ep default
+case, if used, should be last and does not require a
+.Ep break 
+if it is last.
+.PP
+Whenever an
+.Ec if-else
+statement has a compound statement for either the
+.Ec if
+or
+.Ec else
+section, the statements of both the
+.Ec if
+and
+.Ec else
+sections should both be enclosed in braces
+(called \fIfully bracketed syntax\fP).
+.PP
+.Ex
+if (expr) {
+	statement;
+} else {
+	statement;
+	statement;
+}
+.Ee
+Braces are also essential in \fIif-if-else\fP sequences
+with no second \fIelse\fP such as the following,
+which will be parsed incorrectly if the brace after
+.Ep (ex1)
+and its mate are omitted:
+.Ex
+if (ex1) {
+	if (ex2) {
+		funca();
+	}
+} else {
+	funcb();
+}
+.Ee
+.PP
+An \fIif-else\fP with \fIelse if\fP should
+be written with the \fIelse\fP conditions left-justified.
+.Ex
+if (STREQ (reply, "yes")) {
+	statements for yes
+	...
+} else if (STREQ (reply, "no")) {
+	...
+} else if (STREQ (reply, "maybe")) {
+	...
+} else {
+	statements for default
+	...
+}
+.Ee
+The format then looks
+like a generalized \fIswitch\fP statement and the
+tabbing reflects the switch between exactly one of several
+alternatives rather than a nesting of statements.
+.PP
+.Ec Do-while
+loops should always have braces around the body. 
+.PP
+The following code is very dangerous:
+.Ex
+#ifdef CIRCUIT
+#	define CLOSE_CIRCUIT(circno)	{ close_circ(circno); }
+#else
+#	define CLOSE_CIRCUIT(circno)
+#endif
+
+\&	...
+	if (expr)
+		statement;
+	else
+		CLOSE_CIRCUIT(x)
+	++i;
+.Ee
+Note that on systems where CIRCUIT is not defined
+the statement
+.Ep ++i; '' ``
+will only
+get executed when
+.Ep expr
+is false!
+This example points out both the value
+of naming macros with CAPS and
+of making code fully-bracketed.
+.PP
+Sometimes an
+.Ec if
+causes an unconditional control transfer
+via
+.Ep break ,
+.Ep continue ,
+.Ep goto ,
+or
+.Ep return .
+The
+.Ec else
+should be implicit and the code should not be indented.
+.Ex
+if (level > limit)
+	return (OVERFLOW)
+normal();
+return (level);
+.Ee
+The ``flattened'' indentation tells the reader that the boolean test
+is invariant over the rest of the enclosing block.
+.NH
+Operators
+.PP
+Unary operators should not be separated from their single operand.
+Generally, all binary operators
+except
+.Ep "\&." ' `
+and
+.Ep "\->" ' `
+should be separated from their operands by blanks.
+Some judgement is called for in the case of complex expressions,
+which may be clearer if the ``inner'' operators are not surrounded
+by spaces and the ``outer'' ones are.
+.PP
+If you think an expression will be hard to read,
+consider breaking it across lines.
+Splitting at the lowest-precedence operator near the break is best.
+Since C has some unexpected precedence rules,
+expressions involving mixed operators should be parenthesized.
+Too many parentheses, however,
+can make a line \fIharder\fP to read
+because humans aren't good at parenthesis-matching.
+.PP
+There is a time and place for the binary comma operator,
+but generally it should be avoided.
+The comma operator is most useful
+to provide multiple initializations or operations,
+as in \fIfor\fP statements.
+Complex expressions,
+for instance those with nested ternary
+.Ec ?\^:
+operators,
+can be confusing and should be avoided if possible.
+There are some macros like
+.Ep getchar
+where both the ternary
+operator and comma operators are useful.
+The logical expression operand before the
+.Ec ?\^:
+should be parenthesized and both return values must be the same type.
+.NH
+Naming Conventions
+.PP
+Individual projects will no doubt have their own naming conventions.
+There are some general rules however.
+.IP \0\0\(bu
+Names with leading and trailing underscores are reserved for system
+purposes and should not be used for any user-created names.
+Most systems use them for names
+that the user should not have to know.
+If you must have your own private identifiers,
+begin them with a letter or two identifying the
+package to which they belong.
+.IP \0\0\(bu
+#define constants should be in all CAPS.
+.IP \0\0\(bu
+Enum constants are Capitalized or in all CAPS
+.IP \0\0\(bu
+Function, typedef, and variable names, as well as struct, union, and
+enum tag names should be in lower case.
+.IP \0\0\(bu
+Many macro ``functions'' are in all CAPS.
+Some macros (such as
+.Ep getchar
+and
+.Ep putchar )
+are in lower case
+since they may also exist as functions.
+Lower-case macro names are only acceptable if the macros behave
+like a function call,
+that is, they evaluate their parameters \fIexactly\fP once and
+do not assign values to named parameters.
+Sometimes it is impossible to write a macro that behaves like a
+function even though the arguments are evaluated exactly once.
+.IP \0\0\(bu
+Avoid names that differ only in case, like \fIfoo\fP and \fIFoo\fP.
+Similarly, avoid \fIfoobar\fP and \fIfoo_bar\fP.
+The potential for confusion is considerable.
+.IP \0\0\(bu
+Similarly, avoid names that look like each other.
+On many terminals and printers, `l', `1' and `I' look quite similar.
+A variable named `l' is particularly bad because it looks so much like
+the constant `1'.
+.PP
+In general, global names (including
+.Ec enum s)
+should have a
+common prefix identifying the module that they belong with.
+Globals may alternatively be grouped in a global structure.
+Typedeffed names often have
+.Ep _t '' ``
+appended to their name.
+.PP
+Avoid names that might conflict with various standard
+library names.
+Some systems will include more library code than you want.
+Also, your program may be extended someday.
+.NH
+Constants
+.PP
+Numerical constants should not be coded directly.
+The
+.Ec #define
+feature of the C preprocessor should be used to
+give constants meaningful names.
+Symbolic constants make the code easier to read.
+Defining the value in one place
+also makes it easier to administer large programs since the
+constant value can be changed uniformly by changing only the
+define.
+The enumeration data type is a better way to declare variables
+that take on only a discrete set of values, since
+additional type checking is often available.
+At the very least, any directly-coded numerical constant must have a
+comment explaining the derivation of the value.
+.PP
+Constants should be defined consistently with their use;
+e.g. use
+.Ep 540.0
+for a float instead of
+.Ep 540
+with an implicit float cast.
+There are some cases where the constants 0 and 1 may appear as
+themselves instead of as defines.
+For example if a
+.Ec for
+loop indexes through an array, then
+.Ex
+for (i = 0; i < ARYBOUND; i++)
+.Ee
+is reasonable while the code
+.Ex
+door_t *front_door = opens(door[i], 7);
+if (front_door =\^= 0)
+	error("can't open %s\\\\n", door[i]);
+.Ee
+is not.
+In the last example
+.Ep front_door
+is a pointer.
+When a value is a pointer it should be compared to
+.Ep NULL
+instead of 0.
+.Ec NULL
+is available
+either as part of the standard I/O library's header file \fIstdio.h\fP
+or in \fIstdlib.h\fP for newer systems.
+Even simple values like 1 or 0 are often better expressed using
+defines like
+.Ec TRUE
+and
+.Ec FALSE
+(sometimes
+.Ec YES
+and
+.Ec NO
+read better).
+.PP
+Simple character constants should be defined as character literals
+rather than numbers.
+Non-text characters are discouraged as non-portable.
+If non-text characters are necessary,
+particularly if they are used in strings,
+they should be written using a escape character of three octal digits
+rather than one
+(e.g.,
+.Ep \&'\&\e007' ).
+Even so, such usage should be considered machine-dependent and treated
+as such.
+.NH
+Macros
+.PP
+Complex expressions can be used as macro parameters,
+and operator-precedence problems can arise unless all occurrences of
+parameters have parentheses around them.
+There is little that can be done about the problems caused by side
+effects in parameters
+except to avoid side effects in expressions (a good idea anyway)
+and, when possible,
+to write macros that evaluate their parameters exactly once.
+There are times when it is impossible to write macros that act exactly
+like functions.
+.\" .PP
+.\" Here are some classic macros.
+.\" .DS
+.\" #define INV(val)	1/val
+.\" \&...
+.\" 	y = INV(*x);		/* turns into ``start comment''! */
+.\" .DE
+.\" (The above does \fInot\fP start a comment with ANSI preprocesors.)
+.\" .DS
+.\" #define MAX(a,b)	(((a)>(b)) ? (a) : (b) )
+.\" \&...
+.\" 	k = MAX(i++,j++);
+.\" .DE
+.PP
+Some macros also exist as functions (e.g.,
+.Ep getc
+and
+.Ep fgetc ).
+The macro should be used in implementing the function
+so that changes to the macro
+will be automatically reflected in the function.
+Care is needed when interchanging macros and functions since function
+parameters are passed by value, while macro parameters are passed by
+name substitution.
+.\" Carefree use of macros requires care when they are defined.
+Carefree use of macros requires that they be declared carefully.
+.PP
+Macros should avoid using globals, since the global name may be
+hidden by a local declaration.
+Macros that change named parameters (rather than the storage they
+point at) or may be used as the left-hand side of an assignment
+should mention this in their comments.
+Macros that take no parameters but reference variables,
+are long,
+or are aliases for function calls
+should be given an empty parameter list, e.g.,
+.Ex
+#define	OFF_A(\^\^)	(a_global+OFFSET)
+#define	BORK(\^\^)	(zork(\^))
+#define	SP3(\^\^)	if (b) { int x; av = f (&x); bv += x; }
+.Ee
+.PP
+Macros save function call/return overhead,
+but when a macro gets long, the effect of the call/return
+becomes negligible, so a function should be used instead.
+.PP
+In some cases it is appropriate to make the compiler
+insure that a macro is terminated with a semicolon.
+.Ex
+if (x==3)
+    SP3(\^\^);
+else
+    BORK(\^\^);
+.Ee
+If the semicolon is omitted after the call to
+.Ep SP3 ,
+then the
+.Ep else
+will (silently!) become associated with the
+.Ep if
+in the
+.Ep SP3
+macro.
+With the semicolon, the
+.Ep else
+doesn't match \fBany\fP
+.Ep if !
+The macro
+.Ep SP3
+can be written safely as
+.Ex
+#define SP3(\^\^) \\\\
+	do { if (b) { int x; av = f (&x); bv += x; }} while (0)
+.Ee
+Writing out the enclosing
+.Ec do-while
+by hand is awkward and some compilers and tools
+may complain that there is a constant in the
+.Ep while '' ``
+conditional.
+A macro for declaring statements may make programming easier.
+.Ex
+#ifdef lint
+	static int ZERO;
+#else
+#	define ZERO 0
+#endif
+#define STMT( stuff )		do { stuff } while (ZERO)
+.Ee
+Declare
+.Ep SP3
+with
+.Ex
+#define SP3(\^\^) \\\\
+	STMT( if (b) { int x; av = f (&x); bv += x; } )
+.Ee
+Using
+.Ep STMT
+will help prevent small typos from silently changing programs.
+.PP
+Except for type casts,
+.Ep sizeof ,
+and hacks such as the above,
+macros should contain keywords only if the entire
+macro is surrounded by braces.
+.NH
+Conditional Compilation.
+.PP
+Conditional compilation is useful for things like
+machine-dependencies,
+debugging,
+and for setting certain options at compile-time.
+Beware of conditional compilation.
+Various controls can easily combine in unforeseen ways.
+If you #ifdef machine dependencies,
+make sure that when no machine is specified,
+the result is an error, not a default machine.
+(Use
+.Ep #error '' ``
+and indent it so it works with older compilers.)
+If you #ifdef optimizations,
+the default should be the unoptimized code
+rather than an uncompilable program.
+Be sure to test the unoptimized code.
+.PP
+Note that the text inside of an #ifdeffed section may be scanned
+(processed) by the compiler, even if the #ifdef is false.
+Thus, even if the #ifdeffed part of the file never gets compiled
+(e.g.,
+.Ep "#ifdef COMMENT" ),
+it cannot be arbitrary text.
+.PP
+Put #ifdefs in header files instead of source files when possible.
+Use the #ifdefs to define macros
+that can be used uniformly in the code.
+For instance, a header file for checking memory allocation
+might look like (omitting definitions for
+.Ep REALLOC
+and
+.Ep FREE ):
+.Ex
+#ifdef DEBUG
+	extern void *mm_malloc();
+#	define MALLOC(size) (mm_malloc(size))
+#else
+	extern void *malloc();
+#	define MALLOC(size) (malloc(size))
+#endif
+.Ee
+.PP
+Conditional compilation should generally be
+on a feature-by-feature basis.
+Machine or operating system dependencies
+should be avoided in most cases.
+.Ex
+#ifdef BSD4
+	long t = time ((long *)NULL);
+#endif
+.Ee
+The preceding code is poor for two reasons:
+there may be 4BSD systems for which there is a better choice,
+and there may be non-4BSD systems for which the above \fIis\fP the
+best code.
+Instead, use \fIdefine\fP symbols
+such as
+.Ep TIME_LONG
+and
+.Ep TIME_STRUCT
+and define the appropriate one
+in a configuration file such as \fIconfig.h\fP.
+.NH
+Debugging
+.QP
+.ce
+``\fIC Code.  C code run.  Run, code, run...  PLEASE!!!\fP'' \(em Barbara Tongue
+.\"
+.\" Recently: "C Code.  C Code Run.  Run, Code, RUN!  PLEASE!!!"
+.\" But I think the original is accurate.
+.\"
+.PP
+If you use
+.Ec enum s,
+the first enum constant should have a non-zero value,
+or the first constant should indicate an error.
+.Ex
+enum { STATE_ERR, STATE_START, STATE_NORMAL, STATE_END } state_t;
+enum { VAL_NEW=1, VAL_NORMAL, VAL_DYING, VAL_DEAD } value_t;
+.Ee
+Uninitialized values will then often ``catch themselves''.
+.PP
+Check for error return values, even from functions that ``can't''
+fail.
+Consider that
+.Ep close(\^)
+and
+.Ep fclose(\^)
+can and do fail, even when all prior file operations have succeeded.
+Write your own functions so that they test for errors
+and return error values or abort the program in a well-defined way.
+Include a lot of debugging and error-checking code
+and leave most of it in the finished product.
+Check even for ``impossible'' errors. [8]
+.PP
+Use the
+.Ec assert
+facility to insist that
+each function is being passed well-defined values,
+and that intermediate results are well-formed.
+.PP
+Build in the debug code using as few #ifdefs as possible.
+For instance, if
+.Ep mm_malloc '' ``
+is a debugging memory allocator, then
+.Ep MALLOC
+will select the appropriate allocator,
+avoids littering the code with #ifdefs,
+and makes clear the difference between allocation calls being debugged
+and extra memory that is allocated only during debugging.
+.Ex
+#ifdef DEBUG
+#	define MALLOC(size)  (mm_malloc(size))
+#else
+#	define MALLOC(size)  (malloc(size))
+#endif
+.Ee
+.PP
+Check bounds even on things that ``can't'' overflow.
+A function that writes on to variable-sized storage
+should take an argument
+.Ep maxsize
+that is the size of the destination.
+If there are times when the size of the destination is unknown,
+some `magic' value of
+.Ep maxsize
+should mean ``no bounds checks''.
+When bound checks fail,
+make sure that the function does something useful
+such as abort or return an error status.
+.Ex
+/*
+ * INPUT: A null-terminated source string `src' to copy from and
+ * a `dest' string to copy to.  `maxsize' is the size of `dest'
+ * or UINT_MAX if the size is not known.  `src' and `dest' must
+ * both be shorter than UINT_MAX, and `src' must be no longer than
+ * `dest'.
+ * OUTPUT: The address of `dest' or NULL if the copy fails.
+ * `dest' is modified even when the copy fails.
+ */
+	char *
+copy (dest, maxsize, src)
+	char *dest, *src;
+	unsigned maxsize;
+.\"
+.\" That should be `size_t', rather than `unsigned'?
+.\"
+{
+	char *dp = dest;
+
+	while (maxsize\-\^\- > 0)
+		if ((*dp++ = *src++) =\^= '\\\\0')
+			return (dest);
+
+	return (NULL);
+}
+.Ee
+.PP
+In all, remember that
+a program that produces wrong answers twice as fast is infinitely
+slower.
+The same is true of programs that crash occasionally
+or clobber valid data.
+.NH
+Portability
+.QP
+.ad r
+``\fIC combines the power of assembler with
+the portability of assembler.\fP''
+.br
+\(em Anonymous, alluding to Bill Thacker.
+.br
+.ad b
+.LP
+.\"
+.\" .QP
+.\" .ad r
+.\" ``\fI"C" combines the power of assembly language with
+.\" the flexibility of assembly language.\fP''
+.\" .br
+.\" \(em Bill Thacker
+.\" .ad b
+.\"
+.PP
+The advantages of portable code are well known.
+This section gives some guidelines for writing portable code.
+Here, ``portable'' means that a source file
+can be compiled and executed on different machines
+with the only change being the inclusion of possibly
+different header files and the use of different compiler flags.
+The header files will contain #defines and typedefs that may vary from
+machine to machine.
+In general, a new ``machine'' is different hardware,
+a different operating system, a different compiler,
+or any combination of these.
+Reference [1] contains useful information on both style and portability.
+.\" Does it really?
+The following is a list of pitfalls to be avoided and recommendations
+to be considered when designing portable code:
+.IP \0\0\(bu
+Write portable code first,
+worry about detail optimizations only on machines where they
+prove necessary.
+Optimized code is often obscure.
+Optimizations for one machine may produce worse code on another.
+Document performance hacks and localize them as much as possible.
+Documentation should explain \fIhow\fP it works and \fIwhy\fP
+it was needed (e.g., ``loop executes 6 zillion times'').
+.IP \0\0\(bu
+Recognize that some things are inherently non-portable.
+Examples are code to deal with particular hardware registers such as
+the program status word,
+and code that is designed to support a particular piece of hardware,
+such as an assembler or I/O driver.
+Even in these cases there are many routines and data organizations
+that can be made machine independent.
+.IP \0\0\(bu
+Organize source files so that the machine-independent
+code and the machine-dependent code are in separate files.
+Then if the program is to be moved to a new machine,
+it is a much easier task to determine what needs to be changed.
+Comment the machine dependence in the headers of the appropriate
+files.
+.IP \0\0\(bu
+Any behavior that is described as ``implementation defined''
+should be treated as a machine (compiler) dependency.
+Assume that the compiler or hardware does it some completely screwy
+way.
+.IP \0\0\(bu
+Pay attention to word sizes.
+Objects may be non-intuitive sizes,
+Pointers are not always the same size as \fIint\fPs,
+the same size as each other,
+or freely interconvertible.
+The following table shows bit sizes for basic types in C for various
+machines and compilers.
+.br
+.ne 2i
+.TS
+center;
+l c c c c c c c
+l c c c c c c c
+l r r r r r r r.
+type	pdp11	VAX/11	68000	Cray-2	Unisys	Harris	80386
+	series		family		1100	H800	
+_
+char	8	8	8	8	9	8	8
+short	16	16	8/16	64(32)	18	24	8/16
+int	16	32	16/32	64(32)	36	24	16/32
+long	32	32	32	64	36	48	32
+char*	16	32	32	64	72	24	16/32/48
+int*	16	32	32	64(24)	72	24	16/32/48
+int(*)(\^\^)	16	32	32	64	576	24	16/32/48
+.TE
+.\" 
+.\" blarson%skat.usc.edu@oberon.usc.edu (Bob Larson) sez for a pr1me
+.\" int=16 is a compile-time option.  pointer size depends on which
+.\" instruction set you generate code for, only 32 bits are significant
+.\" on non-char* pointers (extra 16 bits allocated but not used.)
+.\" 
+.\" beaver.cs.washington.edu!cornell!calvin!johns (John Sahr) sez
+.\" the Harris H800/H100 series has 3-byte words.  Float and double
+.\" are the same bit-size but are different precision; two bytes are
+.\" thrown away for floats.  Int* and char* are same size but 2 bits
+.\" are reserved for the byte pointer within a word.  H1000/H12000
+.\" have software triple and quad precision for FORTRAN, 9 & 12 bytes.
+.\"
+.\" Theodore Stevens Norvell <norvell@csri.toronto.edu> on the Control
+.\" Data Cyber-180 (aka Cyber 900).  Pointers hold only 48 bits of
+.\" useful data (44 for virtual byte address, 4 for security) but are
+.\" padded to make them more interchangeable with ints.
+.\" 
+.\" DEEBE@SCIENCE.UTAH.EDU (Nelson H.F. Beebe) on 36-bit DEC-20:
+.\" 4 compilers, including PCC-20 (Johnson's PCC ported to TOPS-20 by
+.\" Lereau@cs.utah.edu), KCC-20 (Kok Chen at Stanford, Ken Harrenstien
+.\" and Ian Macky at SRI), New Mexico Tech C, Sargasso C compiler
+.\" (from BBN, he thinks).  Most still using DEC-20's use KCC.
+.\" [*] Note that KCC-20 has 4 pointer formats based on local/global
+.\" and char*/non-char* usage.  The following fails:
+.\"     int *p = malloc( sizeof(int) );
+.\"	free( p );
+.\" It works correctly with casts to int* from malloc and to char* for
+.\" free.
+.\" 
+.\" type	pr1me	H800	Cyber	PCC-20	KCC-20
+.\"				900
+.\"
+.\" char	8	8	8	36	9
+.\" short	16	24	32	36	18
+.\" int		16/32	24	64	36	36
+.\" long	32	48	64	36	36
+.\" char*	32(48)	24	64	36	36[*]
+.\" int*	32(48)	?	64	36	36[*]
+.\" int(*)()	32(48)	24	64	36	36[*]
+.\" float	?	48	64	36	36
+.\" double	?	48	64	36	72
+.\" long double	?	?	128	<none>	<none>
+.\" 
+Some machines have more than one possible size for a given type.
+The size you get can depend both on the compiler
+and on various compile-time flags.
+The following table shows ``safe'' type sizes on the majority of
+systems.
+Unsigned numbers are the same bit size as signed numbers.
+.KS
+.TS
+center;
+c c c
+l r c.
+Type	Minimum	No Smaller
+	# Bits	Than
+_
+char	8
+short	16	char
+int	16	short
+long	32	int
+float	24
+double	38	float
+any *	14
+char *	15	any *
+void *	15	any *
+.TE
+.KE
+.IP \0\0\(bu
+The
+.Ec void*
+type
+is guaranteed to have enough bits
+of precision to hold a pointer to any data object.
+The
+.Ec void(*)(\^\^)
+type is guaranteed to be able to hold a pointer to any function.
+Use these types when you need a generic pointer.
+(Use
+.Ec char*
+and
+.Ec char(*)(\^\^) ,
+respectively, in older compilers).
+.\"
+.\" Any return value should do; `int(*)()' makes more sense,
+.\" but then it's hard to #define back and forth between dpANS
+.\" (void means void) and older compilers (#define void ...).
+.\" You still bite the farm if the compiler understands void but
+.\" not void*.
+.\"
+Be sure to cast pointers back to the correct type before using them.
+.IP \0\0\(bu
+Even when, say, an
+.Ec int*
+and a
+.Ec char*
+are the same \fIsize\fP, they may have different \fIformats\fP.
+For example, the following will fail on some machines that have
+.Ep sizeof(int*)
+equal to
+.Ep sizeof(char*) .
+The code fails because
+.Ep free
+expects a
+.Ec char*
+and gets passed an
+.Ec int* .
+.\" See the comment above about the KCC compiler for DEC-20s
+.Ex
+int *p = (int *) malloc (sizeof(int));
+free (p);
+.Ee
+.\"
+.\" Another example:
+.\" Consider the \fBqsort\fP routine, which takes a pointer to an array
+.\" of `things', the size of each element, and a comparison function.
+.\" Sorting an array of \fBstruct foo\fP, you may be tempted to say
+.\" .Ex
+.\" int compare (struct foo *a, struct foo *b) { ... }
+.\" qsort ((void*)argv, argc, sizeof(struct foo), compare);
+.\" .Ee
+.\" This will surely bomb on some machines, however.
+.\" .Ep compare(\^)
+.\" takes pointers to two
+.\" .Ec struct Ps,
+.\" while
+.\" .Ep qsort(\^)
+.\" will \fIcall\fP it with two
+.\" .Ec void* s.
+.\"
+.IP \0\0\(bu
+Note that
+the \fIsize\fP of an object does not guarantee the \fIprecision\fP of
+that object.
+The Cray-2 may use 64 bits to store an
+.Ec int ,
+but a \fIlong\fP cast into an
+.Ec int
+and back to a
+.Ec long
+may be truncated to 32 bits.
+.IP \0\0\(bu
+The integer
+.Ec constant
+zero may be cast to any pointer type.
+The resulting pointer is called a
+\fInull pointer\fP
+for that type, and is different from any other pointer of that type.
+A null pointer always compares equal to the constant zero.
+A null pointer might \fInot\fP compare equal with a variable
+that has the value zero.
+Null pointers are \fInot\fP always stored with all bits zero.
+Null pointers for two different types are sometimes different.
+A null pointer of one type cast in to a pointer of another
+type will be cast in to the null pointer for that second type.
+.\"
+.\" The name of the null pointer is called "NULL".
+.\" But that's just what the name is called.
+.\" The name is really "0" (cast or otherwise coerced to a pointer value).
+.\" But again, that's just the name.
+.\" The actual null pointer can have any bitwise value the implementor chooses.
+.\"			-- Wayne Throop (alluding to Lewis Carroll)
+.\"
+.\" In C, the name of the nil pointer is called "NULL".
+.\" But that's only what the name is CALLED, you see.
+.\" The NAME of the nil pointer is "0".
+.\" The nil pointer itself can have any bit pattern it pleases. 
+.\"			-- Wayne Throop (alluding to Lewis Carroll)
+.\"
+.IP \0\0\(bu
+On \s-1ANSI\s+1 compilers, when two pointers of the same type access
+the same storage, they will compare as equal.
+When non-zero integer constants are cast to pointer types,
+they may become identical to other pointers.
+On non-\s-1ANSI\s+1 compilers, pointers that
+access the same storage may compare as different.
+The following two pointers, for instance,
+may or may not compare equal,
+and they may or may not access the same storage\*f.
+.FS
+.IP \*F
+The code may also fail to compile, fault on pointer creation,
+fault on pointer comparison, or fault on pointer dereferences.
+.FE
+.Ex
+((int *) 2 )
+((int *) 3 )
+.Ee
+.\"
+.\" This is true, for instance, on the 8086, where the least-
+.\" -significant bit is always ignored, except when accessing
+.\" byte-sized values.  The pointer comparison (==) uses \fIall\fP
+.\" bits, so the two pointers do \fInot\fP compare the same.
+.\"
+If you need `magic' pointers other than NULL,
+either allocate some storage or treat the pointer as
+a machine dependence.
+.Ex
+extern int x_int_dummy;		/* in x.c */
+#define X_FAIL	(NULL)
+#define X_BUSY	(&x_int_dummy)
+.Ee
+.Ex
+#define X_FAIL	(NULL)
+#define X_BUSY	MD_PTR1		/* MD_PTR1 from "machdep.h" */
+.Ee
+.IP \0\0\(bu
+Floating-point numbers have both a \fIprecision\fP and a \fIrange\fP.
+These are independent of the size of the object.
+Thus, overflow (underflow) for a 32-bit floating-point number will
+happen at different values on different machines.
+Also,
+4.9
+times
+5.1
+will yield
+two different numbers on two different machines.
+Differences in rounding and truncation can give surprisingly
+different answers.
+.\"
+.\" .QP
+.\" ``\fI10.0 times 0.1 is hardly ever 1.0\fP'' -- Kernighan and Plauger [9]
+.\"
+.IP \0\0\(bu
+On some machines,
+a
+.Ec double
+may have \fIless\fP range or precision than a
+.Ec float .
+.IP \0\0\(bu
+On some machines the first half of a
+.Ec double
+may be a
+.Ec float
+with similar value.
+Do \fInot\fP depend on this.
+.IP \0\0\(bu
+Watch out for signed characters.
+On some \s-1VAX\s+1es, for instance,
+characters are sign extended when used in expressions,
+which is not the case on many other machines.
+Code that assumes signed/unsigned is unportable.
+For example,
+.Ep array[c]
+won't work if
+.Ep c
+is supposed to be positive and is instead signed and negative.
+If you must assume signed or unsigned characters, comment them as
+.Ep SIGNED
+or
+.Ep UNSIGNED .
+Unsigned behavior can be guaranteed with
+.Ep "unsigned char" .
+.IP \0\0\(bu
+Avoid assuming \s-1ASCII\s+1.
+.\"
+.\" (Use
+.\" .Ep "<ctype.h>"
+.\" where possible, but beware that their behavior varies considerably
+.\" between C implementations.
+.\" For instance, if c is not an upper-case letter,
+.\" tolower(c) may return c or garbage.)
+.\"
+If you must assume, document and localize.
+Remember that characters may hold (much) more than 8 bits.
+.IP \0\0\(bu
+Code that takes advantage of the two's complement representation of
+numbers on most machines should not be used.
+Optimizations that replace arithmetic operations with equivalent
+shifting operations are particularly suspect.
+If absolutely necessary, machine-dependent code should be #ifdeffed
+or operations should be performed by #ifdeffed macros.
+You should weigh the time savings with the potential for obscure
+and difficult bugs when your code is moved.
+.IP \0\0\(bu
+In general, if the word size or value range is important,
+typedef ``sized'' types.
+Large programs should have a central header file which supplies
+typedefs for commonly-used width-sensitive types, to make
+it easier to change them and to aid in finding width-sensitive code.
+Unsigned types other than
+.Ec "unsigned int"
+are highly compiler-dependent.
+If a simple loop counter is being used where either 16 or 32 bits will
+do, then use
+.Ec int ,
+since it will get the most efficient (natural)
+unit for the current machine.
+.\"
+.\" <side comment>
+.\" Actually, there are many machines that use ``unnatural''
+.\" int sizes to cope with ``the world is a \s-1VAX\s+1'' problems.
+.\" The rule int == natural is still true, though.
+.\" Modern compilers have a switch that lets you select either
+.\" efficiency or bogus-\s-1VAX\s+1-code-compatibility.
+.\" On the other hand, this is still a lie, because the libraries
+.\" must work in any event.
+.\" On the other (third?) hand, modern systems are being fixed.
+.\"
+.IP \0\0\(bu
+Data \fIalignment\fP is also important.
+For instance,
+on various machines a 4-byte integer may start at any address,
+start only at an even address, or start only at a multiple-of-four
+address.
+Thus, a particular structure may have its elements
+at different offsets on different machines,
+even when given elements are the same size on all machines.
+Indeed, a structure of a 32-bit pointer and an 8-bit character may be
+3 sizes on 3 different machines.
+As a corollary, pointers to objects may not be interchanged freely;
+saving an integer through a pointer
+to 4 bytes starting at an odd address
+will sometimes work,
+sometimes cause a core dump,
+and sometimes fail silently (clobbering other data in the process).
+.\"
+.\" In particular, the \s-1VAX\s+1 will work, the 68000 (tho' not necessarily
+.\" other family members) will dump, and the 8086 (tho' not
+.\" necessarily other members) will ignore the lowest bit.
+.\" The IBM RT will silently round the address down to the nearest
+.\" multiple of four.
+.\"
+Pointer-to-character is a particular trouble spot on machines which
+do not address to the byte.
+Alignment considerations and loader peculiarities make it very rash
+to assume that two consecutively-declared variables are together
+in memory, or that a variable of one type is aligned appropriately
+to be used as another type.
+.IP \0\0\(bu
+The bytes of a word are of increasing significance with increasing
+address on machines such as the \s-1VAX\s+1 (little-endian)
+and of decreasing significance with increasing address on other
+machines such as the 68000 (big-endian).
+The order of bytes in a word and of words in larger
+objects (say, a double word) might not be the same.
+.\"
+.\" Consider, for example, the PDP-11, in which words are
+.\" little-endian, but the most-significant word of a long is stored
+.\" first.
+.\"
+Hence any code that depends on the left-right orientation of bits
+in an object deserves special scrutiny.
+Bit fields within structure members will only be portable so long as
+two separate fields are never concatenated and treated as a unit. [1,3]
+Actually, it is nonportable to concatenate \fIany\fP two variables.
+.IP \0\0\(bu
+There may be unused holes in structures.
+Suspect unions used for type cheating.
+Specifically, a value should not be stored as one type and retrieved as
+another.
+An explicit tag field for unions may be useful.
+.\"
+.\" .Ex
+.\" enum union_tag_t { UT_ERROR, UT_INT, UT_FLOAT };
+.\" struct good_t {
+.\" 	enum union_tag_t tag;
+.\" 	union {
+.\" 		int i;
+.\" 		float f;
+.\"         } u;
+.\" } good_t;
+.\" .Ee
+.\"
+.IP \0\0\(bu
+Different compilers use different conventions for returning
+structures.
+This causes a problem when libraries return structure values
+to code compiled with a different compiler.
+Structure pointers are not a problem.
+.\"
+.\" Potentially, \fIany\fP parameter passing mechanism will vary
+.\" between compilers.
+.\" In general, compilers return word-size units in a fixed register
+.\" and (in general) structure pointers are word-sized, so structure
+.\" pointers are not a problem.
+.\"
+.IP \0\0\(bu
+Do not make assumptions about the parameter passing mechanism.
+especially pointer sizes and parameter evaluation order, size, etc.
+The following code, for instance, is \fIvery\fP nonportable.
+.Ex
+	c = foo (getchar(), getchar());
+
+	char
+foo (c1, c2, c3)
+	char c1, c2, c3;
+{
+	char bar = *(&c1 + 1);
+	return (bar);			/* often won't return c2 */
+}
+.\"
+.\" It can be argued that if this *does* return c2, then
+.\" sizeof(char) == sizeof(int).
+.\"
+.Ee
+This example has lots of problems.
+The stack may grow up or down
+(indeed, there need not even be a stack!).
+Parameters may be widened when they are passed,
+so a
+.Ec char
+might be passed as an
+.Ec int ,
+for instance.
+Arguments may be pushed left-to-right, right-to-left,
+in arbitrary order, or passed in registers (not pushed at all).
+The order of evaluation may differ from the order in which
+they are pushed.
+One compiler may use several (incompatible) calling conventions.
+.\"
+.\" <side comment>
+.\" One machine (??), for instance pushes R-to-L for compatibility
+.\" with Pascal, except for varargs, which are passed L-to-R to
+.\" make varargs work.  This always works since Pascal functions
+.\" are never called varargs.
+.\"
+.IP \0\0\(bu
+On some machines, the null character pointer
+.Ep "((char *)0)"
+is treated the same way as a pointer to a null string.
+Do \fInot\fP depend on this.
+.IP \0\0\(bu
+Do not modify string constants\*f.
+.FS
+.IP \*F
+Some libraries attempt to modify and then restore read-only
+string variables.
+Programs sometimes won't port because of these broken libraries.
+The libraries are getting better.
+.FE
+.\"
+.\" .FS
+.\" .IP \*F
+.\" Note that an initialzed array is writable.
+.\" .Ex
+.\" char s[] = "/dev/tty??";
+.\" .Ee
+.\" .FE
+.\"
+One particularly notorious (bad) example is
+.Ex
+s = "/dev/tty??";
+strcpy (&s[8], ttychars);
+.Ee
+.IP \0\0\(bu
+The address space may have holes.
+Simply \fBcomputing\fP the address
+of an unallocated element in an array
+(before or after the actual storage of the array)
+may crash the program.
+If the address is used in a comparison,
+sometimes the program will run but clobber data, give wrong answers,
+or loop forever.
+In \s-1ANSI\s+1 C, a pointer into an array of objects may legally point to
+the first element after the end of the array; this is usually safe
+in older implementations.
+This ``outside'' pointer may not be dereferenced.
+.\"
+.\" K&R1 does not guarantee this behavior.  See K&R1, pg 188-9.
+.\" Most implementations allow it, and it was standardized as a
+.\" result.  On some machines, however, it fails.  For example,
+.\" on an i80x86, no memory segments are 64k.  Addresses look like
+.\" <segment,base>.  If N bytes are allocated and byte N+1 falls off
+.\" the end of the segment, the base will wrap around to zero but stay
+.\" in the same segment.  For example, adding 1 to <4,65535> gives
+.\" <4,0>, so if &s[N-1] == <4,65535>, then &s[N] == <4,0>, which
+.\" compares as LESS than the address of the N-1'th element.
+.\"
+.IP \0\0\(bu
+Only the
+.Ep =\^=
+and
+.Ep !\^=
+comparisons are defined for all pointers of a given type.
+It is only portable to use
+.Ep < ,
+.Ep <= ,
+.Ep > ,
+or
+.Ep >= 
+to compare pointers when they both point in to
+(or to the first element after) the same array.
+It is likewise only portable to use arithmetic operators on pointers
+that both point into the same array or the first element afterwards.
+.IP \0\0\(bu
+Word size also affects shifts and masks.
+The following code will clear only the three rightmost bits of an
+\fIint\fP on \fIsome\fP 68000s.
+On other machines it will also clear the upper two bytes.
+.Ex
+x &= 0177770
+.Ee
+Use instead
+.Ex
+x &= ~07
+.Ee
+which works properly on all machines.
+.\"
+.\" Originally, I'd said something like ``the or operator (\ |\ ) does
+.\" not have these problems'', but that's not true.
+.\" Consider
+.\" .Ep "foo |= 0177770"
+.\" vs.
+.\" .Ep "foo |= ~07" 
+.\".
+Bitfields do not have these problems.
+.IP \0\0\(bu
+Side effects within expressions can result in code
+whose semantics are compiler-dependent, since C's order of evaluation
+is explicitly undefined in most places.
+Notorious examples include the following.
+.Ex
+a[i] = b[i++];
+.Ee
+In the above example, we know only that
+the subscript into
+.Ep b
+has not been incremented.
+The index into
+.Ep a
+could be the value of
+.Ep i
+either before or after the increment.
+.Ex
+struct bar_t { struct bar_t *next; } bar;
+bar->next = bar = tmp;
+.Ee
+In the second example, the address of
+.Ep bar->next '' ``
+may be computed before the value is assigned to
+.Ep bar ''. ``
+.Ex
+bar = bar->next = tmp;
+.Ee
+In the third example,
+.Ep bar
+can be assigned before
+.Ep bar->next.
+Although this \fIappears\fP to violate the rule that
+``assignment proceeds right-to-left'', it is a legal interpretation.
+Consider the following example:
+.Ex
+long i;
+short a[N];
+i = old
+i = a[i] = new;
+.Ee
+The value that
+.Ep i '' ``
+is assigned must be a value that is typed as if assignment
+proceeded right-to-left.
+However,
+.Ep i '' ``
+may be assigned the value
+.Ep "(long)(short)new" '' ``
+before
+.Ep a[i] '' ``
+is assigned to.
+Compilers do differ.
+.\"
+.\" More: if you write
+.\" 
+.\" 		short b;
+.\" 		long a,c;
+.\" 		 ...
+.\" 		a = b = c;
+.\" 
+.\" assignment ``proceeds AS IF right-to-left''.  The following is a
+.\" legal implementation:
+.\" 
+.\" 		b = (short) c;
+.\" 		a = (long) b;
+.\" 
+.\" A compiler is also allowed to implement it as:
+.\" 
+.\" 		a = (long) (short) c;
+.\" 		b = (short) c;
+.\" 
+.\" since the same values are being assigned in each case.  But the
+.\" assignment is not "proceeding right to left" in the second
+.\" example, because a is assigned before b is.  This matters if b is
+.\" replaced with an expression.
+.\"
+.IP \0\0\(bu
+Be suspicious of numeric values appearing in the code (``magic
+numbers'').
+.IP \0\0\(bu
+Avoid preprocessor tricks.
+Tricks such as using
+.Ep /**/
+for token pasting
+and macros that rely on argument string expansion will break reliably.
+.Ex
+#define FOO(string)	(printf("string = %s",(string)))
+\&...
+FOO(filename);
+.Ee
+Will only sometimes be expanded to
+.Ex
+(printf("filename = %s",(filename)))
+.Ee
+Be aware, however, that tricky preprocessors may cause macros to break
+\fIaccidentally\fP on some machines.
+Consider the following two versions of a macro.
+.Ex
+#define LOOKUP(chr)	(a['c'+(chr)])	/* Works as intended. */
+#define LOOKUP(c)	(a['c'+(c)])		/* Sometimes breaks. */
+.Ee
+The second version of
+.Ep LOOKUP
+can be expanded in two different ways
+and will cause code to break mysteriously.
+.IP \0\0\(bu
+Become familiar with existing library functions and defines.
+(But not \fItoo\fP familiar.
+The internal details of library facilities, as opposed to their
+external interfaces, are subject to change without warning.
+They are also often quite unportable.)
+You should not be writing your own string compare routine,
+terminal control routines, or making
+your own defines for system structures.
+``Rolling your own'' wastes your time and
+makes your code less readable, because another reader has to
+figure out whether you're doing something special in that reimplemented
+stuff to justify its existence.
+It also prevents your program
+from taking advantage of any microcode assists or other
+means of improving performance of system routines.
+Furthermore, it's a fruitful source of bugs.
+If possible, be aware of the \fIdifferences\fP between the common 
+libraries (such as \s-1ANSI\s+1, \s-1POSIX\s+1, and so on).
+.IP \0\0\(bu
+Use \fIlint\fP when it is available.
+It is a valuable tool for finding machine-dependent constructs as well
+as other inconsistencies or program bugs that pass the compiler.
+If your compiler has switches to turn on warnings, use them.
+.IP \0\0\(bu
+Suspect labels inside blocks with the
+associated
+.Ec switch
+or
+.Ec goto
+outside the block.
+.IP \0\0\(bu
+Wherever the type is in doubt,
+parameters should be cast to the appropriate type.
+Always cast NULL when it appears in non-prototyped function calls.
+Do not use function calls as a place to do type cheating.
+C has confusing promotion rules, so be careful.
+For example, if a function expects a 32-bit
+.Ec long
+and it is passed a 16-bit
+.Ec int
+the stack can get misaligned, the value can get promoted wrong, etc.
+.IP \0\0\(bu
+Use explicit casts when doing arithmetic
+that mixes signed and unsigned values.
+.IP \0\0\(bu
+The inter-procedural goto,
+.Ec longjmp ,
+should be used with caution.
+Many implementations ``forget'' to restore values in registers.
+Declare critical values as
+.Ec volatile
+if you can or comment them as
+.Ep VOLATILE .
+.IP \0\0\(bu
+Some linkers convert names to lower-case
+and
+some only recognize the first six letters as unique.
+Programs may break quietly on these systems.
+.IP \0\0\(bu
+Beware of compiler extensions.
+If used, document and
+consider them as machine dependencies.
+.IP \0\0\(bu
+.\"
+.\" <interesting, but most folks don't care?>
+.\"
+A program cannot generally execute code in the data
+segment or write into the code segment.
+Even when it can, there is no guarantee that it can do so reliably.
+.\"
+.\" Examples: one 80386 default protection won't let you write to the
+.\" code segment or execute from the data segment.  An 88000 will let
+.\" you execute from the data segment, but unless the I-cache is told
+.\" \fIexplicitly\fP to watch for invalidations, there is no way to
+.\" tell when the I-cache will be updated.  As a result, some of the
+.\" bytes of the cached instructions may be updated while others are
+.\" left unchanged!
+.\"
+.NH
+ANSI C
+.PP
+Modern C compilers support some or all of the \s-1ANSI\s+1 proposed standard
+C.
+Whenever possible, write code to run under standard C, and use
+features such as function prototypes, constant storage, and volatile
+storage.
+Standard C improves program performance by giving better information
+to optimizers.
+Standard C improves portability by insuring that all compilers
+accept the same input language and by providing mechanisms
+that try to hide machine dependencies or emit warnings about
+code that may be machine-dependent.
+.NH 2
+Compatibility
+.PP
+Write code that is easy to port to older compilers.
+For instance,
+conditionally #define new (standard) keywords such as
+.Ec const
+and
+.Ec volatile
+in a global \fI.h\fP file.
+Standard compilers pre-define the preprocessor symbol
+.Ep _\^\^_STDC_\^\^_ \*f.
+.FS
+.IP \*F
+Some compilers predefine
+.Ep _\^\^_STDC_\^\^_
+to be 0, in an attempt to indicate partial compliance with the \s-1ANSI\s+1 C
+standard.
+Unfortunately, it is not possible to determine \fIwhich\fP \s-1ANSI\s+1
+facilities are provided.
+Thus, such compilers are broken.
+See the rule about
+``don't write around a broken compiler unless you are forced to.''
+.\"
+.\" Although the 1989 \s-1ANSI\s+1 standard (X3.159-1989)
+.\" defines _\^\^_STDC_\^\^_ as 1, later
+.\" versions may define it to be another number.
+.\"
+.\" There's nothing keeping a vendor from defining __STDC__ to 0, or 1, or
+.\" "hi" or anything else.  It is guaranteed that a conforming
+.\" compiler will have __STDC__ set, and in particular that an
+.\" \s-1ANSI\s+1-89-compliant compiler will set it to 1.  However, ``A implies
+.\" B'' does not mean ``B implies A''.  That is, a nonconformant
+.\" compiler can do anything it damn well pleases: interpret `while'
+.\" to mean `abort compilation', rearrange expressions arbitrarily, or
+.\" even set __STDC__ to zero.  Such usage is  broken because the
+.\" vendor KNOWS that users are expecting __STDC__ to mean \s-1ANSI\s+1
+.\" compliant and the vendor also KNOWS that the compiler isn't
+.\" \s-1ANSI\s+1-compliant.
+.\"
+.FE
+The
+.Ec void*
+type is hard to get right simply,
+since some older compilers understand
+.Ep void
+but not
+.Ep void* .
+It is easiest to create a new
+(machine- and compiler-dependent)
+.Ep VOIDP
+type, usually
+.Ec char*
+on older compilers.
+.Ex
+#if _\^\^_STDC_\^\^_
+	typedef void *voidp;
+#	define COMPILER_SELECTED
+#endif
+#ifdef A_TARGET
+#	define const
+#	define volatile
+#	define void int
+	typedef char *voidp;
+#	define COMPILER_SELECTED
+#endif
+#ifdef ...
+	\&...
+#endif
+#ifdef COMPILER_SELECTED
+#	undef COMPILER_SELECTED
+#else
+	{ NO TARGET SELECTED! }
+#endif
+.\"
+.\" Alternatively, we could do
+.\"
+.\" #ifdef __STDC__
+.\"	..
+.\" #	define CONST const
+.\" #	define VOLATILE volatile
+.\" #else
+.\"	..
+.\" #endif
+.\"
+.\" Is one of these better?  Probably not, it will be a strange
+.\" anachronism when everybody has forgotten that const once didn't
+.\" exist.
+.\"
+.Ee
+.PP
+Note that under ANSI C, the `#' for a preprocessor directive must be
+the first non-whitespace character on a line.
+Under older compilers it must be the first character on the line.
+.PP
+When a static function has a forward declaration, the forward
+declaration must include the storage class.
+For older compilers, the class must be
+.Ec extern ''. ``
+For \s-1ANSI\s+1 compilers, the class must be
+.Ec static ''. ``
+but global functions must still be declared as
+.Ec extern ''. ``
+Thus, forward declarations of static functions should use a #define
+such as
+.Ep FWD_STATIC
+that is #ifdeffed as appropriate.
+.PP
+An
+.Ep "#ifdef NAME" '' ``
+should end with either
+.Ep #endif '' ``
+or
+.Ep "#endif /* NAME */" '', ``
+\fInot\fP with
+.Ep "#endif NAME" ''. ``
+The comment should not be used on short #ifdefs,
+as it is clear from the code.
+.PP
+ANSI
+.Ec trigraphs
+may cause programs with strings containing
+.Ep ?? '' ``
+may break mysteriously.
+.\"
+.\" ``sed -e "s;??\\([-=(/)'<!>]\\);?\\\\?\\1;g"
+.\" will fix them...	-- Karl Heuer
+.\"
+.NH 2
+Formatting
+.PP
+The style for \s-1ANSI\s+1 C is the same as for regular C,
+with two notable exceptions: storage qualifiers
+and parameter lists.
+.PP
+Because
+.Ep const
+and
+.Ep volatile
+have strange binding rules,
+.\"
+.\" In particular, "char const *s, *t" means both `t' and `s' point
+.\" to constant storage, while "char * const s, *t" means that s is
+.\" a constant, but `t' isn't.
+.\"
+.\" I think.
+.\"
+.\" `*' binds differently than `const'.
+.\"
+each
+.Ec const
+or
+.Ec volatile
+object should have a separate declaration.
+.Ex
+int const *s;		/* YES */
+int const *s, *t;	/* NO */
+.Ee
+.PP
+Prototyped functions merge parameter declaration
+and definition in to one list.
+Parameters should be commented in the function comment.
+.Ex
+/*
+ * `bp': boat trying to get in.
+ * `stall': a list of stalls, never NULL.
+ * returns stall number, 0 => no room.
+ */
+	int
+enter_pier (boat_t const *bp, stall_t *stall)
+{
+	\&...
+.Ee
+.\" .NH 2
+.\" Storage Qualifiers
+.NH 2
+Prototypes
+.PP
+Function prototypes should be used
+to make code more robust and to make it run faster.
+Unfortunately, the prototyped \fBdeclaration\fP
+.Ex
+extern void bork (char c);
+.Ee
+is incompatible with the \fBdefinition\fP
+.Ex
+	void
+bork (c)
+	char c;
+\&...
+.Ee
+The prototype says that
+.Ep c
+is to be passed as the most natural type for the machine,
+possibly a byte.
+The non-prototyped (backwards-compatible) definition implies that
+.Ep c
+is always passed as an
+.Ec int \*f.
+.FS
+.IP \*F
+Such automatic type promotion is called
+.Ec widening .
+For older compilers, the widening rules require that
+all
+.Ec char
+and
+.Ec short
+parameters are passed as
+.Ec int s
+and that
+.Ec float
+parameters are passed as
+.Ec double s.
+.FE
+If a function has promotable parameters then 
+the caller and callee must be compiled identically.
+Either both must use function prototypes
+or neither can use prototypes.
+The problem can be avoided if parameters are promoted when the program
+is designed.
+For example,
+.Ep bork
+can be defined to take an
+.Ec int
+parameter.
+.PP
+The above declaration works if the definition is prototyped.
+.Ex
+	void
+bork (char c)
+{
+	\&...
+.Ee
+Unfortunately,
+the prototyped syntax will cause non-\s-1ANSI\s+1 compilers to reject the
+program.
+.\"
+.\" There is no obvious way to define the function so that
+.\" prototypes are used only when an \s-1ANSI\s+1 compiler is used.
+.\" Prototyped and nonprototyped declarations can be #ifdeffed on
+.\" .Ep _\^\^_STDC_\^\^_ ,
+.\" but the extra #ifdeffing causes maintainance problems
+.\" and makes the code hard to read.
+.\"
+.\" Oh yeah, try
+.\"
+.\"	int DEFUN (foo, (a, p), int a AND char *p)
+.\"	int foo FUN2(int, a, char *, p)
+.\"
+.\" But beware: ``Don't change the syntax via macro substitution.''
+.\"
+.PP
+It \fIis\fP easy to write external declarations that work with both
+prototyping and with older compilers\*f.
+.FS
+.IP \*F
+Note that using
+.Ep PROTO
+violates the rule ``don't change the syntax via macro substitution.''
+It is regrettable that there isn't a better solution.
+.FE
+.Ex
+#if _\^\^_STDC_\^\^_
+#	define PROTO\^(x) x
+#else
+#	define PROTO\^(x) (\^)
+#endif
+
+extern char **ncopies PROTO((char *s, short times));
+.Ee
+Note that
+.Ep PROTO
+must be used with \fIdouble\fP parentheses.
+.PP
+In the end,
+it may be best to write in only one style (e.g., with prototypes).
+When a non-prototyped version is needed, it is generated using an
+automatic conversion tool.
+.NH 2
+Pragmas
+.PP
+Pragmas
+are used to introduce machine-dependent code in a controlled way.
+Obviously, pragmas should be treated as machine dependencies.
+Unfortunately, the syntax of \s-1ANSI\s+1 pragmas
+makes it impossible to isolate them in machine-dependent headers.
+.\"
+.\" <side note>
+.\" Because it is of the form ``#pragma'' instead of ``pragma(args)''.
+.\" You can't put the #pragma in an include file, as it will get
+.\" interpreted there.
+.\"
+.\" You are also prevented from embedding pragmas in macros.
+.\"
+.PP
+Pragmas are of two classes.
+.Ec Optimizations
+may safely be ignored.
+Pragmas that change the system behavior (``required pragmas'')
+may not.
+Required pragmas should be #ifdeffed so that compilation will abort if
+no pragma is selected.
+.PP
+Two compilers may use a given pragma in two very different ways.
+For instance, one compiler may use
+.Ep haggis '' ``
+to signal an optimization.
+Another might use it to indicate that a given statement,
+if reached, should terminate the program.
+Thus, when pragmas are used,
+they must always be enclosed in machine-dependent #ifdefs.
+Pragmas must always be #ifdefed out for non-\s-1ANSI\s+1 compilers.
+Be sure to indent the `#' character on the
+.Ep #pragma ,
+as older preprocessors will halt on it otherwise.
+.Ex
+#if defined(_\^\^_STDC_\^\^_) && defined(USE_HAGGIS_PRAGMA)
+	#pragma (HAGGIS)
+#endif
+.Ee
+.QP
+``\fIThe `#pragma' command is specified in the \s-1ANSI\s+1 standard to have an
+arbitrary implementation-defined effect.
+In the GNU C preprocessor, `#pragma' first attempts to run the game
+`rogue'; if that fails, it tries to run the game `hack'; if that
+fails, it tries to run GNU Emacs displaying the Tower of Hanoi; if
+that fails, it reports a fatal error.
+In any case, preprocessing does not continue.\fP''
+.br
+.ad r
+\(em Manual for the GNU C preprocessor for GNU CC 1.34.
+.br
+.ad b
+.\" NEED MORE STUFF!!
+.NH
+Special Considerations
+.PP
+This section contains some miscellaneous do's and don'ts.
+.\"
+.\" This should probably be either "dos and don'ts" or
+.\" "do's and don't's", but neither looks quite right.
+.\"
+.IP \0\0\(bu
+Don't change syntax via macro substitution.
+It makes the program unintelligible to all but the perpetrator.
+.IP \0\0\(bu
+Don't use floating-point variables where discrete values are needed.
+Using a
+.Ec float
+for a loop counter is a great way to shoot yourself in the foot.
+Always test floating-point numbers as \fB<=\fP or \fB>=\fP,
+never use an exact comparison (\fB=\^=\fP or \fB!=\fP\&).
+.IP \0\0\(bu
+Compilers have bugs.
+Common trouble spots include structure assignment and bitfields.
+You cannot generally predict which bugs a compiler has.
+You \fIcould\fP write a program that avoids all constructs that are
+known broken on all compilers.
+You won't be able to write anything useful,
+you might still encounter bugs,
+and the compiler might get fixed in the meanwhile.
+Thus, you should write ``around'' compiler bugs only when you are
+\fIforced\fP to use a particular buggy compiler.
+.IP \0\0\(bu
+Do not rely on automatic beautifiers.
+The main person who benefits from good program style is the
+programmer him/herself,
+and especially in the early design of handwritten algorithms
+or pseudo-code.
+Automatic beautifiers can only be applied to complete, syntactically
+correct programs and hence are not available when the need for
+attention to white space and indentation is greatest.
+Programmers can do a better job of making clear
+the complete visual layout of a function or file, with the normal
+attention to detail of a careful programmer.
+(In other words, some of the visual layout is dictated by intent
+rather than syntax
+and beautifiers cannot read minds.)
+Sloppy programmers should learn to be careful programmers instead of
+relying on a beautifier to make their code readable.
+.\"
+.\" Finally, beautifiers are nontrivial, can have bugs, and never do a
+.\" perfect job.
+.\" Also, beautifiers do things such as silently taking
+.\" .Ep x=-1;
+.\" to be old-style syntax for
+.\" .Ep x -= 1;
+.\" even though that might not be what is wanted, and
+.\" such a conversion is \fIwrong\fP for ANSI-C input.
+.\"
+.IP \0\0\(bu
+Accidental omission of the second
+.Ep = '' ``
+of the logical compare is a problem.
+Use explicit tests.
+Avoid assignment with implicit test.
+.Ex
+abool = bbool;
+if (abool) { ...
+.Ee
+When embedded assignment \fIis\fP used, make the test explicit
+so that it doesn't get ``fixed'' later.
+.Ex
+while ((abool = bbool) != FALSE) { ...
+.Ee
+.Ex
+while (abool = bbool) { ...	/* VALUSED */
+.Ee
+.Ex
+while (abool = bbool, abool) { ...
+.Ee
+.\"
+.\" I happen to think the following is ugly, but it works if one of
+.\" the values is a constant.
+.\" The ``trick'' is to put a non-lvalue on the lhs.
+.\" The compiler then barfs if an
+.\" .Ep = '' ``
+.\" is typed instead of the intended
+.\" .Ep =\^= ''. ``
+.\"
+.\" .Ex
+.\" if (2 == i) {...}
+.\" .Ee
+.\"
+.IP \0\0\(bu
+Explicitly comment
+variables that are changed out of the normal control flow,
+or other code that is likely to break during maintenance.
+.IP \0\0\(bu
+Modern compilers will put variables in registers automatically.
+Use the
+.Ec register
+sparingly to indicate the variables that you think are most critical.
+In extreme cases, mark the 2-4 most critical values as
+.Ep register
+and mark the rest as
+.Ep REGISTER.
+The latter can be #defined to
+.Ep register
+on those machines with many registers.
+.NH
+Lint
+.PP
+\fILint\fP is a C program checker [2][11] that examines C source files
+to detect and report type incompatibilities, inconsistencies between
+function definitions and calls,
+potential program bugs, etc.
+The use of \fIlint\fP on all programs is strongly recommended,
+and it is expected that most projects will require programs to use
+\fIlint\fP as part of the official acceptance procedure.
+.PP
+It should be noted that the best way to use \fIlint\fP is not as a
+barrier that must be overcome before official acceptance of a program,
+but rather as a tool to use during and after changes or additions to
+the code.
+\fILint\fP
+can find obscure bugs and insure portability before problems occur.
+Many messages from \fIlint\fP really do indicate something wrong.
+One fun story is about is about a program that was missing
+an argument to
+.Ep fprintf '. `
+.Ex
+fprintf ("Usage: foo -bar <file>\\\en");
+.Ee
+The \fIauthor\fP never had a problem.
+But the program dumped core every time an ordinary user made a mistake
+on the command line.
+Many versions of \fIlint\fP will catch this.
+.PP
+Most options are worth learning.
+Some options may complain about legitimate things, but they will
+also pick up many botches.
+Note that \-p\*f
+.FS
+.IP \*F
+Flag names may vary.
+.FE
+checks function-call type-consistency for only a subset
+of library routines, so programs should be linted both with and
+without \-p for the best ``coverage''.
+.PP
+\fILint\fP also recognizes several special comments in the code.
+These comments both shut up \fIlint\fP when the code
+otherwise makes it complain,
+and also document special code.
+.NH
+Make
+.PP
+One other very useful tool is \fImake\fP [7].
+During development,
+\fImake\fP recompiles only those modules that have been changed
+since the last time \fImake\fP was used.
+It can be used to automate other tasks, as well.
+Some common conventions include:
+.TS
+center;
+r l.
+all	\fIalways\fP makes all binaries
+clean	remove all intermediate files
+debug	make a test binary 'a.out' or 'debug'
+depend	make transitive dependencies
+install	install binaries, libraries, etc.
+deinstall	back out of ``install''
+mkcat	install the manual page(s)
+lint	run lint
+print/list	make a hard copy of all source files
+shar	make a shar of all source files
+spotless	make clean, use revision control to put away sources.
+	Note: doesn't remove Makefile, although it is a source file
+source	undo what spotless did
+tags	run ctags, (using the -t flag is suggested)
+rdist	distribute sources to other hosts
+\fIfile.c\fP	check out the named file from revision control
+.TE
+In addition, command-line defines
+can be given to define either Makefile values
+(such as ``CFLAGS'')
+or values in the program
+(such as ``DEBUG'').
+.NH
+Project-Dependent Standards
+.PP
+Individual projects may wish to establish additional standards beyond
+those given here.
+The following issues are some of those that should be addressed by
+each project program administration group.
+.IP \0\0\(bu
+What additional naming conventions should be followed?
+In particular, systematic prefix conventions for functional grouping
+of global data and also for structure or union member names can be
+useful.
+.IP \0\0\(bu
+What kind of include file organization is appropriate for the
+project's particular data hierarchy?
+.IP \0\0\(bu
+What procedures should be established for reviewing \fIlint\fP
+complaints?
+A tolerance level needs to be established in concert with the \fIlint\fP
+options to prevent unimportant complaints from hiding complaints about
+real bugs or inconsistencies.
+.IP \0\0\(bu
+If a project establishes its own archive libraries, it should plan on
+supplying a lint library file [2] to the system administrators.
+The lint library file allows \fIlint\fP to check for compatible use of
+library functions.
+.IP \0\0\(bu
+What kind of revision control needs to be used?
+.NH
+Conclusion
+.PP
+A set of standards has been presented for C programming style.
+Among the most important points are:
+.IP \0\0\(bu
+The proper use of white space and comments
+so that the structure of the program is evident from
+the layout of the code.
+The use of simple expressions, statements, and functions
+so that they may be understood easily.
+.IP \0\0\(bu
+To keep in mind that
+you or someone else will likely be asked to modify code or make
+it run on a different machine sometime in the future.
+Craft code so that it is portable to obscure machines.
+Localize optimizations since they are often confusing
+and may be ``pessimizations'' on other machines.
+.IP \0\0\(bu
+Many style choices are arbitrary.
+Having a style that is consistent
+(particularly with group standards)
+is more important than following absolute style rules.
+Mixing styles is worse than using any single bad style.
+.PP
+As with any standard, it must be followed if it is to be useful.
+If you have trouble following any of these standards
+don't just ignore them.
+Talk with your local guru,
+or an experienced programmer at your institution.
+.bp
+.ce 1
+\fBReferences\fP
+.sp 2
+.IP [1]
+B.A. Tague, \fIC Language Portability\fP, Sept 22, 1977.
+This document issued by department 8234 contains three memos by
+R.C. Haight, A.L. Glasser, and T.L. Lyon dealing with style and
+portability.
+.IP [2]
+S.C. Johnson, \fILint, a C Program Checker\fP,
+\s-1USENIX\s+1
+.UX
+Supplementary Documents, November 1986.
+.IP [3]
+R.W. Mitze, \fIThe 3B/PDP-11 Swabbing Problem\fP, Memorandum for File,
+1273-770907.01MF,
+September 14, 1977.
+.IP [4]
+R.A. Elliott and D.C. Pfeffer, \fI3B Processor Common Diagnostic
+Standards- Version 1\fP,
+Memorandum for File, 5514-780330.01MF, March 30, 1978.
+.IP [5]
+R.W. Mitze,
+\fIAn Overview of C Compilation of
+.UX
+User Processes on the 3B\fP,
+Memorandum for File, 5521-780329.02MF, March 29, 1978.
+.IP [6]
+B.W. Kernighan and D.M. Ritchie,
+\fIThe C Programming Language\fP,
+Prentice Hall 1978,
+Second Ed. 1988, \s-1ISBN\s+1 0-13-110362-8.
+.IP [7]
+S.I. Feldman,
+\fIMake \(em A Program for Maintaining Computer Programs\fP,
+\s-1USENIX\s+1
+.UX
+Supplementary Documents, November 1986.
+.IP [8]
+Ian Darwin and Geoff Collyer,
+\fICan't Happen or /* NOTREACHED */ or Real Programs Dump Core\fP,
+\s-1USENIX\s+1 Association Winter Conference, Dallas 1985 Proceedings.
+.IP [9]
+Brian W. Kernighan and P. J. Plauger
+\fIThe Elements of Programming Style\fP.
+McGraw-Hill, 1974, Second Ed. 1978, \s-1ISBN\s+1 0-07-034-207-5.
+.IP [10]
+J. E. Lapin
+\fIPortable C and U\s-1NIX\s+1 System Programming\fP,
+Prentice Hall 1987,
+\s-1ISBN\s+1 0-13-686494-5.
+.IP [11]
+Ian F. Darwin,
+\fIChecking C Programs with lint\fP,
+O'Reilly & Associates, 1989.
+\s-1ISBN\s+1 0-937175-30-7.
+.IP [12]
+Andrew R. Koenig,
+\fIC Traps and Pitfalls\fP,
+Addison-Wesley, 1989.
+\s-1ISBN\s+1 0-201-17928-8.
+.\" .IP []
+.\" Samuel P. Harbison and Guy L. Steele Jr.
+.\" \fIC: A Reference Manual\fP
+.\" 1984, 1987
+.\" \s-1ISBN\s+1 is 0-13-109802-0
+.\" .Ee
+.\" .IP []
+.\" Mark Horton
+.\" \fIPortable C Software\fP
+.\" Prentice-Hall, Englewood Cliffs NJ
+.\" 1990
+.\" \s-1ISBN\s+1 is 0-13-868050-7
+.\" .Ee
+.bp
+\s+1
+.ce
+\fBThe Ten Commandments for C Programmers\fP
+\s-1
+.sp 2
+.ce
+\fIHenry Spencer\fP
+.sp 2
+.IP 1
+Thou shalt run \fIlint\fP frequently and study its pronouncements with
+care, for verily its perception and judgement oft exceed thine.
+.IP 2
+Thou shalt not follow the NULL pointer,
+for chaos and madness await thee at its end.
+.IP 3
+Thou shalt cast all function arguments to the expected type
+if they are not of that type already,
+even when thou art convinced that this is unnecessary,
+lest they take cruel vengeance upon thee when thou least expect it.
+.IP 4
+If thy header files fail to declare the return types
+of thy library functions,
+thou shalt declare them thyself with the most meticulous care,
+lest grievous harm befall thy program.
+.IP 5
+Thou shalt check the array bounds of all strings (indeed, all arrays),
+for surely where thou typest ``foo'' someone someday shall type
+``supercalifragilisticexpialidocious''.
+.IP 6
+If a function be advertised to return an error code in the event of
+difficulties,
+thou shalt check for that code, yea, even though the checks
+triple the size of thy code and produce aches in thy typing fingers,
+for if thou thinkest ``it cannot happen to me'',
+the gods shall surely punish thee for thy arrogance.
+.IP 7
+Thou shalt study thy libraries and strive not to re-invent them
+without cause,
+that thy code may be short and readable and thy days pleasant and
+productive.
+.IP 8
+Thou shalt make thy program's purpose and structure
+clear to thy fellow man by using the
+One True Brace Style,
+even if thou likest it not,
+for thy creativity is better used in solving problems than in creating
+beautiful new impediments to understanding.
+.IP 9
+Thy external identifiers shall be unique in the first six characters,
+though this harsh discipline be irksome and the years of its necessity
+stretch before thee seemingly without end,
+lest thou tear thy hair out and go mad on that fateful day when
+thou desirest to make thy program run on an old system.
+.IP 10
+Thou shalt foreswear, renounce,
+and abjure the vile heresy which claimeth
+that ``All the world's a VAX'', and have no commerce with the
+benighted heathens who cling to this barbarous belief,
+that the days of thy program may be long even though the days of thy
+current machine be short.

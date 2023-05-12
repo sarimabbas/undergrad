@@ -1,0 +1,501 @@
+#!/usr/bin/python3
+
+# Sarim Abbas
+# sarim.abbas@yale.edu
+# clipp: C LImited PreProcessor
+# For CS323 Hwk3 
+
+import re
+import os
+import sys
+LEN_MATCHES = None
+POSITION = None
+
+def main():
+	# f = open("my_tests/bashTestSource", "r")
+	# contents = f.read()
+	contents = sys.stdin.read()
+	basicUnmatchedDetector(contents)
+	contents = removeComments(contents)
+	contents = processDirectives(contents)
+	sys.stdout.write(contents)
+
+############# START PROCESS DIRECTIVES #############
+
+def processDirectives(contents): 
+
+	def hangingDirective(matches, contents, processed_contents, define_dict):
+		# get current match
+		global POSITION
+		curr_match = matches[POSITION]
+
+		# get content following match
+		if POSITION == LEN_MATCHES - 1:
+			content = contents[curr_match.end():]
+		elif POSITION + 1 < LEN_MATCHES:
+			next_match = matches[POSITION + 1]
+			content = contents[curr_match.end():next_match.start()]
+		else:
+			sys.stderr.write("hangingDirective error\n")
+			return
+		
+		# error check and parse
+		sys.stderr.write("clipp: unexpected directive\n")
+		processed_contents.extend(parseDefine(content, define_dict))
+
+		# advance position
+		POSITION += 1
+
+	# get all the directives
+	pattern = directivesPattern()
+	matches = re.finditer(pattern, contents)
+
+	# remove any directive which is not part of if block
+	matches = list(matches)
+	reduced_matches = []
+	for index, match in enumerate(matches):
+		if match.group("type") in ["ifdef", "else", "endif"]:
+			reduced_matches.append(match)
+	matches = reduced_matches 
+
+	# now we have a list of directives that are only if-block related
+	global LEN_MATCHES
+	LEN_MATCHES = len(matches)
+
+	# if there are no if directives, then we can just return the contents as is
+	define_dict = {}
+	if LEN_MATCHES == 0:
+		return "".join(parseDefine(contents, define_dict))
+
+	# this will contain the final output
+	processed_contents = []
+
+	# special case at start copies everything until the first directive
+	leading = contents[0:matches[0].start()]
+	processed_contents.extend(parseDefine(leading, define_dict))
+
+	# now we can move ahead in the matches list using recursive descent
+	global POSITION 
+	POSITION = 0
+	while(POSITION < LEN_MATCHES):
+		# parse a block
+		parsed = parseIfBlock(matches, contents, processed_contents, define_dict)
+		# if failure, pick up where it left off
+		if not parsed and POSITION < LEN_MATCHES:
+			hangingDirective(matches, contents, processed_contents, define_dict)
+
+	# join everything
+	return "".join(processed_contents)
+
+def parseIfBlock(matches, contents, block_contents, define_dict):
+	# parse ifdef
+	parsed_if, defined = parseIfdef(matches, contents, block_contents, define_dict)
+	if not parsed_if:
+		return False
+	# make_backup
+	len_backup = len(block_contents)
+
+	# try to parse else
+	parsed_else = parseElse(matches, contents, block_contents, define_dict)
+	len_new = len(block_contents)
+
+	# throw away difference if defined
+	if defined:
+		for i in range(0, len_new - len_backup):
+			block_contents.pop()
+
+	# parse endif
+	parsed_end = parseEndif(matches, contents, block_contents, define_dict)
+	if not parsed_end:
+		sys.stderr.write("clipp: missing #endif\n")
+		return False
+
+	return True
+
+def parseIfdef(matches, contents, block_contents, define_dict):
+	# defined bool
+	defined = False
+
+	# get match
+	global POSITION
+	if not POSITION < LEN_MATCHES:
+		return False, defined
+	curr_match = matches[POSITION]
+
+	# if it fails, stop
+	if not checkDirectiveSyntax(curr_match) or not curr_match.group("type") == "ifdef":
+		return False, defined
+
+	# if it doesn't fail, copy over the content only if it is defined 
+	if curr_match.group("name") in define_dict:
+		if POSITION + 1 < LEN_MATCHES:
+			defined = True
+			next_match = matches[POSITION + 1]
+			if_content = contents[curr_match.end():next_match.start()]
+			block_contents.extend(parseDefine(if_content, define_dict))
+		else:
+			return False, defined
+
+	# advance position if success
+	POSITION += 1
+
+	# check for more if blocks
+	while(parseIfBlock(matches, contents, block_contents, define_dict)):
+		pass
+
+	# always return true if reached here
+	return True, defined
+
+
+def parseElse(matches, contents, block_contents, define_dict):
+	# get match
+	global POSITION
+	if not POSITION < LEN_MATCHES:
+		return False
+	curr_match = matches[POSITION]
+
+	# if it fails, stop
+	if not checkDirectiveSyntax(curr_match) or not curr_match.group("type") == "else":
+		return False
+
+	# copy over the content
+	if POSITION + 1 < LEN_MATCHES:
+		next_match = matches[POSITION + 1]
+		else_content = contents[curr_match.end():next_match.start()] 
+		block_contents.extend(parseDefine(else_content, define_dict))
+
+	# advance position if success
+	POSITION += 1
+
+	# check for more if blocks
+	while(parseIfBlock(matches, contents, block_contents, define_dict)):
+		pass
+
+	# all done
+	return True
+
+
+def parseEndif(matches, contents, block_contents, define_dict):
+	# get match
+	global POSITION
+	if not POSITION < LEN_MATCHES:
+		return False
+	curr_match = matches[POSITION]
+
+	# if it fails, stop
+	if not checkDirectiveSyntax(curr_match) or not curr_match.group("type") == "endif":
+		return False
+
+	# if it succeeds, copy over the content (this is the content between if-blocks)
+	if POSITION + 1 < LEN_MATCHES:
+		next_match = matches[POSITION + 1]
+		end_content = contents[curr_match.end():next_match.start()]
+		block_contents.extend(parseDefine(end_content, define_dict))
+	elif POSITION == LEN_MATCHES - 1:
+		end_content = contents[curr_match.end():]
+		block_contents.extend(parseDefine(end_content, define_dict))
+
+	# advance if success
+	POSITION += 1
+	
+	# all done
+	return True
+
+def parseDefine(content, define_dict):
+	"""processes #define statements and expands tokens using define_dict
+	"""
+
+	def addDefinetoDictionary(match, define_dict):
+		if match.group("type") == "define":
+			if not match.group("name"):
+				printDirectiveError(match)
+			else:
+				define_dict[match.group("name")] = (match.group("value").rstrip()
+										if match.group("value") else "")
+
+	# get matches
+	pattern = directivesPattern()
+	matches = list(re.finditer(pattern, content))
+	len_matches = len(matches)
+
+	# processed content
+	processed = []
+	# special case
+	if len_matches == 0:
+		processed.append(tokenReplacer(content, define_dict))
+		return processed
+
+	# special case at start
+	leading = content[0:matches[0].start()]
+	processed.append(tokenReplacer(leading, define_dict))
+
+	# work through the general case
+	if len_matches > 1:
+		# move through all the matches
+		for i in range(0, len_matches - 1):
+			curr_match = matches[i]
+			checkDirectiveSyntax(curr_match)
+			next_match = matches[i + 1]
+			# if a define directive is found, add it to dictionary
+			addDefinetoDictionary(curr_match, define_dict)
+			# expand subsequent string and append
+			between = content[curr_match.end():next_match.start()]
+			processed.append(tokenReplacer(between, define_dict))
+
+	# special case at end
+	end_match = matches[len_matches - 1]
+	checkDirectiveSyntax(end_match)
+	addDefinetoDictionary(end_match, define_dict)
+	trailing = content[matches[len_matches - 1].end():]
+	processed.append(tokenReplacer(trailing, define_dict))
+
+	# return
+	return processed
+
+def checkDirectiveSyntax(match):
+	# ifdef and undef need names and cannot have values
+	if match.group("type") in ["ifdef", "undef"]:
+		if not match.group("name") or match.group("value") != "":
+			printDirectiveError(match)
+			return False
+	# define needs a name, value doesn't matter
+	elif match.group("type") == "define":
+		if not match.group("name"):
+			printDirectiveError(match)
+			return False
+	# include can have a name or value but not both
+	elif match.group("type") == "include":
+		if match.group("value") and match.group("name"):
+			printDirectiveError(match)
+			return False
+	# these cannot have any names or values
+	elif match.group("type") in ["endif", "else"]:
+		if match.group("name") or match.group("value") != "":
+			printDirectiveError(match)
+			return False
+	# and no other directives can be accepted
+	else:
+		printDirectiveError(match)
+		return False
+	# otherwise it is correct
+	return True
+
+def printDirectiveError(match):
+	sys.stderr.write("clipp: invalid directive: {}\n".format(match.group("type")))
+
+def tokenReplacer(content, define_dict):
+	"""Replaces tokens in content using define dict
+	"""
+	def repl(match, value, sub_count):
+		if match.group(1):
+			sub_count[0] += 1
+			return value
+		else:
+			return match.group()
+
+	def doubleHashRepl(match):
+		if match.group(1):
+			return ""
+		else:
+			return match.group()
+
+	# split content into lines
+	split = content.split("\n")
+
+	# work with each line
+	subbed_lines = []
+	for string in split:
+		# check if problematic string literal
+		ignore_pos = getUnmatchedQuotePosition(string)
+		# if there are items, keep trying unless no subs are made
+
+		while(True):
+			sub_count = [ 0 ]
+			for key, value in define_dict.items():
+				# create a dynamic pattern to detect tokens
+				pattern = tokenPattern(key)
+				# do the sub
+				string = (pattern.sub(lambda match: repl(match, value, sub_count), string[0:ignore_pos]) + string[ignore_pos:])
+				# update ignore pos
+				ignore_pos = getUnmatchedQuotePosition(string)
+
+			# replace any double hash
+			double_hash_pattern = doubleHashPattern()
+			string = double_hash_pattern.sub(doubleHashRepl, string[0:ignore_pos]) + string[ignore_pos:]
+
+			# break if no subs made
+			if sub_count[0] < 1:
+				break
+
+		# append modified string to array
+		subbed_lines.append(string)
+	# return modified contents
+	return "\n".join(subbed_lines)
+
+############# COMMENTS AND MATCHED QUOTES #############
+
+def basicUnmatchedDetector(contents):
+	unmatchedStringDetector(contents)
+	unmatchedMuliLineCommentDetector(contents)
+
+def unmatchedStringDetector(contents):
+	not_comments = getNonComments(contents)
+	split_not_comments = []
+	# quotes cannot extend out over several lines
+	for string in not_comments:
+		split_not_comments.extend(string.split("\n"))
+	for string in split_not_comments:
+		double_count, single_count = quoteCounter(string)
+		# count the number of double quotes and check if even
+		if double_count % 2 != 0:
+			sys.stderr.write("clipp: unmatched \"\n")
+		# count the number of single quotes and check if even
+		if single_count % 2 != 0:
+			sys.stderr.write("clipp: unmatched \'\n")
+
+def getUnmatchedQuotePosition(string):
+	double_count, single_count = quoteCounter(string)
+	ignore_pos = len(string)
+	if double_count % 2 != 0:
+		ignore_pos = string.rfind("\"")
+	if single_count % 2 != 0:
+		ignore_pos = string.rfind("\'")
+	return ignore_pos
+
+def quoteCounter(string):
+	# eliminate any escaped quotes
+	eliminate_escaped = string.replace('\\"', "")
+	eliminate_escaped = eliminate_escaped.replace("\\'", "")
+	# count the number of quotes
+	double_count = eliminate_escaped.count('"')
+	single_count = eliminate_escaped.count("'")
+	return double_count, single_count
+
+def getNonComments(contents):
+	# get patterns for both comment styles
+	pattern_single = singleLineCommentsPattern()
+	pattern_multi = multiLineCommmentsPattern()
+	# get iterators over all the matches
+	matches_single = re.finditer(pattern_single, contents)
+	matches_multi = re.finditer(pattern_multi, contents)
+	# get a list of spans over all the matches
+	spans = []
+	for match in matches_single:
+		if match.group(1):
+			spans.append(match.span(1))
+	for match in matches_multi:
+		if match.group(1):
+			spans.append(match.span(1))
+	# find everything in between
+	not_comments = invertRegex(spans, contents)
+	# return non-comments
+	return not_comments
+
+def unmatchedMuliLineCommentDetector(contents):
+	# get everything outside of strings (more precisely: outside strings not inside multi-comments)
+	not_strings = getNonStrings(contents) 
+	for string in not_strings:
+		# count the number of /*
+		open_count = string.count("/*")
+		# count the number of */
+		close_count = string.count("*/") #! ERROR: Should be clear for test case: "*/"
+		# error check
+		if open_count != close_count:
+			sys.stderr.write("clipp: unmatched /*\n")
+
+def getNonStrings(contents):
+	pattern_multi = multiLineCommmentsPattern()
+	matches_multi = re.finditer(pattern_multi, contents)
+	# get a list of spans over all the matches
+	# these spans correspond to strings which are not inside comments
+	spans = []
+	for match in matches_multi:
+		if match.group(0):
+			spans.append(match.span(0))
+	# find everything in between
+	not_strings = invertRegex(spans, contents)
+	# return non-strings
+	return not_strings
+
+def invertRegex(spans, contents):
+	"""finds and returns everything not matched by a regex
+	Arguments:
+		spans {[str]} -- a list of str not matched
+		contents {str} -- the original source
+	"""
+	# sort the list of tuples
+	spans.sort()
+	# a list to store all the in-between strings
+	inverted_matches = []
+	# if no spans, then have everything
+	if not spans:
+		inverted_matches.append(contents)
+		return inverted_matches
+	# special case at start
+	inverted_matches.append(contents[:spans[0][0]])
+	# general case
+	spans_len = len(spans)
+	if spans_len > 1:
+		for i in range(0, spans_len - 1):
+			inverted_matches.append(contents[spans[i][1]:spans[i + 1][0]])
+	# special case at end
+	inverted_matches.append(contents[spans[spans_len - 1][1]:])
+	# return matches
+	return inverted_matches
+
+def removeComments(contents):
+	contents = removeSingleLineComments(contents)
+	return removeMultiLineComments(contents)
+
+def removeSingleLineComments(contents):
+	# get compiled pattern
+	pattern = singleLineCommentsPattern()
+	# replacement for re.sub
+	def repl(match):
+		if match.group(1):
+			return ""
+		else:
+			return match.group()
+	# do the sub
+	return pattern.sub(repl, contents)
+
+def removeMultiLineComments(contents):
+	# get compiled pattern
+	pattern = multiLineCommmentsPattern()
+	# replacement for re.sub
+	def repl(match):
+		if match.group(1):
+			return " "
+		else:
+			return match.group()
+	# do the sub
+	return pattern.sub(repl, contents)
+
+############# REGEX #############
+
+def singleLineCommentsPattern():
+	regex = r"""
+	\'(?:\\\'|.)*?\'|\"(?:\\\"|.)*?\"|(\/\/.*)
+	"""
+	return re.compile(regex, re.MULTILINE | re.VERBOSE)
+
+def multiLineCommmentsPattern():
+	regex = r"""
+	\'(?:\\\'|.)*?\'|\"(?:\\\"|.)*?\"|(\/\*+.*?\*+\/)
+	"""
+	return re.compile(regex, re.MULTILINE | re.VERBOSE | re.DOTALL)
+
+def directivesPattern():
+	# https://regex101.com/r/x40eUX/69
+	regex = r"^(?:\ *)(?P<leading>\# *)(?P<type>\w+)(?: *)(?P<name>[^\W\d]+\w*)?(?: *)(?P<value>.*)[\r\n]?"
+	return re.compile(regex, re.MULTILINE)
+
+def tokenPattern(key):
+	# https://regex101.com/r/x40eUX/67
+	return re.compile(r"\'(?:\\\'|.)*?\'|\"(?:\\\"|.)*?\"|(" + key + ")", re.MULTILINE)
+
+def doubleHashPattern():
+	return re.compile(r"\'(?:\\\'|.)*?\'|\"(?:\\\"|.)*?\"|((?:[^\v\S]*)##(?:[^\v\S]*))", re.MULTILINE)
+
+if __name__ == "__main__":
+	main()

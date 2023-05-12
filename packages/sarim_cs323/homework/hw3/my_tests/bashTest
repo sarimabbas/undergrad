@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if diff -y <(/c/cs323/Hwk3/clipp < ./bashTestSource) <(/home/accts/sa857/cs323/homework/hw3/clipp < ./bashTestSource); then
+    printf "No difference, reference output:\n"
+    printf "\-\-\-\-\-\n"
+    /c/cs323/Hwk3/clipp < ./bashTestSource
+    printf "\n\-\-\-\-\-\n"
+    printf "END\n"
+else
+    printf "Differences found\n"
+    printf "\-\-\-\-\-\n"
+fi

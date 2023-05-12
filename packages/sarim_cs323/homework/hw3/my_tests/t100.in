@@ -1,0 +1,19 @@
+#define gamma g
+#define beta b
+#define alpha a
+#ifdef beta
+    beta is defined
+    #ifdef gamma
+        gamma is defined within beta
+    #endif
+    intermediate
+    #ifdef alpha
+        alpha is defined
+    #endif
+#else
+    beta is not defined
+    #ifdef gamma
+        gamma is defined
+    #endif
+    blah blah
+#endif

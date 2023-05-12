@@ -1,0 +1,22 @@
+#!/bin/bash
+# Simple pipe
+# REQUIRES: PIPE, REDIR (<, >)
+
+FILES="+bashful.tmp"
+PROGS="die cat echo fmt wc"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+timeout -k 1 2 ./bashful <<\END
+  /c/cs323/Hwk5/Tests/die 1 cat < /c/cs323/Hwk5/Tests/stk.txt | fmt -48
+  /c/cs323/Hwk5/Tests/die 1 cat < /c/cs323/Style/C-IH | wc -l > +bashful.tmp
+  cat +bashful.tmp
+  echo End of test
+END
+
+echo

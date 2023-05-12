@@ -1,0 +1,22 @@
+#!/bin/bash
+# Redirect stdin to here document
+# REQUIRES: HERE
+
+FILES=
+PROGS="echo wc"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+(echo "wc <<HERE" ;           \
+ cat  /c/cs323/Doc/logic.1 ;  \
+ echo "HERE" ;                \
+ echo "echo End of test") |   \
+timeout -k 1 2 ./bashful  |   \
+perl -p -e 's{ +}{ }g'                  # Collapse multiple blanks from wc
+
+echo

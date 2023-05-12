@@ -1,0 +1,56 @@
+#!/bin/bash
+# Errors
+#   cd  [HOME undefined] (error)
+#   cd nonexistent (error)
+# REQUIRES: BUILT-IN (cd)
+
+ERROR="/tmp/+bashful.err.$$"
+
+FILES="$ERROR"
+PROGS="echo pwd true"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+# cd  [HOME undefined] (error)
+export -n HOME
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  cd /c/cs323                   # Ensure that cd is implemented
+  pwd
+  cd
+  pwd
+  echo End of test
+END
+echo
+echo -----
+wc -l < $ERROR
+
+echo =====
+
+# cd nonexistent (error)
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  cd /c/cs323
+  cd nonexistent
+  pwd
+  echo End of test
+END
+echo
+echo -----
+wc -l < $ERROR
+
+echo =====
+
+# cd two arguments (error)
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  cd /c/cs323
+  cd / second-argument
+  pwd
+  echo End of test
+END
+echo
+echo -----
+wc -l < $ERROR

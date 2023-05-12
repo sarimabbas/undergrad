@@ -1,0 +1,22 @@
+leading content      
+
+#define FORTY 40
+
+FORTY
+
+#ifdef FORTY
+    I am amazing
+#else
+    Sorry I am not amazing
+#endif
+
+spare content in between
+
+# ifdef TWENTY
+    oh m GEEEE
+#  else 
+    Oh my goo
+# endif
+
+
+stuff way at the end

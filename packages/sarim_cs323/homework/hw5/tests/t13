@@ -1,0 +1,32 @@
+#!/bin/bash
+# cd -p
+# REQUIRES: BUILT-IN (cd -p), REDIR (>)
+
+STDOUT="/tmp/+bashful.out.$$"
+
+FILES="$STDOUT"
+PROGS="echo"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+export WHERE=`pwd`             # Where bashful is located
+
+cd /c/cs323/Hwk5
+
+timeout -k 1 2 $WHERE/bashful <<END
+ cd -p
+ cd -p > $STDOUT
+ cat -vet $STDOUT
+ cd /usr/bin
+ cd -p
+ cd -p > $STDOUT
+ cat -vet $STDOUT
+ echo End of test
+END
+
+echo

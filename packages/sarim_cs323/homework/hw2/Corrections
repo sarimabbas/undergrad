@@ -1,0 +1,26 @@
+1. The examples at the end of the specification should be:
+
+     Command:     < A B=C D E > F
+     Token Array: ARG:D ARG:E LOCAL:B=C <A >F ;
+
+     Command:     A=B C D > E < F
+     Token Array: ARG:C ARG:D LOCAL:A=B >E <F ;
+
+     Command:     < A B | C | D | E > F
+     Token Array: ARG:B <A | ARG:C | ARG:D | ARG:E >F ;
+
+     Command:     A && B || C && D
+     Token Array: ARG:A && ARG:B || ARG:C && ARG:D ;
+
+     Command:     A ; B & C ; D || E ;
+     Token Array: ARG:A ; ARG:B & ARG:C ; ARG:D || ARG:E ;
+
+     Command:     (A ; B &) | (C || D) && E
+     Token Array: ( ARG:A ; ARG:B & ) | ( ARG:C || ARG:D ; ) && ARG:E ;
+
+   (Note the ; now at the end of each of the first four
+   examples, and the ARG: labels for C, D, and E in the
+   last example.
+
+2. The "numbering" in Note 6 contains two instances of (b),
+   and thus the entire list needs to be resequenced.

@@ -1,0 +1,62 @@
+#!/bin/bash
+# Nonexistent / unreadable / unwritable files (ERROR)
+# REQUIRES: REDIR (<, >)
+
+ERROR="/tmp/+bashful.err.$$"
+
+FILES="+bashful.tmp $ERROR"
+PROGS="echo stderr wc"
+/c/cs323/bin/Exist $FILES && trap "" 0 && exit
+
+trap "/bin/rm -f $FILES; \
+      /bin/killall -q -u $USER -s KILL bashful $PROGS 2>/dev/null" 0 1 2 3 9 15
+ulimit -u 1000
+
+################
+
+# Nonexistent command (error) # * DONE: passes
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  Nonexistent commands can not be executed
+  echo End of test
+END
+echo ; echo ----- ; wc -l < $ERROR
+
+echo =====
+
+# Nonexecutable command (error) # * DONE: unexecutable command
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  /bin is a file that exists but is not executable
+  echo End of test
+END
+echo ; echo ----- ; wc -l < $ERROR
+
+echo =====
+
+# Nonexistent file (error) # * DONE
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  wc < /nonexistent
+  echo End of test
+END
+echo ; echo ----- ; wc -l < $ERROR
+
+echo =====
+
+# Unreadable file (error) # * DONE
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  wc < /lost+found
+  echo End of test
+END
+echo ; echo ----- ; wc -l < $ERROR
+
+echo =====
+
+# Unwritable file (error) # * DONE
+timeout -k 1 2 ./bashful <<\END 2>$ERROR
+  cp /c/cs323/Doc/alice.1 +bashful.tmp
+  chmod +w +bashful.tmp
+  wc +bashful.tmp
+  cp /c/cs323/Doc/logic.1 +bashful.tmp > /nonexistent
+  wc +bashful.tmp
+  echo End of test
+END
+echo ; echo ----- ; wc -l < $ERROR
