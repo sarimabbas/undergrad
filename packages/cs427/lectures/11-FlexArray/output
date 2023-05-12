@@ -1,0 +1,51 @@
+---------------------------------------------------------------
+	Ima Goetting Closeau
+	CPSC 427/527
+	Tue Oct  2 2018	10:07:16
+---------------------------------------------------------------
+FlexArray Demonstration Program
+Starting unit test for FlexArray
+Creating Flex object
+>>> New FlexArray, size = 2
+User should see array header and no data.
+Array size 2; length 0; contents:
+----------------------------
+
+Adding 5 items
+>>> Grew FlexArray, size now = 4
+>>> Grew FlexArray, size now = 8
+User should see 5 items, not sorted.
+Array size 8; length 5; contents:
+    0:    6.00  vollkornbrot
+    1:    3.00  croissant
+    2:    2.50  baguette
+    3:    3.00  danish
+    4:    5.00  anise bread
+----------------------------
+
+Testing subscript
+User should see baguette in slot 2 above.
+   2.50  baguette
+
+Testing sort
+User should see the data sorted by product name.
+Array size 8; length 5; contents:
+    0:    5.00  anise bread
+    1:    2.50  baguette
+    2:    3.00  croissant
+    3:    3.00  danish
+    4:    6.00  vollkornbrot
+----------------------------
+
+Testing search
+Searching for "croissant".  Answer should be slot 2.
+croissant found at slot 2.
+
+Searching for "cupcake".  Answer should be -1 (not found).
+cupcake search returned slot -1.
+
+Terminating unit test program
+>>> Deleted FlexArray, size = 8
+
+---------------------------------------------------------------
+Normal termination.

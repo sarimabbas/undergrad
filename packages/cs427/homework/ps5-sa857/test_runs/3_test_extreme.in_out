@@ -1,0 +1,24 @@
+10000 agents, all crowd, all have 0 choice.
+
+sarimabbas:ps5-sa857 sarimabbas$ ./consensus2 10000 0.0 0.0
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Sat Nov 10 2018 23:41:22
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1541911282
+   numAgents:  10000
+  probFickle:      0
+     probOne:      0
+Population statistics:
+   numFickle:      0
+    numCrowd:  10000
+     numOnes:      0
+Results of simulation:
+      Rounds:      0
+   Consensus:      0
+
+---------------------------------------------------------------
+Normal termination.

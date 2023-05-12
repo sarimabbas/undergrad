@@ -1,0 +1,68 @@
+Submitted files:
+
+1. Makefile
+Description:
+- Compiles 'tad' and 'test'. 
+- Provides a set of instructions to g++ to use 
+other files in the project
+
+2. tad.cpp 
+Type: source code 
+Description: 
+- Contains code for run() function of tad executable
+
+3. tad
+Type: executable
+Description: 
+- Starts an interactive prompt for the user to play with a simulated
+ThinkADot
+
+4. tools.hpp
+Type: source code
+Description: 
+- Declarations for utilities used in other implementation files
+
+5. tools.cpp
+Type: source code
+Description: 
+- Definitions for utilities used in other implementation files
+
+6. flipflop.hpp
+Type: source code
+Description: 
+- Declarations for FlipFlop class. Simulates a single flip flop inside a ThinkADot
+
+7. flipflop.cpp
+Type: source code
+Description: 
+- Definitions for FlipFlop class. Simulates a single flip flop inside a ThinkADot
+
+8. thinkadot.hpp
+Type: source code
+Description: 
+- Declarations for ThinkADot class. Simulates the entire toy with many flip flops
+
+9. thinkadot.cpp
+Type: source code
+Description: 
+- Definitions for ThinkADot class. Simulates the entire toy with many flip flops
+
+10. game.hpp
+Type: source code
+Description: 
+- Declarations for Game class. Runs an interactive prompt for user to play with ThinkADot
+
+11. game.cpp
+Type: source code
+Description: 
+- Definitions for Game class. Runs an interactive prompt for user to play with ThinkADot
+
+12. tad.out
+Type: text file
+Description: 
+- Contains output from test runs of 'tad'
+
+13. notes.text
+Type: text file
+Description:
+- This file

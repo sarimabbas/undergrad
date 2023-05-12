@@ -1,0 +1,9 @@
+Michael J. Fischer
+CPSC 427
+November 13, 2018
+-----------------
+
+This is a cleaned up version of what was presented in class on 11/12/2018.
+Biggest change is to simplify Serial by removing operator() definition, and
+making a new static function newID() to both fetch the instantiation and
+also call the id generator.

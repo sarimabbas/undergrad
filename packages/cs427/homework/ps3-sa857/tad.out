@@ -1,0 +1,156 @@
+TEST RUN 1 (note this is the flipped version of the example in the PDF):
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Fri Oct  5 2018 22:20:04
+---------------------------------------------------------------
+Welcome to ThinkADot
+Input a key (input H for help): p
+A B C
+------
+L L L
+ L L
+L L L
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: P
+A B C
+------
+L L R
+ L R
+L R L
+------
+P   Q
+Input a key (input H for help): b
+Dropping into B...
+Came out of hole: P
+A B C
+------
+L R R
+ R R
+R R L
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L R L
+ R R
+R R R
+------
+P   Q
+Input a key (input H for help): q
+Exiting game...
+---------------------------------------------------------------
+Normal termination.
+
+
+
+TEST RUN 2: Binary counter
+
+sarimabbas:ps3-sa857 sarimabbas$ ./tad
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Fri Oct  5 2018 22:23:02
+---------------------------------------------------------------
+Welcome to ThinkADot
+Input a key (input H for help): p
+A B C
+------
+L L L
+ L L
+L L L
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: P
+A B C
+------
+L L R
+ L R
+L R L
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L L
+ L R
+L R R
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L R
+ L L
+L R L
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L L
+ L L
+L R R
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L R
+ L R
+L L R
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L L
+ L R
+L L L
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L R
+ L L
+L L R
+------
+P   Q
+Input a key (input H for help): c
+Dropping into C...
+Came out of hole: Q
+A B C
+------
+L L L
+ L L
+L L L
+------
+P   Q
+Input a key (input H for help): q
+Exiting game...
+---------------------------------------------------------------
+Normal termination.
+sarimabbas:ps3-sa857 sarimabbas$

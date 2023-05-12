@@ -1,0 +1,8 @@
+FlexArray is a flexarray that uses move assignment instead of memcopy
+to move data during grow().
+Item uses std::string to store the product name instead of 
+const char* C-strings.
+Item's move constructor and move assignment simply delegate the move
+to moving each data member.
+Item no longer has a dynamic extension, so there is no double-deletion
+problem to solve and no need for a non-null destructor.

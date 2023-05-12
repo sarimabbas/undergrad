@@ -1,0 +1,22 @@
+SAME AS SAMPLE OUTPUT
+
+---------------------------------------------------------------
+	Sarim Abbas
+	CPSC 427/527
+	Sat Nov 10 2018	23:27:15
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1541033658
+   numAgents:   1000
+  probFickle:    0.8
+     probOne:    0.3
+Population statistics:
+   numFickle:    810
+    numCrowd:    190
+     numOnes:    301
+Results of simulation:
+      Rounds:  35313
+   Consensus:      0
+
+---------------------------------------------------------------
+Normal termination.

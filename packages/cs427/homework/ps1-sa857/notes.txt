@@ -1,0 +1,35 @@
+Submitted files:
+
+1. Makefile
+Compiles 'myapp'. Provides a set of instructions to g++ to use 
+other files in the project.
+
+2. main.cpp 
+Type: source code 
+Description: calls code from tools.hpp and petitions user for input to calculate age. 
+After class on Sep 10th, I made a design decision to reprompt the user for input
+after a non-integer is added for year of birth. In class, we learned about
+status bits. Initially, I used cin.clear(), but after researching on the web, it
+only clears the error bits on the stream, and does not remove the garbage input. 
+So I learned that I can use cin.ignore(). But for this I would have to utilize <limits.h> in tools,
+which was not mentioned in the specification, so I can ignore upto the maximum stream size till
+the newline. I hope this is acceptable!
+
+3. myapp
+Type: executable
+Description: petitions user for first name, last name and year of birth. Calculates
+the user's age based on this information. If the year of birth is invalid, the program
+reprompts the user for a valid integer value. When valid information is supplied, the program
+exits.
+
+4. tools.hpp
+Type: source code
+Description: declarations for utilities used in main.cpp
+
+5. tools.cpp
+Type: source code
+Description: definitions for utilities used in main.cpp
+
+6. aboutme.out
+Type: text file
+Description: contains output from test runs of 'myapp'

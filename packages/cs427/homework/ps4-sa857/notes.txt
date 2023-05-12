@@ -1,0 +1,74 @@
+Sarim Abbas
+Modified October 2018
+CPSC 427 / PS4
+
+-------
+
+Submitted files:
+
+1. Makefile
+Description:
+- Compiles 'consensus' and 'test'. 
+- Provides a set of instructions to g++ to use 
+other files in the project
+
+2. main.cpp 
+Type: source code 
+Description: 
+- Contains code for run() function of consensus executable
+
+3. consensus
+Type: executable
+Description: 
+- Runs a simulation of the consensus problem
+
+4. tools.hpp
+Type: source code
+Description: 
+- Declarations for utilities used in other implementation files
+
+5. tools.cpp
+Type: source code
+Description: 
+- Definitions for utilities used in other implementation files
+
+6. agent.hpp
+Type: source code
+Description: 
+- Declarations for Agent class. Simulates a single agent in the simulation
+
+7. agent.cpp
+Type: source code
+Description: 
+- Definitions for Agent class. Simulates a single agent in the simulation
+
+8. simulator.hpp
+Type: source code
+Description: 
+- Declarations for Simulator class. Simulates many agents in rounds
+
+9. simulator.cpp
+Type: source code
+Description: 
+- Definitions for Simulator class. Simulates many agents in rounds
+
+10. sample.in
+Type: text file
+Description: 
+- Contains sample inputs for 'consensus' testing
+
+11. sample.out
+Type: text file
+Description: 
+- Contains output from test runs of 'consensus'
+
+12. sample_staff.out
+Type: text file
+Description: 
+- Contains output from test runs of staff solution of 'consensus'
+- Running git diff on sample.out and sample_staff.out should show no difference
+
+13. notes.txt
+Type: text file
+Description:
+- This file

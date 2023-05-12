@@ -1,0 +1,108 @@
+Sarim Abbas
+Modified December 2018
+CPSC 427 / PS6
+
+-------
+
+Submitted files:
+
+1. Makefile
+Description:
+- Compiles 'blockchain' and 'test'. 
+- Provides a set of instructions to g++ to use 
+other files in the project
+
+2. main.cpp 
+Type: source code 
+Description: 
+- Contains code for run() function of blockchain executable
+
+3. blockchain
+Type: executable
+Description: 
+- Runs a driver with 10 blockchains
+
+4. tools.hpp
+Type: source code
+Description: 
+- Declarations for utilities used in other implementation files
+
+5. tools.cpp
+Type: source code
+Description: 
+- Definitions for utilities used in other implementation files
+
+6. driver.hpp
+Type: source code
+Description: 
+- Declarations for Driver class. Allows user to interact with 10 blockchains
+
+7. driver.cpp
+Type: source code
+Description: 
+- Definitions for Driver class. Allows user to interact with 10 blockchains
+
+8. blockchain.hpp
+Type: source code
+Description: 
+- Declarations for Blockchain class. Points to a chain of Block()s
+
+9. blockchain.cpp
+Type: source code
+Description: 
+- Definitions for Blockchain class. Points to a chain of Block()s
+
+10. block.hpp
+Type: source code
+Description: 
+- Declarations for Block class. Points to a chain of Block()s
+
+11. block.cpp
+Type: source code
+Description: 
+- Definitions for Block class. Points to a chain of Block()s
+
+12. Serial.hpp
+Type: source code
+Description: 
+- Declarations for Serial class. Allows for UID generation
+
+13. Serial.cpp
+Type: source code
+Description: 
+- Definitions for Serial class. Allows for UID generation
+
+13. SPtr.hpp
+Type: source code
+Description: 
+- Declarations for SPtr class. Allows for smart deletion of shared objects
+
+14. SPtr.hpp
+Type: source code
+Description: 
+- Definitions for SPtr class. Allows for smart deletion of shared objects
+
+15. test.cpp 
+Type: source code 
+Description: 
+- Contains code to test all previously mentioned code
+
+16. test 
+Type: executable
+Description: 
+- Tests all previously mentioned code
+
+17. notes.txt
+Type: text file
+Description:
+- This file
+
+18. sample.in
+Type: text file
+Description:
+- sample run inputs
+
+19. sample.out
+Type: text file
+Description:
+- sample run outputs

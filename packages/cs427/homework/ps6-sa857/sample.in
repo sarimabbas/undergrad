@@ -1,0 +1,16 @@
+T1: create something like Figure 1
+./blockchain
+E2
+A02
+E2
+A12
+E3
+
+T2: same as above but reassign last blockchain to cause delete
+./blockchain
+E2
+A02
+E2
+A12
+E3
+A32

@@ -1,0 +1,24 @@
+100,000 agents (takes a few seconds). Mostly fickle and near 1.
+
+sarimabbas:ps5-sa857 sarimabbas$ ./consensus2 100000 0.9 0.9
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Sat Nov 10 2018 23:46:04
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1541911564
+   numAgents: 100000
+  probFickle:    0.9
+     probOne:    0.9
+Population statistics:
+   numFickle:  90098
+    numCrowd:   9902
+     numOnes:  90034
+Results of simulation:
+      Rounds:8018941
+   Consensus:      1
+
+---------------------------------------------------------------
+Normal termination.

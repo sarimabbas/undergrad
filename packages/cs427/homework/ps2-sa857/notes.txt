@@ -1,0 +1,30 @@
+Submitted files:
+
+1. Makefile
+Compiles 'readint'. Provides a set of instructions to g++ to use 
+other files in the project.
+
+2. main.cpp 
+Type: source code 
+Description: Contains code for run() function of readint app.
+
+3. myapp
+Type: executable
+Description: Parses the input file. If an integer is read, it is output on its own line.
+If a non-integer is read, it is output on its own line in the following format
+Skipping char: <dec> <hex> <char>
+<dec> is the ASCII code in decimal
+<hex> is the ASCII code in hex
+<char> is the character (if printable)
+
+4. tools.hpp
+Type: source code
+Description: declarations for utilities used in main.cpp
+
+5. tools.cpp
+Type: source code
+Description: definitions for utilities used in main.cpp
+
+6. readint.out
+Type: text file
+Description: contains output from test runs of 'readint'

@@ -1,0 +1,25 @@
+Average case. Expect that if majority are fickle, and choice is disproportionately 0, 
+then consensus will be 0
+
+sarimabbas:ps5-sa857 sarimabbas$ ./consensus2 1000 0.77 0.3
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Sat Nov 10 2018 23:43:22
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1541911402
+   numAgents:   1000
+  probFickle:   0.77
+     probOne:    0.3
+Population statistics:
+   numFickle:    755
+    numCrowd:    245
+     numOnes:    302
+Results of simulation:
+      Rounds:  30942
+   Consensus:      0
+
+---------------------------------------------------------------
+Normal termination.

@@ -1,0 +1,182 @@
+TEST RUN 1:
+Input: /c/cs427/code/ps2/sample.in
+Output: 
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Tue Sep 18 2018 17:39:58
+---------------------------------------------------------------
+Skipping char:  83 0x53 'S'
+Skipping char:  99 0x63 'c'
+Skipping char: 111 0x6f 'o'
+Skipping char: 114 0x72 'r'
+Skipping char: 101 0x65 'e'
+Skipping char: 119 0x77 'w'
+Skipping char:  97 0x61 'a'
+Skipping char: 115 0x73 's'
+35
+Skipping char: 116 0x74 't'
+Skipping char: 111 0x6f 'o'
+21
+Skipping char:  46 0x2e '.'
+Skipping char:  46 0x2e '.'
+Loop exit
+---------------------------------------------------------------
+Normal termination.
+
+
+
+TEST RUN 2:
+Input: /c/cs427/code/ps2/data.in
+Output:
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Tue Sep 18 2018 17:40:36
+---------------------------------------------------------------
+23
+67
+123456
+-543
+789
+Skipping char:  73 0x49 'I'
+Skipping char: 116 0x74 't'
+Skipping char:  99 0x63 'c'
+Skipping char:  97 0x61 'a'
+Skipping char: 110 0x6e 'n'
+Skipping char:  39 0x27 '''
+Skipping char: 116 0x74 't'
+Skipping char:  98 0x62 'b'
+Skipping char: 101 0x65 'e'
+Skipping char: 116 0x74 't'
+Skipping char: 104 0x68 'h'
+Skipping char: 105 0x69 'i'
+Skipping char: 115 0x73 's'
+Skipping char: 101 0x65 'e'
+Skipping char:  97 0x61 'a'
+Skipping char: 115 0x73 's'
+Skipping char: 121 0x79 'y'
+Skipping char:  33 0x21 '!'
+Skipping char:  73 0x49 'I'
+Skipping char: 116 0x74 't'
+Skipping char: 104 0x68 'h'
+Skipping char: 105 0x69 'i'
+Skipping char: 110 0x6e 'n'
+Skipping char: 107 0x6b 'k'
+Skipping char:  73 0x49 'I'
+Skipping char:  39 0x27 '''
+Skipping char: 108 0x6c 'l'
+Skipping char: 108 0x6c 'l'
+Skipping char: 116 0x74 't'
+Skipping char: 114 0x72 'r'
+Skipping char: 121 0x79 'y'
+23
+Skipping char: 109 0x6d 'm'
+Skipping char: 111 0x6f 'o'
+Skipping char: 114 0x72 'r'
+Skipping char: 101 0x65 'e'
+Skipping char:  99 0x63 'c'
+Skipping char:  97 0x61 'a'
+Skipping char: 115 0x73 's'
+Skipping char: 101 0x65 'e'
+Skipping char: 115 0x73 's'
+Skipping char:  46 0x2e '.'
+Skipping char:   0 0x00
+567
+Loop exit
+---------------------------------------------------------------
+Normal termination.
+
+
+TEST RUN 3:
+Input (without quotes): "wekfhwei weru4209t804 otuinr wogkj hiowug3t49834098t fiwef092348r0928
+r-029r0-38 39028r809  hfoiwe fkwe ´∑˙ jker83209r823"
+Output:
+---------------------------------------------------------------
+Normal termination.
+sarimmacbook:ps2-sa857 sarimabbas$ ./readint data2.in
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Tue Sep 18 2018 17:41:43
+---------------------------------------------------------------
+Skipping char: 119 0x77 'w'
+Skipping char: 101 0x65 'e'
+Skipping char: 107 0x6b 'k'
+Skipping char: 102 0x66 'f'
+Skipping char: 104 0x68 'h'
+Skipping char: 119 0x77 'w'
+Skipping char: 101 0x65 'e'
+Skipping char: 105 0x69 'i'
+Skipping char: 119 0x77 'w'
+Skipping char: 101 0x65 'e'
+Skipping char: 114 0x72 'r'
+Skipping char: 117 0x75 'u'
+4209
+Skipping char: 116 0x74 't'
+804
+Skipping char: 111 0x6f 'o'
+Skipping char: 116 0x74 't'
+Skipping char: 117 0x75 'u'
+Skipping char: 105 0x69 'i'
+Skipping char: 110 0x6e 'n'
+Skipping char: 114 0x72 'r'
+Skipping char: 119 0x77 'w'
+Skipping char: 111 0x6f 'o'
+Skipping char: 103 0x67 'g'
+Skipping char: 107 0x6b 'k'
+Skipping char: 106 0x6a 'j'
+Skipping char: 104 0x68 'h'
+Skipping char: 105 0x69 'i'
+Skipping char: 111 0x6f 'o'
+Skipping char: 119 0x77 'w'
+Skipping char: 117 0x75 'u'
+Skipping char: 103 0x67 'g'
+3
+Skipping char: 116 0x74 't'
+49834098
+Skipping char: 116 0x74 't'
+Skipping char: 102 0x66 'f'
+Skipping char: 105 0x69 'i'
+Skipping char: 119 0x77 'w'
+Skipping char: 101 0x65 'e'
+Skipping char: 102 0x66 'f'
+92348
+Skipping char: 114 0x72 'r'
+928
+Skipping char: 114 0x72 'r'
+-29
+Skipping char: 114 0x72 'r'
+0
+-38
+39028
+Skipping char: 114 0x72 'r'
+809
+Skipping char: 104 0x68 'h'
+Skipping char: 102 0x66 'f'
+Skipping char: 111 0x6f 'o'
+Skipping char: 105 0x69 'i'
+Skipping char: 119 0x77 'w'
+Skipping char: 101 0x65 'e'
+Skipping char: 102 0x66 'f'
+Skipping char: 107 0x6b 'k'
+Skipping char: 119 0x77 'w'
+Skipping char: 101 0x65 'e'
+Skipping char: -62 0xffffffc2
+Skipping char: -76 0xffffffb4
+Skipping char: -30 0xffffffe2
+Skipping char: -120 0xffffff88
+Skipping char: -111 0xffffff91
+Skipping char: -53 0xffffffcb
+Skipping char: -103 0xffffff99
+Skipping char: 106 0x6a 'j'
+Skipping char: 107 0x6b 'k'
+Skipping char: 101 0x65 'e'
+Skipping char: 114 0x72 'r'
+83209
+Skipping char: 114 0x72 'r'
+823
+Loop exit
+---------------------------------------------------------------
+Normal termination.

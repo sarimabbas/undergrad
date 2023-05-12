@@ -1,0 +1,88 @@
+Sarim Abbas
+Modified November 2018
+CPSC 427 / PS4
+
+-------
+
+Submitted files:
+
+1. Makefile
+Description:
+- Compiles 'consensus2' and 'test'. 
+- Provides a set of instructions to g++ to use 
+other files in the project
+
+2. main.cpp 
+Type: source code 
+Description: 
+- Contains code for run() function of consensus2 executable
+
+3. consensus2
+Type: executable
+Description: 
+- Runs a simulation of the consensus problem
+
+4. tools.hpp
+Type: source code
+Description: 
+- Declarations for utilities used in other implementation files
+
+5. tools.cpp
+Type: source code
+Description: 
+- Definitions for utilities used in other implementation files
+
+6. agent.hpp
+Type: source code
+Description: 
+- Declarations for Agent class. Simulates a single agent in the simulation
+
+7. fickle.hpp
+Type: source code
+Description: 
+- Declarations for Agent inheriting Fickle class. Simulates a single agent in the simulation
+
+8. fickle.cpp
+Type: source code
+Description: 
+- Definitions for Agent inheriting Fickle class. Simulates a single agent in the simulation
+
+9. crowd.hpp
+Type: source code
+Description: 
+- Declarations for Agent inheriting Crowd class. Simulates a single agent in the simulation
+
+10. crowd.cpp
+Type: source code
+Description: 
+- Definitions for Agent inheriting Crowd class. Simulates a single agent in the simulation
+
+11. population.hpp
+Type: source code
+Description: 
+- Declarations for Population class. Aggregates agents of two types: Fickle and Crowd
+
+12. population.cpp
+Type: source code
+Description: 
+- Definitions for Population class. Aggregates agents of two types: Fickle and Crowd
+
+13. simulator.hpp
+Type: source code
+Description: 
+- Declarations for Simulator class. Simulates many agents in rounds
+
+14. simulator.cpp
+Type: source code
+Description: 
+- Definitions for Simulator class. Simulates many agents in rounds
+
+15. test_runs/
+Type: directory
+Description: 
+- Contains many sample tests on range of parameter space
+
+16. notes.txt
+Type: text file
+Description:
+- This file

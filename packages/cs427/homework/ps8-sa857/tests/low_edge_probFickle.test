@@ -1,0 +1,351 @@
+./blockchain 10 100 0.9 0 .1 1543782199 > tests/low_edge_probFickle.test
+---------------------------------------------------------------
+	Sarim Abbas
+	CPSC 427/527
+	Mon Dec 10 2018	00:52:25
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1543782199
+   numAgents:     10
+   maxRounds:    100
+     probNak:    0.9
+  probFickle:      0
+  probExtend:    0.1
+
+Population statistics:
+      numNak:      8
+   numFickle:      0
+    numCrowd:      2
+  probExtend:    0.1
+
+Starting simulation with probExtend=0.1
+Inventory: 1 active blockchain(s):
+ 10 copies of: [0,1]
+extend(0)
+New blockchain: [0,1][1,48]
+Inventory: 2 active blockchain(s):
+  1 copies of: [0,1][1,48]
+  9 copies of: [0,1]
+sendMessage(9, 5)
+sendMessage(5, 6)
+sendMessage(3, 2)
+sendMessage(7, 6)
+sendMessage(4, 6)
+sendMessage(6, 9)
+extend(3)
+New blockchain: [0,1][1,80]
+Inventory: 3 active blockchain(s):
+  1 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  8 copies of: [0,1]
+sendMessage(3, 7)
+Inventory: 3 active blockchain(s):
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  7 copies of: [0,1]
+sendMessage(1, 0)
+sendMessage(0, 5)
+sendMessage(0, 5)
+Inventory: 3 active blockchain(s):
+  2 copies of: [0,1][1,80]
+  2 copies of: [0,1][1,48]
+  6 copies of: [0,1]
+sendMessage(3, 4)
+sendMessage(6, 0)
+sendMessage(8, 5)
+sendMessage(6, 9)
+sendMessage(4, 8)
+sendMessage(2, 0)
+sendMessage(8, 5)
+Inventory: 3 active blockchain(s):
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  7 copies of: [0,1]
+sendMessage(9, 0)
+sendMessage(4, 7)
+sendMessage(5, 4)
+extend(5)
+New blockchain: [0,1][1,150]
+Inventory: 4 active blockchain(s):
+  1 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  6 copies of: [0,1]
+sendMessage(1, 9)
+sendMessage(5, 1)
+Inventory: 4 active blockchain(s):
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  5 copies of: [0,1]
+extend(4)
+New blockchain: [0,1][1,168]
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  4 copies of: [0,1]
+extend(4)
+New blockchain: [0,1][1,168][2,176]
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  4 copies of: [0,1]
+sendMessage(5, 6)
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176]
+  3 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  3 copies of: [0,1]
+sendMessage(7, 4)
+sendMessage(3, 1)
+sendMessage(4, 2)
+Inventory: 5 active blockchain(s):
+  2 copies of: [0,1][1,168][2,176]
+  3 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  2 copies of: [0,1]
+sendMessage(7, 2)
+sendMessage(3, 5)
+sendMessage(9, 0)
+sendMessage(2, 9)
+Inventory: 5 active blockchain(s):
+  3 copies of: [0,1][1,168][2,176]
+  3 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  1 copies of: [0,1]
+sendMessage(7, 9)
+extend(4)
+New blockchain: [0,1][1,168][2,176][3,226]
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226]
+  2 copies of: [0,1][1,168][2,176]
+  3 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+  1 copies of: [0,1]
+sendMessage(4, 8)
+Inventory: 5 active blockchain(s):
+  2 copies of: [0,1][1,168][2,176][3,226]
+  2 copies of: [0,1][1,168][2,176]
+  3 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+extend(4)
+New blockchain: [0,1][1,168][2,176][3,226][4,240]
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176][3,226]
+  2 copies of: [0,1][1,168][2,176]
+  3 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(7, 9)
+sendMessage(0, 1)
+sendMessage(6, 1)
+sendMessage(4, 1)
+Inventory: 6 active blockchain(s):
+  2 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176][3,226]
+  2 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(7, 4)
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176][3,226]
+  2 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  3 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(8, 4)
+sendMessage(1, 3)
+Inventory: 6 active blockchain(s):
+  2 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176][3,226]
+  2 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(8, 1)
+extend(2)
+New blockchain: [0,1][1,168][2,176][3,286]
+Inventory: 7 active blockchain(s):
+  2 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176][3,286]
+  1 copies of: [0,1][1,168][2,176][3,226]
+  1 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(9, 5)
+sendMessage(4, 8)
+sendMessage(2, 3)
+sendMessage(5, 6)
+sendMessage(9, 4)
+extend(2)
+New blockchain: [0,1][1,168][2,176][3,286][4,314]
+Inventory: 7 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  2 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176][3,226]
+  1 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(3, 8)
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  3 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  2 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(2, 1)
+sendMessage(5, 3)
+sendMessage(3, 2)
+sendMessage(8, 7)
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  4 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,168][2,176]
+  2 copies of: [0,1][1,150]
+  1 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(5, 4)
+sendMessage(0, 6)
+sendMessage(2, 1)
+sendMessage(8, 2)
+sendMessage(1, 8)
+sendMessage(4, 5)
+sendMessage(1, 9)
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  5 copies of: [0,1][1,168][2,176][3,226][4,240]
+  2 copies of: [0,1][1,150]
+  1 copies of: [0,1][1,80]
+  1 copies of: [0,1][1,48]
+sendMessage(5, 6)
+sendMessage(4, 1)
+sendMessage(0, 6)
+sendMessage(4, 7)
+sendMessage(3, 4)
+sendMessage(7, 0)
+Inventory: 4 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  6 copies of: [0,1][1,168][2,176][3,226][4,240]
+  2 copies of: [0,1][1,150]
+  1 copies of: [0,1][1,80]
+sendMessage(4, 3)
+extend(4)
+New blockchain: [0,1][1,80][2,406]
+Inventory: 4 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  6 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406]
+  2 copies of: [0,1][1,150]
+sendMessage(7, 6)
+Inventory: 4 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  7 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406]
+  1 copies of: [0,1][1,150]
+sendMessage(6, 2)
+extend(7)
+New blockchain: [0,1][1,168][2,176][3,226][4,240][5,424]
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  6 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406]
+  1 copies of: [0,1][1,150]
+sendMessage(8, 9)
+extend(4)
+New blockchain: [0,1][1,80][2,406][3,436]
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  6 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+extend(3)
+New blockchain: [0,1][1,168][2,176][3,226][4,240][5,444]
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,444]
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  5 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+sendMessage(0, 3)
+sendMessage(7, 1)
+Inventory: 6 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,444]
+  2 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  1 copies of: [0,1][1,168][2,176][3,286][4,314]
+  4 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+sendMessage(8, 6)
+sendMessage(2, 4)
+sendMessage(6, 8)
+sendMessage(1, 3)
+sendMessage(0, 1)
+sendMessage(3, 4)
+sendMessage(1, 2)
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,444]
+  3 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  4 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+sendMessage(7, 0)
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,444]
+  4 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  3 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+sendMessage(4, 5)
+sendMessage(7, 4)
+sendMessage(4, 7)
+sendMessage(0, 8)
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,444]
+  5 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  2 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+sendMessage(2, 3)
+sendMessage(9, 3)
+sendMessage(5, 6)
+sendMessage(3, 8)
+sendMessage(2, 9)
+Inventory: 5 active blockchain(s):
+  1 copies of: [0,1][1,168][2,176][3,226][4,240][5,444]
+  6 copies of: [0,1][1,168][2,176][3,226][4,240][5,424]
+  1 copies of: [0,1][1,168][2,176][3,226][4,240]
+  1 copies of: [0,1][1,80][2,406][3,436]
+  1 copies of: [0,1][1,150]
+sendMessage(6, 4)
+Current blockchain choices after 100 rounds:
+Agent 0 choice: [0,1][1,168][2,176][3,226][4,240][5,424]
+Agent 1 choice: [0,1][1,168][2,176][3,226][4,240][5,424]
+Agent 2 choice: [0,1][1,168][2,176][3,226][4,240][5,424]
+Agent 3 choice: [0,1][1,168][2,176][3,226][4,240][5,444]
+Agent 4 choice: [0,1][1,80][2,406][3,436]
+Agent 5 choice: [0,1][1,150]
+Agent 6 choice: [0,1][1,168][2,176][3,226][4,240]
+Agent 7 choice: [0,1][1,168][2,176][3,226][4,240][5,424]
+Agent 8 choice: [0,1][1,168][2,176][3,226][4,240][5,424]
+Agent 9 choice: [0,1][1,168][2,176][3,226][4,240][5,424]
+
+---------------------------------------------------------------
+Normal termination.

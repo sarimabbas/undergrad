@@ -1,0 +1,163 @@
+Sarim Abbas
+Modified December 2018
+CPSC 427 / PS6
+
+-------
+
+Submitted files:
+
+Makefile
+Description:
+- Compiles 'blockchain' and 'test'. 
+- Provides a set of instructions to g++ to use 
+other files in the project
+
+main.cpp 
+Type: source code 
+Description: 
+- Contains code for run() function of blockchain executable
+
+blockchain
+Type: executable
+Description: 
+- Runs a simulation of the consensus problem, with inventory printing
+
+tools.hpp
+Type: source code
+Description: 
+- Declarations for utilities used in other implementation files
+
+tools.cpp
+Type: source code
+Description: 
+- Definitions for utilities used in other implementation files
+
+driver.hpp
+Type: source code
+Description: 
+- Declarations for Driver class. Allows user to interact with 10 blockchains
+
+driver.cpp
+Type: source code
+Description: 
+- Definitions for Driver class. Allows user to interact with 10 blockchains
+
+population.hpp
+Type: source code
+Description: 
+- Declarations for Population class. Composes a population of agents and their blockchains
+
+population.cpp
+Type: source code
+Description: 
+- Definitions for Population class. Composes a population of agents and their blockchains
+
+simulation.hpp
+Type: source code
+Description: 
+- Declarations for Simulator class. Runs a simulation of an agent population
+
+simulation.cpp
+Type: source code
+Description: 
+- Definitions for Simulator class. Runs a simulation of an agent population
+
+blockchain.hpp
+Type: source code
+Description: 
+- Declarations for Blockchain class. Points to a chain of Block()s
+
+blockchain.cpp
+Type: source code
+Description: 
+- Definitions for Blockchain class. Points to a chain of Block()s
+
+block.hpp
+Type: source code
+Description: 
+- Declarations for Block class. Points to a chain of Block()s
+
+block.cpp
+Type: source code
+Description: 
+- Definitions for Block class. Points to a chain of Block()s
+
+Serial.hpp
+Type: source code
+Description: 
+- Declarations for Serial class. Allows for UID generation
+
+Serial.cpp
+Type: source code
+Description: 
+- Definitions for Serial class. Allows for UID generation
+
+SPtr.hpp
+Type: source code
+Description: 
+- Declarations for SPtr class. Allows for smart deletion of shared objects
+
+SPtr.hpp
+Type: source code
+Description: 
+- Definitions for SPtr class. Allows for smart deletion of shared objects
+
+test.cpp 
+Type: source code 
+Description: 
+Contains code to test all previously mentioned code
+
+test 
+Type: executable
+Description: 
+Tests all previously mentioned code
+
+agent.hpp
+Type: source code 
+Description: 
+- Declarations for pure abstract class Agent
+
+agent.cpp
+Type: source code 
+Description: 
+- Definitions for pure abstract class Agent
+
+agentbase.hpp
+Type: source code 
+Description: 
+- Declarations for base derived class of Agent. Provides common point for Fickle, Crowd and Nakamoto
+
+agentbase.cpp
+Type: source code 
+Description: 
+- Definitions for base derived class of Agent. Provides common point for Fickle, Crowd and Nakamoto
+
+multiagent.hpp
+Type: source code 
+Description: 
+- Declarations for Fickle, Crowd and Nakamoto classes
+
+multiagent.cpp
+Type: source code 
+Description: 
+- Definitions for Fickle, Crowd and Nakamoto classes
+
+inventory.hpp
+Type: source code 
+Description: 
+- Declarations for Inventory class. Maintains a count/map of <Blockchain, int>
+
+inventory.cpp
+Type: source code 
+Description: 
+- Definitions for Inventory class. Maintains a count/map of <Blockchain, int>
+
+notes.txt
+Type: text file
+Description:
+- This file
+
+tests/
+Type: directory
+Description:
+- sample run outputs

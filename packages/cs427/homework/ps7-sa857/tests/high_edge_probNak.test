@@ -1,0 +1,2 @@
+./blockchain 10 100 1.0 0.5 0.5 1543782199 > tests/high_edge_probNak.test
+Usage: probNak + probFickle < 1.0

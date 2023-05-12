@@ -1,0 +1,50 @@
+sarimmacbook:ps1-sa857 sarimabbas$ ./aboutme
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Tue Sep  4 2018 17:17:16
+---------------------------------------------------------------
+Please enter your first name: Sarim
+Please enter your last name: Abbas
+Please enter the year of your birth: 1997
+Sarim Abbas becomes 21 years old in 2018.
+---------------------------------------------------------------
+Normal termination.
+
+------
+------
+
+Integer validation in a loop (After class on 10th September):
+
+sarimmacbook:ps1-sa857 sarimabbas$ ./aboutme
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Tue Sep 11 2018 20:38:41
+---------------------------------------------------------------
+Please enter your first name: Sarim
+Please enter your last name: Abbas
+Please enter the year of your birth: text
+Please enter an integer for your year of birth: 1997
+Sarim Abbas becomes 21 years old in 2018.
+---------------------------------------------------------------
+Normal termination.
+
+------
+------
+
+No integer validation (original submission):
+
+sarimmacbook:ps1-sa857 sarimabbas$ ./aboutme
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Fri Sep  7 2018 14:28:42
+---------------------------------------------------------------
+Please enter your first name: Sarim
+Please enter your last name: Abbas
+Please enter the year of your birth: text
+Year of your birth is invalid. Exiting program.

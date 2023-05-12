@@ -1,0 +1,24 @@
+10 agents, split between type and choice.
+
+sarimabbas:ps5-sa857 sarimabbas$ ./consensus2 10 0.5 0.5
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Sat Nov 10 2018 23:44:43
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1541911483
+   numAgents:     10
+  probFickle:    0.5
+     probOne:    0.5
+Population statistics:
+   numFickle:      4
+    numCrowd:      6
+     numOnes:      6
+Results of simulation:
+      Rounds:    164
+   Consensus:      1
+
+---------------------------------------------------------------
+Normal termination.

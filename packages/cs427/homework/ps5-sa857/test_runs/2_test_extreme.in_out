@@ -1,0 +1,24 @@
+1000 agents, all are fickle, all have 1 set.
+
+sarimabbas:ps5-sa857 sarimabbas$ ./consensus2 1000 1.0 1.0
+
+---------------------------------------------------------------
+        Sarim Abbas
+        CPSC 427/527
+        Sat Nov 10 2018 23:39:39
+---------------------------------------------------------------
+Welcome to Consensus Simulator!
+Using seed: 1541911179
+   numAgents:   1000
+  probFickle:      1
+     probOne:      1
+Population statistics:
+   numFickle:   1000
+    numCrowd:      0
+     numOnes:   1000
+Results of simulation:
+      Rounds:      0
+   Consensus:      1
+
+---------------------------------------------------------------
+Normal termination.
