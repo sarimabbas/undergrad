@@ -1,0 +1,4 @@
+t001: ./Cooccur ball cold play sun wet < /c/cs223/hw4/Tests/t001.in
+t002: ./Cooccur ATL ORD DFW DEN LAX CLT PHX LAS SFO SEA MSP MCO IAH LGA DTW BOS PHL JFK EWR BWI < /c/cs223/hw4/Tests/cat_routes.sh
+custom: ./Cooccur ATL ORD DFW DEN LAX CLT PHX LAS SFO SEA MSP MCO IAH LGA DTW BOS PHL JFK EWR BWI < /c/cs223/hw4/Tests/routes.txt
+t003: 

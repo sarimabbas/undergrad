@@ -1,0 +1,5 @@
+CC = gcc
+CFLAGS = -std=c99 -pedantic -Wall
+
+Todo: todo.o string_util.o task.o
+	${CC} ${CFLAGS} -o $@ $^

@@ -1,0 +1,18 @@
+ESTIMATE of time: 8 hours.
+TOTAL time spent: 12 hours.
+
+Started on Wed 29th November, Ended on Dec 1, 10:40 PM
+
+Difficulties:
+* Rules of the game were a bit tricky to understand, and midterm-week time crunch made it less of
+a priority. Instead, I mostly just wrote the code based on Prof. Glenn's notes and advice
+
+* Valgrind was giving difficulties when initializing my smap, apparently mallocing keys in a loop
+makes stuff go wonky
+
+* Hardest function was successors, but overall the pset wasn't too bad.
+
+
+Source(s) consulted:
+* Prof. Aspnes' notes
+* Data Structures Using C - Sharma

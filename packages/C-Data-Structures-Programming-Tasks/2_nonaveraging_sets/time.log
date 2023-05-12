@@ -1,0 +1,15 @@
+ESTIMATE of time: 10 hours.
+TOTAL time spent: 17 hours.
+
+Difficulties:
+0. Accepting command line arguments in the correct format and order required
+the use of many loops and counters
+
+1. Working with arrays, copying them, trimming them and passing them to other
+functions took me a very long time to figure out
+
+2. Implementing the actual progression free algorithms was also difficult. I spent the most time
+on greedy, after that it became much easier to tweak the algorithm for the other
+two approaches
+
+3. I was not able to implement opt, i did not have enough time :( 

@@ -1,0 +1,82 @@
+// SINGLE LINE COMMENTS
+// this is one comments
+// this is another comments
+// this is yet another comments
+//       this is one more
+//*****who let the dogs out
+//* * *  i did
+//*** I *** did
+// I am a coolio******* *** ***
+//@hello friend
+// @hello friend
+// **commplicomment
+// hello my name is @Sarim
+// hello my name @sarim is
+// hello my@sarim name
+//***@tag hello
+//***@tag
+// * * *@tag
+// * * * @tag
+// * * *@tag who this
+// * * * yo @tag who this
+//*****    *****   ***** @tag ******  ****** hello
+// **** @hello sari@sari @hello
+//@tag
+//hello my name is //
+//hello my name is /shavra//shavra
+//*******    *********
+//***********
+//***@mixedtag ****
+//***@mixedtag****
+//***@mixedtag****@mixedtag
+//@
+// @
+// hello @
+//////hello
+///hello \n
+//hello \n
+//hello */
+//yumyum // **/ /* */
+// hello "let's try this"
+// hello "let's try this \n"
+// hello "let's try this \n \"
+
+/* MULTILINE COMMENTS */
+/*Hello World!
+*How are you?*/
+/*Hello World!
+ *How are you?*/
+/***** Hello World!
+***** How are you?*/
+/****** Hello **/
+/*
+hello ibiza
+ */
+
+
+/* cs203 */
+/*****cs203****/
+/*cas@203*/
+/*@cs203*/
+
+/*hello @cs203 hello*/
+/* hello @cs223 @cs223 */
+
+/*@param x returns 4
+ *@param y an integer
+ *@param z a string
+ */
+
+ /* @param x returns 4
+  * @param y an integer
+  * @param z a string
+  */
+
+ /* "/* who let the dogs out */" */
+ /*"/* who let the dogs out */"*/
+ /* hello my name is "savarspreaewfw \" who let the dogs out" it wasn't @CS203*/
+ /* whatchoo gonna do "//ghost busters!"*/
+
+ "/* hello */"
+
+"hello my name \" sarim"

@@ -1,0 +1,65 @@
+/*
+******
+*** ewqjeiqw	 	
+****** 			
+*/
+
+/* Hello
+ ** Yasss
+ "heeey"
+o@bro
+"**/"
+*@example ***hello **hello
+* @ hey
+!*ERROR 1*!
+hey @bro no tag
+dededed 
+******/
+
+!*ERROR 2*!
+//
+// hey
+
+/*Hello World!
+ *How are you?*/
+
+ /*Hello World!
+How are you?*/
+
+
+// hello @canyouseethis hello
+// hi there @dave
+// hello
+// hey@xy
+// ** ** @hi
+
+// 							A C++ comment with leading spaces and tabs
+
+// hey \
+what's up
+
+
+/* yolo
+lolol \
+hi */
+
+
+/* start of the program
+****************************** yo
+*  h ey
+* nothing much
+* "*/
+
+" say something /* nothing */"
+// @nothing ay
+
+int main() {
+	do something
+}
+/* yass */
+
+/* 
+	Hey ******8*
+	* *
+nothing *
+*/

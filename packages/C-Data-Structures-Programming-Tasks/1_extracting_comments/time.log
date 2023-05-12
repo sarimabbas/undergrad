@@ -1,0 +1,20 @@
+ESTIMATE of time: 5 hours.
+TOTAL time spent: 10 hours.
+
+Difficulties:
+Initially I thought that I could complete the
+assignment by writing if statements. But soon I realized my approach
+would require the use of pointers. It was only when we covered state machines
+and switches in class that I had an idea of how to tackle the pset without malloc/arrays.
+
+It was difficult to visualize the state machine, and when I drew the machine
+out, it had a lot of transitions and special cases. I asked other students
+if the pset was difficult for them, but they replied the solution was simple,
+so I got worried that I was overthinking my state machine. But there was no
+radical change I could think of that could simplify my state machine; there
+was just too many things to keep track of.
+
+Modularizing my code was another problem. I was reluctant to break up my main function
+into components, for fear of not having all my switch logic in the same place. I wish I had
+more time to optimize my code.
+

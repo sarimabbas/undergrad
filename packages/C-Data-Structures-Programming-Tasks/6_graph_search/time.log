@@ -1,0 +1,29 @@
+ESTIMATE of time: 15 hours.
+TOTAL time spent: 25 hours.
+
+Started on Monday 20th November, Ended on Friday 24th November 2:30 AM.
+
+Difficulties:
+* I had trouble visualising what the algorithms for BFS and OFS would look like. It took me a
+while to realise BFS could be best written imperatively with a queue
+
+* Implementing the queue as a separate library file was also tricky. First, i had to implement
+it with linked lists, because with a regular array embiggening would be a problem. Then
+i had to figure out how to include the queue into ldigraph.c and link everything with the compiler
+
+* For OFS, the biggest challenge was figuring out how to keep the recursion intact while
+making the outdegree comparison decision. At first, I thought I'd use qsort for nlogn sort
+of each vertex's neighbors, but this proves difficult when using regular qsort because
+the comparator function cannot take in an extra parameter (in this case the ldigraph) which
+is needed to check the outdegrees. One workaround is to use qsort_r() but there are two
+separate versions (GNU and BSD), and I was unsure of which would be compatible across many
+platforms. The other workaround that I used was a slower bubble sort
+
+* one optimisation for the neighbor sort could be that only WHITE nodes should be considered
+for a new neighbor list. This reduces the vertices needed to sort over time, as more of them
+become visited
+
+Source(s) consulted:
+* BFS visualisation: https://www.cs.usfca.edu/~galles/visualization/BFS.html
+* Prof. Aspnes' notes
+* Data Structures Using C - Sharma

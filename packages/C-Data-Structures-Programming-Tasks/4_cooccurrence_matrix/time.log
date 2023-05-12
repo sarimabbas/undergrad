@@ -1,0 +1,27 @@
+ESTIMATE of time: 15 hours.
+TOTAL time spent: 25 hours.
+
+Started on Wednesday Oct 20, Ended on Oct 29
+
+Difficulties:
+* I began this pset early, but it was a lot more complicated than expected.
+
+* For one thing, I wasn't sure how to implement my smap, either with chaining or
+open addressing. I started with chaining but embiggen was an issue so i switched to open
+addressing
+
+* Later, with coccurrence matrix, what was complicated was how to use the smap functionality
+to store vectors and check for duplicates. I needed to use several "tricks", like a separate
+value in keywords_orders to discard duplicates from context in suitable time complexity
+
+* Reading in input was a pain too. getline() is a relatively recent function and I had to
+distinguish between two situations: one in which EOF was reached, and one in which
+my returned array had no relevant keyword inside it
+
+* Truncating arrays to discard non-unique or NULL values was also a pain. I had to work
+excessively with the heap and reallocate to get the arrays the right size
+
+* I have used several resources to finish this pset. I used the djb2 hash function from
+http://www.cse.yorku.ca/~oz/hash.html. I consulted stack overflow to see how I could
+use getline() and get rid of the warning messages I got. And I also had to use
+reference.cs50.net to find out how all the string and pointer-related functions worked.

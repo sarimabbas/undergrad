@@ -1,0 +1,16 @@
+ESTIMATE of time: 15 hours.
+TOTAL time spent: 25 hours.
+
+Started on Wednesday Oct 4, Ended on Sunday Oct 8
+
+Difficulties:
+* Was getting valgrind errors until I realised I hadn't freed the lists in the cleanup strange
+* Kept struggling with the unit test case till the very end
+* Was confused about where to put the plist struct. Eventually moved it to plist.h, even though we
+  were told not to change the header
+* Was confused about how to cast the compare function for use with qsort, but eventually figured it out
+  by Googling the specification for qsort
+* Was difficult to read in arguments, but eventually figured it out by reading the spec for fscanf
+  on reference.cs50.net
+* Kept struggling with how to make each individual step run in O(n) time to give overall O(nlogn) time
+* This took a long time, especially with search_middle and checking for distinctness

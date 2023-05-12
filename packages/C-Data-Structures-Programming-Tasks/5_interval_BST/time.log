@@ -1,0 +1,23 @@
+ESTIMATE of time: 15 hours.
+TOTAL time spent: 25 hours.
+
+Started on Wednesday 8th November, Ended on Sunday 12th November 3:50 AM.
+
+Difficulties:
+* Figuring out how to incorporate isset_delete_node() into my code. In the end, I removed it entirely
+because I was able to condense my isset_remove() to incorporate its functionality
+
+* I had trouble understanding the value of **incoming because of the syntax. Eventually I realized
+that it could save me a lot of frustration with promoting to children to the correct place
+
+* merge_intervals() was tricky because there are two situations to account for. (1) is when
+the item being added causes a simple append and prepend to its parent. (2) is when the item being
+added is further down the tree. It took me a very long time to figure this out
+
+* In hindsight, I should've implemented the splay functionality first because it was easier to
+conceptualize and break down by cases as compared to the merging behavior
+
+Source(s) consulted:
+* Splay Tree Animation: https://www.cs.usfca.edu/~galles/visualization/SplayTree.html
+* Prof. Aspnes' notes
+* Data Structures Using C - Sharma
