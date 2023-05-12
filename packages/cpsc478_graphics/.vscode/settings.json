@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "*.pyde": "python",
+        "*.html": "html",
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "RayCast.C": "cpp"
+    }
+}
